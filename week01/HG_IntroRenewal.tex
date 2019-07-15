@@ -1,0 +1,346 @@
+
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Intro \& Renewal Process}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   Section 1
+%----------------------------------------------------------------------------------------
+\section{Introduction to Stochastic Processes}
+
+
+
+
+\subsection{Introduction}
+
+\textbf{$\sigma$-algebra} on a set $\Omega$ is a collection $F$ of subsets of $\Omega$ :
+
+\begin{itemize}
+	\item \textbf{Includes $\Omega$ itself},
+	\item Closed under \textbf{complement}
+	\item Closed under \textbf{countable unions}
+\end{itemize}
+
+where the pair $(\Omega, F)$ is called a \textbf{measurable space} or \textbf{Borel space}. More rigorously, letting $X$ be some set, and $\mathcal{P}(X)$ be its power set. Then $\Sigma \subseteq \mathcal{P}(X)$ is called \textbf{$\sigma$-algebra} on $X$ if
+
+\begin{itemize}
+	\item $X \in \Sigma$
+	\item If $A \in \Sigma$, then $X - A \in \Sigma$ 
+	\item If $A_1, A_2, \cdots \in \Sigma$, then $A_1 \cup A_2 \cup \cdots \in \Sigma$
+\end{itemize}
+
+where from De Morgan's laws $\Sigma$ is also closed under countable intersections. For example, $\{ \Omega, \emptyset \}$ is the smallest possible $\sigma$-algebra on $\Omega$, whereas the largest possible $\sigma$-algebra on $\Omega$ is $2^\Omega := \mathcal{P}(\Omega)$. Elements of the $\sigma$-algebra, i.e. an ordered pair $(\Omega, F)$ is called a \textbf{measurable set}.
+
+
+For example, let $(\Omega, \mathcal{F}, P)$ be a probability space in Bernoulli scheme, where $(a_1, \cdots, a_n), a_i \in \{0,1\}$.
+
+\begin{itemize}
+	\item $\Omega$, \textbf{sample space}: $\{0,1 \}^n$, $|\Omega| = 2^n$
+	\item $\mathcal{F}$, \textbf{filtration}: $|\mathcal{F}| = 2^{2^n}$, since it is the power set.
+	\item $P$, the \textbf{probability} measure
+\end{itemize}
+
+
+
+\subsection{Stochastic functions}
+
+
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a \textbf{probability space}(or probability triple). \textbf{Random variable} is a function $\xi : \Omega \to \mathbb{R} $ such that $\xi^{-1} (B) \in \mathcal{F}, \forall B \in \mathcal{B}(\mathbb{R})$
+
+
+For time $T$, $X : T \times \Omega \to \mathbb{R}$ is \textbf{random function} if $X(t, \cdot)$ is a random variable on $(\Omega, \mathcal{F}, \mathbb{P})$ for all $t$.
+
+
+$T = \mathbb{R}_{+}$ case is called \textbf{random process}, whereas $T = \mathbb{R}_{+}^n$ case is called \textbf{random field}, where
+
+\begin{itemize}
+	\item Discrete time random process, $T = \mathbb{N}$ or $\mathbb{Z} $
+	\item Continuous time random process, $T = \mathbb{R}_{+}$ or $\mathbb{R} $
+\end{itemize}
+
+Note that \textbf{any stochastic process at any fixed time} is \textbf{a random variable}. 
+
+Let $X : T \times \Omega \to \mathbb{R}$, $T = \mathbb{R}_{+}$. Let a \textbf{finite-dimensional distribution} $(X_{t_1}, X_{t_2}, \cdots, X_{t_n})$ for $t_1, \cdots, t_n \in \mathbb{R}$ be given. A \textbf{trajectory}(path) is $T \to \mathbb{R}$ for a fixed $\omega$, $(X_{t_1}(\omega), X_{t_2}(\omega), \cdots, X_{t_n}(\omega))$.
+
+For example, $X_t = \xi t$, for $P(\xi = 1) = P(\xi = 2) = 1/2$ has only two possible trajectories, since the only source of randomness if $\xi$. Note that for $t_1, t_2$, 
+
+$$
+\begin{aligned}
+P(X_{t_1} \le x_1, X_{t_2} \le x_2) &=
+\begin{cases}
+0 & min(x_1/t_1, x_2/t_2) < 1 \\
+1/2 & min(x_1/t_1, x_2/t_2) \in [1,2) \\
+1 & min(x_1/t_1, x_2/t_2) \in [2,\infty) \\
+\end{cases} \\[8pt]
+\end{aligned}
+$$
+
+
+\subsection{Renewal processes}
+
+Let $S_0 = 0$, $S_n = S_{n-1} + \xi_n$, where $\xi_i >0$ IID. Letting $N_t := \mathrm{argmax}_k \{S_k \le t\}$, 
+
+$$
+F \to \mathbb{E} N_t
+$$
+
+For $X \perp Y$, we have the \textbf{convolution}
+
+$$
+F_{X+Y}(x) = F_X \ast F_Y := \int_{\mathbb{R}} F_X(x-y) dF(y)
+$$
+
+\begin{theorem}
+\textbf{Theorem}. For $S_n = S_{n-1} + \xi_n$, $\xi_i$ IID,
+\begin{itemize}
+	\item $u(t) = \sum_{n=1}^\infty F^{n\ast} (t) < \infty$
+	\item $u(t) = \mathbb{E} N_t$
+\end{itemize}
+\end{theorem}
+
+\subsection{Laplace transform}
+
+
+
+For $f : \mathbb{R}_+ \to \mathbb{R}$, \textbf{Laplace transform} is defined as 
+
+$$
+\mathcal{L}_f(s) = \int_0^\infty e^{-sx} f(x) dx
+$$
+
+\begin{itemize}
+	\item $f$ : density of $\xi$, then $\mathcal{L}_f(s) = m(s) = \mathbb{E}[e^{-s\xi}]$
+	\item $\mathcal{L}_{f_1 \ast f_2} (s) = \mathcal{L}_{f_1} (s) \mathcal{L}_{f_2} (s)$ 
+	\item $F$ : $\mathcal{L}_F(s) = \mathcal{L}_p(s)/s$
+\end{itemize}
+
+For the last property,
+
+$$
+LHS = -\int_{\mathbb{R}_+} F(x) \frac{d(e^{-sx})}{s} = - \frac{F(x)e^{-sx}}{s} \Vert_0^\infty + \frac{1}{s} \int_{\mathbb{R}_+}p(x) e^{-sx}dx = \frac{1}{s} \int_{\mathbb{R}_+}p(x) e^{-sx}dx
+$$
+
+
+Consider
+
+$$
+F \to \mathbb{E} N_t^{-}
+$$
+
+where 
+
+$$
+\begin{aligned}
+\mathbb{E} N_t &= u(t) = \sum_{n=1}^\infty F^{n\ast} (t) \\[8pt]
+&= F(t) + \sum_{n=1}^\infty F^{n\ast} (t) \ast F(t) \\[10pt]
+u&= F + u \ast F = F + u \ast p
+\end{aligned}
+$$
+
+where $\int_\mathbb{R} u(x-y) dF(y) = \int_\mathbb{R} u(x-y) p(y) dy$
+
+
+Note that 
+
+$$
+\begin{aligned}
+\mathcal{L}_u (s) &= \mathcal{L}_F (s) + \mathcal{L}_u (s) \cdot \mathcal{L}_p (s) \\[8pt]
+&= \frac{\mathcal{L}_p(s)}{1-\mathcal{L}_p(s)}
+\end{aligned}
+$$
+
+
+So we can follow 
+
+\begin{itemize}
+	\item $F \to \mathcal{L}_p$
+	\item $\mathcal{L}_p \to \mathcal{L}_u$
+	\item $\mathcal{L}_u \to u$
+\end{itemize}
+
+where the inverse Laplace transform can be obtained using Bromwich integral
+
+
+
+For example, let $\{S_n \}_{n=1}^\infty$ to be
+
+$$
+S_n := S_{n-1} + \xi_n
+$$
+
+where $\xi_i \sim p(x) = e^{-x}/2 + e^{-2x}, x>0$. Then $\mathbb{E} (N_t^{-})?$
+
+
+\textbf{$p \to \mathcal{L}(p)$}. 
+
+$$
+\begin{aligned}
+\mathcal{L}(p) = \frac{1}{2(s+1)} + \frac{1}{s+2} = \frac{3s + 4}{2(s+1)(s+2)}  
+\end{aligned}
+$$
+
+
+\subsection{Limit theorems for renewal processes}
+
+
+Consider a stochastic process $\{S_n \}_{n=1}^\infty$,
+
+$$
+S_n := S_{n-1} + \xi_n
+$$
+
+for IID $\xi_i > 0$. 
+
+\begin{theorem}
+\textbf{Theorem 1}. Assume $\mu := \mathbb{E} (\xi_1) < \infty$. Then 
+
+$$
+N_t / t \overset{t \to \infty}{\to} 1/\mu, a.s.
+$$
+
+This is analogous to \textbf{SLLN}, where 
+
+$$
+(\xi_1 + \cdots + \xi_n) / n \overset{t \to \infty}{\to}  \mu, a.s.
+$$
+\end{theorem}
+
+
+\textbf{Proof} 
+
+$$
+\begin{aligned}
+&S_{N_t} \le t \le S_{N_{t+1}} \\[8pt]
+&\frac{N_t}{S_{N_{t+1}}} \le \frac{N_t}{t} \le \frac{N_t}{S_{N_t}} 
+\end{aligned}
+$$
+
+where we have
+
+$$
+\begin{aligned}
+&\lim_{t\to\infty} \frac{N_t}{S_{N_t}} = \lim_{n\to\infty} \frac{n}{S_n} = 1/\mu \\[8pt]
+&\lim_{t\to\infty} \frac{N_t}{S_{N_{t+1}}} = 
+\lim_{t\to\infty} \frac{N_t}{N_{t+1}} \frac{N_{t+1}}{S_{N_{t+1}}} = 1/\mu
+\end{aligned}
+$$
+
+
+\begin{theorem}
+\textbf{Theorem 2}. Assume $\sigma^2 = \mathrm{Var} (\xi_1) < \infty$. Then
+
+$$
+Z_t := \frac{N_t - t/\mu}{\sigma \sqrt{t} / \mu^{3/2}} \overset{d}{\to} N(0,1)
+$$
+
+This is analogous to \textbf{CLT}, where 
+
+$$
+\frac{\xi_1 + \cdots + \xi_n - n\mu}{\sigma \sqrt{n}} \overset{d}{\to}  N(0,1)
+$$
+\end{theorem}
+
+
+\textbf{Proof} 
+
+Note that 
+
+$$
+P \left( \frac{S_n - n\mu}{\sigma \sqrt{n}} \le x \right) \to P(x)
+$$
+
+
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	Appendix
+%----------------------------------------------------------------------------------------
+\section*{Karlin: Renewal processes}
+\setcounter{section}{0}
+
+\section{Renewal Process: Definition and Concepts}
+
+A \textbf{renewal (counting) process} $\{ N(t) : t \ge 0 \}$ is a nonnegative integer-valued stochastic process that registers the successive 
+
+cf. A \textbf{counting process} is a process $\{ N(t) : t \ge 0 \}$ such that
+
+\begin{itemize}
+	\item $N(t) \ge 0$
+	\item $N(t)$ is an integer
+	\item $s \le t$, then $N(s) \le N(t)$
+\end{itemize}
+
+\section{Examples}
+
+\subsection{Poisson Processes}
+
+A Poisson process $\{N(t): t \ge 0 \}$ with $\lambda$ is a renewal counting process having the exponential interoccurrence distribution
+
+$$
+F(x) = 1 - e^{-\lambda x}, x \ge 0
+$$
+
+Note that 
+
+$$
+P(W_r > t) = P(N_t \le r-1)
+$$
+
+where $W_r$ is the time taken for $r$th event, and $N_t$ is the number of events that cumulated until time $t$. By integral by parts, we can obtain
+
+$$
+\int_t^\infty \frac{\lambda^r y^{r-1} exp(-\lambda y)}{\Gamma(r)} dy = \sum_{k=0}^{r-1} \frac{exp(-\lambda t (\lambda t)^k)}{k!}
+$$
+
+
+
+\end{document}
