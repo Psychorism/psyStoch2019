@@ -62,7 +62,7 @@ ntheorem]{theorem}{}
 A \textbf{renewal (counting) process} $\{N(t), t > 0\}$ is a \textbf{nonnegative integer-valued} stochastic process that registers the successive occurrences of an event during the time interval $(0, t]$, where the time durations between consecutive '' events " are positive, IID RVs. 
 
 Let the successive occurence times between
-events be $\{\xi_k\}_{k=1}^\infty$ such that $X_i$ is the elapsed time from the $(i-1)$st event until the occurrence of the ith event, where
+events be $\{\xi_k\}_{k=1}^\infty$ such that $\xi_i$ is the elapsed time from the $(i-1)$st event until the occurrence of the ith event, where
 
 $$
 F_\xi (x) = P(\xi_k \le x)
@@ -72,74 +72,16 @@ Note that $F_\xi(0) = 0$, which means $\xi_k$ is \textbf{positive} random variab
 
 Let the \textbf{partial sum process} $S_0 = 0$, $S_n = S_{n-1} + \xi_n$, where $\xi_i >0$ IID. $S_n$ is interpreted as the \textbf{waiting time} until the occurrence of $n$th event. 
 
-\include 
-graphics
 
-
-Let $N_t := \mathrm{argmax}_k \{S_k \le t\}$, 
-
-which is the \textbf{number of indices} $n$ for which $0 < S_n \le t$. 
+Let $N_t := \mathrm{argmax}_k \{S_k \le t\}$, which is the \textbf{number of indices} $n$ for which $0 < S_n \le t$. 
 
 In common practice, the counting process $\{N(t), t \ge 0 \}$ and the partial sum process $\{ S_n, n \ge 0 \}$ are interchangeably called the \textbf{renewal process}. 
 
 
-
-$$
-F \to \mathbb{E} N_t
-$$
-
-For $X \perp Y$, we have the \textbf{convolution}
-
-$$
-F_{X+Y}(x) = F_X \ast F_Y := \int_{\mathbb{R}} F_X(x-y) dF(y)
-$$
-
 \begin{theorem}
-\textbf{Theorem}. For $S_n = S_{n-1} + \xi_n$, $\xi_i$ IID,
-\begin{itemize}
-	\item $u(t) = \sum_{n=1}^\infty F^{n\ast} (t) < \infty$
-	\item $u(t) = \mathbb{E} N_t$
-\end{itemize}
+\textbf{Theorem}. For $S_n = S_{n-1} + \xi_n$, $\xi_i$ IID, we have
+$$u(t) = \mathbb{E} N_t = \sum_{n=1}^\infty F^{n\ast} (t) < \infty$$
 \end{theorem}
-
-\subsection{Laplace transform}
-
-For $f : \mathbb{R}_+ \to \mathbb{R}$, \textbf{Laplace transform} is defined as 
-
-$$
-\mathcal{L}_f(s) = \int_0^\infty e^{-sx} f(x) dx
-$$
-
-\begin{itemize}
-	\item $f$ : density of $\xi$, then $\mathcal{L}_f(s) = m(s) = \mathbb{E}[e^{-s\xi}]$
-	\item $\mathcal{L}_{f_1 \ast f_2} (s) = \mathcal{L}_{f_1} (s) \mathcal{L}_{f_2} (s)$ 
-	\item $F$ : $\mathcal{L}_F(s) = \mathcal{L}_p(s)/s$
-\end{itemize}
-
-For the last property,
-
-$$
-LHS = -\int_{\mathbb{R}_+} F(x) \frac{d(e^{-sx})}{s} = - \frac{F(x)e^{-sx}}{s} \Vert_0^\infty + \frac{1}{s} \int_{\mathbb{R}_+}p(x) e^{-sx}dx = \frac{1}{s} \int_{\mathbb{R}_+}p(x) e^{-sx}dx
-$$
-
-
-Consider
-
-$$
-F \to \mathbb{E} N_t^{-}
-$$
-
-where 
-
-$$
-\begin{aligned}
-\mathbb{E} N_t &= u(t) = \sum_{n=1}^\infty F^{n\ast} (t) \\[8pt]
-&= F(t) + \sum_{n=1}^\infty F^{n\ast} (t) \ast F(t) \\[10pt]
-u&= F + u \ast F = F + u \ast p
-\end{aligned}
-$$
-
-where $\int_\mathbb{R} u(x-y) dF(y) = \int_\mathbb{R} u(x-y) p(y) dy$
 
 
 Note that 
@@ -152,7 +94,7 @@ $$
 $$
 
 
-So we can follow 
+So we can follow the steps:
 
 \begin{itemize}
 	\item $F \to \mathcal{L}_p$
@@ -160,26 +102,127 @@ So we can follow
 	\item $\mathcal{L}_u \to u$
 \end{itemize}
 
-where the inverse Laplace transform can be obtained using Bromwich integral
 
+\subsection*{Quizzes}
 
+\textbf{(Quiz 1)}. Let $\eta$ be a random variable with $F_\eta$, and $X_t := e^\eta t^2$. What is the distribution function of $X_{t_1}, \cdots, X_{t_n}$ for $t_1, \cdots, t_n >0$? 
 
-For example, let $\{S_n \}_{n=1}^\infty$ to be
+\textbf{(Answer)} We have
 
 $$
-S_n := S_{n-1} + \xi_n
+F_{\eta} \{ min \left( ln(x_1/t_1^2), \cdots, ln(x_n/t_n^2) \right) \}
 $$
 
-where $\xi_i \sim p(x) = e^{-x}/2 + e^{-2x}, x>0$. Then $\mathbb{E} (N_t^{-})?$
-
-
-\textbf{$p \to \mathcal{L}(p)$}. 
+since
 
 $$
 \begin{aligned}
-\mathcal{L}(p) = \frac{1}{2(s+1)} + \frac{1}{s+2} = \frac{3s + 4}{2(s+1)(s+2)}  
+F_\mathbf{X} (\mathbf{x}) &= P(X_{t_1} \le x_1, \cdots, X_{t_n} \le x_n) \\[8pt]
+&= P(e^\eta  \le x_1/t_1^2, \cdots, e^\eta  \le x_n/t_n^2)  \\[8pt]
+&= F_\eta (min (ln(x_1/t_1^2), \cdots, n(x_n/t_n^2)))
 \end{aligned}
 $$
+
+
+\textbf{(Quiz 2)}. Let $\eta$ be a random variable with $F_\eta$, and $X_T := \eta + t$. Compute the distribution of $(X_{t_1}, \cdots, X_{t_n})$, where $t_1, \cdots, t_n >0$. 
+
+\textbf{(Answer)} We have
+
+$$
+F_{\eta} \{ min \left( x_1 - t_1, \cdots, x_n - t_n \right) \}
+$$
+
+since
+
+$$
+\begin{aligned}
+F_\mathbf{X} (\mathbf{x}) &= P(X_{t_1} \le x_1, \cdots, X_{t_n} \le x_n) \\[8pt]
+&= P(\eta \le x_1 - t_1, \cdots, \eta \le x_n - t_n)
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 3)}. Let $S_n := S_{n-1} + \xi_n$ be a renewal process and $p_\xi (x) = \lambda e^{-\lambda x}$. $\mathbb{E}(N_t)?$
+
+\textbf{(Answer)} We have
+
+$$
+\mathbb{E}(N_t) = \lambda t
+$$
+
+since
+
+$$
+N_t \sim Poisson(\lambda t)
+$$
+
+Or, more mathematically, 
+
+$$
+\begin{aligned}
+\mathcal{L}_p (s) &= \int_0^\infty e^{-sx} \lambda e^{-\lambda x} dx \\[8pt]
+&= \lambda \int_0^\infty e^{-(s+\lambda)x} dx \\[8pt]
+&= \frac{\lambda}{s + \lambda} \\[10pt]
+\mathcal{L}_u (s) &= \frac{\mathcal{L}_p}{s(1-\mathcal{L}_p)} \\[8pt]
+&= \frac{\frac{\lambda}{s + \lambda}}{s(1-\frac{\lambda}{s + \lambda})} \\[8pt]
+&= \frac{\lambda}{s^2} \\[10pt]
+\mathcal{L}^{-1}(\mathcal{L}_u (s))(t) &= \lambda t
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 4)}. Let $N_t$ be a counting process of a renewal process $S_n = S_{n-1} + \xi_n$ such that IIDRVs $\xi$ has the density
+
+$$
+p_\xi (x) = \begin{cases}
+e^{-x} (x+1)/2 & x \ge 0 \\
+0 & x <0
+\end{cases}
+$$
+
+$\mathbb{E}(N_t)?$
+
+\textbf{(Answer)} We have
+
+$$
+\mathbb{E}(N_t) = -1/9 + 2t/3 + e^{-(3/2)t}/9
+$$
+
+since 
+
+$$
+\begin{aligned}
+\mathcal{L}_p (s) &= \int_0^\infty e^{-sx} e^{-x}(x+1)/2 \\[8pt]
+&= \frac{1}{2} \int_0^\infty e^{-(s+1)x} x dx + \frac{1}{2} \int_0^\infty e^{-(s+1)x}dx  \\[8pt]
+&= \frac{1}{2(s+1)} (xe^{-(s+1)x} \vert_0^\infty - \int_0^\infty e^{-(s+1)x} dx ) + \frac{1}{2(s+1)} \\[8pt]
+&= \frac{s+2}{2(s+1)^2}\\[10pt]
+\mathcal{L}_u (s) &= \frac{\mathcal{L}_p}{s(1-\mathcal{L}_p)} \\[8pt]
+&= \frac{\frac{s+2}{2(s+1)^2}}{s(1-\frac{s+2}{2(s+1)^2})} \\[8pt]
+&= \frac{s+2}{2s^3 + 3s^2} \\[8pt]
+&= \frac{-1/9}{s} + \frac{2/3}{s^2} + \frac{2/9}{2s+3} \\[10pt]
+\mathcal{L}^{-1}(\mathcal{L}_u (s))(t) &= -1/9 + 2t/3 + e^{-(3/2)t}/9
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 5)}. Let $\xi, \eta$ be RVs and $P(\eta > x) = P (\eta < -x)$, $\forall x >0$, with $P(\eta=0) = 0$. Find the probability of the event that the trajectories of the following stochastic process increase :
+
+$$
+X_t = \xi^2 + t(\eta + 1), \ \ t \ge 0
+$$
+
+\textbf{(Answer)} We have
+
+$$
+P(\frac{d X_t}{dt} > 0,\forall t\ge0) = P(2t + \eta > 0,\forall t\ge0) = P(\eta >0) = 1/2
+$$
+
+
+
+
+
+
+
 
 
 
@@ -327,78 +370,6 @@ $$
 
 
 
-
-\subsection{Limit theorems for renewal processes}
-
-
-Consider a stochastic process $\{S_n \}_{n=1}^\infty$,
-
-$$
-S_n := S_{n-1} + \xi_n
-$$
-
-for IID $\xi_i > 0$. 
-
-\begin{theorem}
-\textbf{Theorem 1}. Assume $\mu := \mathbb{E} (\xi_1) < \infty$. Then 
-
-$$
-N_t / t \overset{t \to \infty}{\to} 1/\mu, a.s.
-$$
-
-This is analogous to \textbf{SLLN}, where 
-
-$$
-(\xi_1 + \cdots + \xi_n) / n \overset{t \to \infty}{\to}  \mu, a.s.
-$$
-\end{theorem}
-
-
-\textbf{Proof} 
-
-$$
-\begin{aligned}
-&S_{N_t} \le t \le S_{N_{t+1}} \\[8pt]
-&\frac{N_t}{S_{N_{t+1}}} \le \frac{N_t}{t} \le \frac{N_t}{S_{N_t}} 
-\end{aligned}
-$$
-
-where we have
-
-$$
-\begin{aligned}
-&\lim_{t\to\infty} \frac{N_t}{S_{N_t}} = \lim_{n\to\infty} \frac{n}{S_n} = 1/\mu \\[8pt]
-&\lim_{t\to\infty} \frac{N_t}{S_{N_{t+1}}} = 
-\lim_{t\to\infty} \frac{N_t}{N_{t+1}} \frac{N_{t+1}}{S_{N_{t+1}}} = 1/\mu
-\end{aligned}
-$$
-
-
-\begin{theorem}
-\textbf{Theorem 2}. Assume $\sigma^2 = \mathrm{Var} (\xi_1) < \infty$. Then
-
-$$
-Z_t := \frac{N_t - t/\mu}{\sigma \sqrt{t} / \mu^{3/2}} \overset{d}{\to} N(0,1)
-$$
-
-This is analogous to \textbf{CLT}, where 
-
-$$
-\frac{\xi_1 + \cdots + \xi_n - n\mu}{\sigma \sqrt{n}} \overset{d}{\to}  N(0,1)
-$$
-\end{theorem}
-
-
-\textbf{Proof} 
-
-Note that 
-
-$$
-P \left( \frac{S_n - n\mu}{\sigma \sqrt{n}} \le x \right) \to P(x)
-$$
-
-
-
 \pagebreak
 %----------------------------------------------------------------------------------------
 %   Section 2
@@ -407,6 +378,7 @@ $$
 
 \subsection{Nonhomogeneous Poisson process}
 
+
 \begin{itemize}
 	\item $P\{ N_{t+h} - N_t = 0 \} = 1 - \lambda h + \bar{\bar{o}}(h)$
 	\item $P\{ N_{t+h} - N_t = 1 \} = \lambda h \bar{\bar{o}}(h)$
@@ -414,7 +386,27 @@ $$
 \end{itemize}
 
 
-\subsection{Relation between renewal theory and non-homogeneous Poisson processes}
+
+$N_t$ is called NHPP, if 
+
+
+
+
+\subsection{Relation between renewal theory and nonhomogeneous Poisson processes}
+
+
+\begin{itemize}
+	\item 0) $N_0 = 0$
+	\item 1) $N_t$ has independent increments
+	\item 2) $N_t - N_s \sim Pois(\Lambda(t) - \Lambda(s))$
+\end{itemize}
+
+$$
+S_n = \mathrm{argmin}_t \{ N_t =n \}, \ \ \xi_n = S_n - S_{n-1}
+$$
+
+
+
 
 
 \subsection{Elements of the queueing theory : M/G/k systems}
@@ -517,10 +509,12 @@ $$
 
 
 
+  
+$$
+PGF = \phi_\alpha (u) = \mathbb{E}(u^\alpha)
+$$
 
 
-
-$N_t$ is the probability for 
 
 
 Probability generating function(BGF)
@@ -538,10 +532,120 @@ Note that if $\xi_1 \perp \xi_2$ then  $\phi_{\xi_1+\xi_2}$
 
 
 
-Moment 
-
-
 A \textbf{characteristic function} is a functional that can be used for any random variable
+
+The amount of claims to an insurance company is modelled by the Poisson process, and the claim sizes are modelled by an exponential distribution. On average there are 100 claims per day, and the mean value of 1 claim is 5000 USD.
+
+What type has the process X_tX 
+t
+​	  equal to the total amount of claims till time tt ?
+
+Compound Poisson process
+
+
+\subsection{Quizzes}
+
+\textbf{(Quiz 1)}. Let $N_t$ be a homogeneous Poisson process with intensity $\lambda$. Find
+
+$$
+\mathrm{lim}_{h\to0} P(N_h = 3)
+$$
+
+\textbf{(Answer)} Note
+
+$$
+\mathrm{lim}_{h\to0} P(N_h = 3) = \mathrm{lim}_{h\to0} e^{-\lambda h} (\lambda h)^3/3! = 0
+$$
+
+
+\textbf{(Quiz 2)}. Two friends are chating: one has a messaging speed equal to $3$ messages per minute, another with $2$ messages per minute. Assuming that for every person the process of writing the messages is modeled with Poisson process and these processes are independent, find the probability that there will be sent only 2 messages during the first minute.
+
+\textbf{(Answer)} Note that
+
+$$
+\begin{aligned}
+P = P(N_1^A = 2, N_1^B = 0) + P(N_1^A = 1, N_1^B = 1) + P(N_1^A = 0, N_1^B = 2) &= \\[8pt]
+&= e^{-5} 25/2
+\end{aligned}
+$$
+
+
+
+\textbf{(Quiz 3)}. Find the probability generating function of the the random variable $N_3$, where $N_t$ : homogeneous Poisson process, using the formula 
+
+$$
+PGF = \phi_\alpha (u) = \mathbb{E}(u^\alpha)
+$$
+
+\textbf{(Answer)} Note
+
+$$
+\begin{aligned}
+\mathbb{E}(u^{N_3}) &= \sum_{k=0}^\infty u^k e^{-3\lambda} \frac{(3\lambda)^k}{k!} \\[8pt]
+&= e^{-3\lambda} e^{3\lambda u} \\[8pt]
+&= e^{-3\lambda(1-u)}
+\end{aligned}
+$$
+
+
+
+\textbf{(Quiz 4)}. There is a speed limit on the street near the a school with a speed-register, which identifies a car's ID number with probability 80\%, if a car violates the speed limit. Assume that the number of cars passing the school and violating the speed limit is modelled by the homogeneous Poisson process $N_t$, with $\lambda=20$. Find the probability that during 2 hours after midday there will be 32 cars registered.
+
+
+\textbf{(Answer)} Let the the number of registered cars till time $t$ by $M_t$. Denote $p := 0.8$. 
+
+$$
+\begin{aligned}
+P(M_t - M_s = m) &= \sum_{n=m}^\infty P(M_t - M_s = m | N_t - N_s = n ) P (N_t - N_s = n)\\[8pt]
+&= \sum_{n=m}^\infty \binom{m}{n} p^m (1-p)^{n-m} e^{-\lambda(t-s) \frac{(\lambda(t-s))^n}{n!}} \\[8pt]
+&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!}\sum_{n=m}^\infty \frac{n!}{(n-m)!} (1-p)^n \frac{(\lambda(t-s))^n}{n!} \\[8pt]
+&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!} \sum_{k=0}^\infty \frac{(\lambda (t-s) (1-p) )^{k+m}}{k!} \\[8pt]
+&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!} (\lambda (t-s) (1-p)^m \sum_{k=0}^\infty \frac{(\lambda (t-s) (1-p) )^k}{k!} \\[8pt]
+&= \frac{(\lambda p (t-s))^m}{m!} e^{-\lambda p (t-s)}
+\end{aligned}
+$$
+
+Therefore
+
+$$
+P (M_{14} - M_0 = 16) = \frac{(20\times 0.8 * 2)^{16}}{16!} exp(-20\times0.8\times2) \approx 0.07
+$$
+
+
+
+\textbf{(Quiz 5)}. Purchases in a shop are modelled with non-homogeneous Poisson process: $30t^{5/4}$ purchases are made on average during $t$ hours after the opening of the shop. Find the probability that the interval between $k$ and $k+1$ purchases will be less than or equal to 2 minutes, given that the purchase number $k$ was in the time moment $s$:
+
+\textbf{(Answer)} Note
+
+
+$$
+\begin{aligned}
+P(S_{k+1} - S_k \le 2 | N_s = k) &= P(N_{s+2} - N_s \ge 1| N_s = k) \\[8pt]
+&= P(N_{s+2} - N_s \ge 1 | N_s - N_0 = k) \\[8pt]
+&= 1 - P(N_{s+2} - N_s = 0)
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 6)}. 
+
+The number of downloads of an app in Google-Play is modelled by a nonhomogeneous Poisson process with intensity $\Lambda(t)=t^{13/5}$, where $t$ is measured in hours after app's commencement time. Find the probability that the time between the $1000$th and $1001$st downloads is less than or equal to $36$ seconds (0.01 hour) given $1000$th download time being 14 hours after app's launch.
+
+
+\textbf{(Answer)} Note that
+
+$$
+\begin{aligned}
+P(S_{1001} - S_{1000} \le 0.01 | S_{1000} = 14) &= P(S_{1001} - S_{1000} \le 0.01 | N_{14} = 1000) \\[8pt]
+&= P( N_{14.01} - N_{14} \ge 1 | N_{14} - N_0 = 1000) \\[8pt]
+&= 1- P( N_{14.01} - N_{14} = 0 ) \\[8pt]
+&= 1- exp(-(\Lambda(14.01) - \Lambda(14)) ) \frac{(\Lambda(14.01) - \Lambda(14))^0}{0!} \\[8pt]
+&= 0.83
+\end{aligned}
+$$
+
+
+
 
 
 \pagebreak
@@ -565,14 +669,8 @@ $$
 Thus 
 
 $$
-\mathbb{E} (X(t)) = \lambda t \ \ \mathbb{Var}(X(t)) = \lambda t
+\mathbb{E} (X(t)) = \lambda t \ \ \mathrm{Var}(X(t)) = \lambda t
 $$
-
-
-\begin{theorem}
-\textbf{Theorem 4.2.1}. The waiting times $T_k$ are IID following an exponential distribution with $\lambda$. 
-\end{theorem}
-
 
 
 \section{Poisson Processes: Continuous Time Markov Chains}
@@ -695,12 +793,6 @@ A = \begin{bmatrix}
 \vdots & \vdots &  \vdots &  \vdots &   & 
 \end{bmatrix}
 $$
-
-
-
-\subsection{Differential Equations of Birth and Death Processes}
-
-
 
 
 \section{Problems}
