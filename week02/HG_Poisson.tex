@@ -292,24 +292,21 @@ P \{ X > u + v  | X > v\} = P\{ X > u\}
 $$
 
 
-DO NOT confuse with 
+\textbf{DO NOT confuse with}
+
+$$
+P \{ X > u + v  | X > v\} = P\{ X > u + v\}
+$$
 
 
 \begin{theorem}
-\textbf{Theorem 2}. Let $X$ be a RV with density $p(x)$. Then
+\textbf{Theorem 2}. Let $X$ be a continuous RV with density $p(x)$. Then
 
 \begin{center}
 $X$ : memoryless $\Leftrightarrow p(x) = \lambda e^{-\lambda x}$
 \end{center}
 
 \end{theorem}
-
-
-(\textbf{Example}) Suppose busses arrive every $20 \pm 2$ minutes. This is \textbf{}
-
-
-
-
 
 
 
@@ -321,8 +318,9 @@ $X$ : memoryless $\Leftrightarrow p(x) = \lambda e^{-\lambda x}$
 
 \begin{itemize}
 	\item 0) $N_0 = 0$, a.s.
-	\item $N_t$ has independent increments 
-	\item $N_t$ has stationary increment 
+	\item 1) $N_t$ has independent increments 
+	\item 2) $N_t$ has stationary increment 
+	\item 3) $N_t - N_s \sim Pois (\lambda (t-s))$
 \end{itemize}
 \end{theorem}
 
@@ -379,21 +377,7 @@ $$
 \subsection{Nonhomogeneous Poisson process}
 
 
-\begin{itemize}
-	\item $P\{ N_{t+h} - N_t = 0 \} = 1 - \lambda h + \bar{\bar{o}}(h)$
-	\item $P\{ N_{t+h} - N_t = 1 \} = \lambda h \bar{\bar{o}}(h)$
-	\item $P\{ N_{t+h} - N_t \ge 2 \} = \bar{\bar{o}}(h)$
-\end{itemize}
-
-
-
 $N_t$ is called NHPP, if 
-
-
-
-
-\subsection{Relation between renewal theory and nonhomogeneous Poisson processes}
-
 
 \begin{itemize}
 	\item 0) $N_0 = 0$
@@ -404,10 +388,6 @@ $N_t$ is called NHPP, if
 $$
 S_n = \mathrm{argmin}_t \{ N_t =n \}, \ \ \xi_n = S_n - S_{n-1}
 $$
-
-
-
-
 
 \subsection{Elements of the queueing theory : M/G/k systems}
 
@@ -420,7 +400,7 @@ given time t is represented by X(t)
 
 Recalling the defining properties of the \textbf{homogeneous Poisson process}, 
 
-\textbf{I. }
+\textbf{I. Arrival Process}
 
 \begin{itemize}
 	\item \textbf{M} : memoryless (Poisson)
@@ -429,14 +409,14 @@ Recalling the defining properties of the \textbf{homogeneous Poisson process},
 \end{itemize}
 
 
-\textbf{II. }
+\textbf{II. Service Time}
 
+\textbf{III. A Number of Services}
 
-For $N(t)$
 
 \begin{itemize}
-	\item $N_1(t)$, $\lambda_1 = \lambda (1 - G(\tau - t) )$ : \textbf{are still being served at} $t$
-	\item $N_2(t)$, $\lambda_2 = \lambda G(\tau - t)$ : \textbf{are a }
+	\item $N_1(t)$, $\lambda_1 = \lambda (1 - G(\tau - t) )$ : \textbf{are still being served at} $\tau$
+	\item $N_2(t)$, $\lambda_2 = \lambda G(\tau - t)$ : \textbf{are already completed by} $\tau$
 \end{itemize}
 
 
@@ -450,12 +430,17 @@ $$
 which does not hold for either $N_1(t)$ or $N_2(t)$. 
 
 $$
-P\{ N_1(t) = n_1,  N_2(t) = n_2 \} = \underbrace{P\{ N_1(t) = n_1,  N_2(t) = n_2 | N(t) = n_1 + n_2 \}}{\binom{n_1+n_2}{n_1} (1 - G(\tau -t))^{n_1} G(\tau -t)^{n_2} } \cdot \underbrace{P\{ N(t) = n_1 + n_2 \}}{e^{-\lambda t} \frac{(\lambda t)^{n_1 + n_2}}{(n_1+n_2)!}}
+\begin{aligned}
+P\{ N_1(t) = n_1,  N_2(t) = n_2 \} &= \underbrace{P\{ N_1(t) = n_1,  N_2(t) = n_2 | N(t) = n_1 + n_2 \}}_{\binom{n_1+n_2}{n_1} (1 - G(\tau -t))^{n_1} G(\tau -t)^{n_2} } \\[8pt]
+&\cdot \underbrace{P\{ N(t) = n_1 + n_2 \}}_{e^{-\lambda t} \frac{(\lambda t)^{n_1 + n_2}}{(n_1+n_2)!}}
+\end{aligned}
 $$
 
 
+\subsection{Compound Poisson process}
 
-A \textbf{compound Poisson process}
+The amount of claims to an insurance company is modelled by the Poisson process, and the claim sizes are modelled by an exponential distribution. On average there are 100 claims per day, and the mean value of 1 claim is 5000 USD. The process $X_t$ equal to the total amount of claims till time $t$ is a compound Poisson process. 
+
 
 $$
 X_t = \sum_{k=1}^{N_t} \xi_k
@@ -476,6 +461,13 @@ where $t > s \ge 0$
 
 \textbf{Corollary}.
 
+$$
+\begin{aligned}
+\mathbb{E}(X_t) &= \lambda t \mathbb{E} \xi_1 \\[8pt]
+\mathrm{Var}(X_t) &= \lambda t \mathbb{E} \xi_1^2
+\end{aligned}
+$$
+
 
 \end{theorem}
 
@@ -491,9 +483,6 @@ $$
 \end{aligned}
 $$
 
-Thus 
-
-
 Note that 
 
 $$
@@ -506,41 +495,6 @@ $$
 \end{aligned}
 $$
 
-
-
-
-  
-$$
-PGF = \phi_\alpha (u) = \mathbb{E}(u^\alpha)
-$$
-
-
-
-
-Probability generating function(BGF)
-
-
-For $\xi \ge 0$:
-
-$$
-\phi_\xi (u) = \mathbb{E}[u]
-$$ 
-
-
-Note that if $\xi_1 \perp \xi_2$ then  $\phi_{\xi_1+\xi_2}$
-
-
-
-
-A \textbf{characteristic function} is a functional that can be used for any random variable
-
-The amount of claims to an insurance company is modelled by the Poisson process, and the claim sizes are modelled by an exponential distribution. On average there are 100 claims per day, and the mean value of 1 claim is 5000 USD.
-
-What type has the process X_tX 
-t
-​	  equal to the total amount of claims till time tt ?
-
-Compound Poisson process
 
 
 \subsection{Quizzes}
