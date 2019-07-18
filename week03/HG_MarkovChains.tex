@@ -1,0 +1,837 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Markov Chains}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   Section 0: Review
+%----------------------------------------------------------------------------------------
+\section*{Review: Renewal process}
+
+\subsection*{Renewal processes}
+
+A \textbf{renewal (counting) process} $\{N(t), t > 0\}$ is a \textbf{nonnegative integer-valued} stochastic process that registers the successive occurrences of an event during the time interval $(0, t]$, where the time durations between consecutive '' events " are positive, IID RVs. 
+
+Let the successive occurence times between
+events be $\{\xi_k\}_{k=1}^\infty$ such that $\xi_i$ is the elapsed time from the $(i-1)$st event until the occurrence of the ith event, where
+
+$$
+F_\xi (x) = P(\xi_k \le x)
+$$
+
+Note that $F_\xi(0) = 0$, which means $\xi_k$ is \textbf{positive} random variables, almost surely. 
+
+Let the \textbf{partial sum process} $S_0 = 0$, $S_n = S_{n-1} + \xi_n$, where $\xi_i >0$ IID. $S_n$ is interpreted as the \textbf{waiting time} until the occurrence of $n$th event. 
+
+
+Let $N_t := \mathrm{argmax}_k \{S_k \le t\}$, which is the \textbf{number of indices} $n$ for which $0 < S_n \le t$. 
+
+In common practice, the counting process $\{N(t), t \ge 0 \}$ and the partial sum process $\{ S_n, n \ge 0 \}$ are interchangeably called the \textbf{renewal process}. 
+
+
+\begin{theorem}
+\textbf{Theorem}. For $S_n = S_{n-1} + \xi_n$, $\xi_i$ IID, we have
+$$u(t) = \mathbb{E} N_t = \sum_{n=1}^\infty F^{n\ast} (t) < \infty$$
+\end{theorem}
+
+
+Note that 
+
+$$
+\begin{aligned}
+\mathcal{L}_u (s) &= \mathcal{L}_F (s) + \mathcal{L}_u (s) \cdot \mathcal{L}_p (s) \\[8pt]
+&= \frac{\mathcal{L}_p(s)}{1-\mathcal{L}_p(s)}
+\end{aligned}
+$$
+
+
+So we can follow the steps:
+
+\begin{itemize}
+	\item $F \to \mathcal{L}_p$
+	\item $\mathcal{L}_p \to \mathcal{L}_u$
+	\item $\mathcal{L}_u \to u$
+\end{itemize}
+
+
+\subsection*{Quizzes}
+
+\textbf{(Quiz 1)}. Let $\eta$ be a random variable with $F_\eta$, and $X_t := e^\eta t^2$. What is the distribution function of $X_{t_1}, \cdots, X_{t_n}$ for $t_1, \cdots, t_n >0$? 
+
+\textbf{(Answer)} We have
+
+$$
+F_{\eta} \{ min \left( ln(x_1/t_1^2), \cdots, ln(x_n/t_n^2) \right) \}
+$$
+
+since
+
+$$
+\begin{aligned}
+F_\mathbf{X} (\mathbf{x}) &= P(X_{t_1} \le x_1, \cdots, X_{t_n} \le x_n) \\[8pt]
+&= P(e^\eta  \le x_1/t_1^2, \cdots, e^\eta  \le x_n/t_n^2)  \\[8pt]
+&= F_\eta (min (ln(x_1/t_1^2), \cdots, n(x_n/t_n^2)))
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 2)}. Let $\eta$ be a random variable with $F_\eta$, and $X_T := \eta + t$. Compute the distribution of $(X_{t_1}, \cdots, X_{t_n})$, where $t_1, \cdots, t_n >0$. 
+
+\textbf{(Answer)} We have
+
+$$
+F_{\eta} \{ min \left( x_1 - t_1, \cdots, x_n - t_n \right) \}
+$$
+
+since
+
+$$
+\begin{aligned}
+F_\mathbf{X} (\mathbf{x}) &= P(X_{t_1} \le x_1, \cdots, X_{t_n} \le x_n) \\[8pt]
+&= P(\eta \le x_1 - t_1, \cdots, \eta \le x_n - t_n)
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 3)}. Let $S_n := S_{n-1} + \xi_n$ be a renewal process and $p_\xi (x) = \lambda e^{-\lambda x}$. $\mathbb{E}(N_t)?$
+
+\textbf{(Answer)} We have
+
+$$
+\mathbb{E}(N_t) = \lambda t
+$$
+
+since
+
+$$
+N_t \sim Poisson(\lambda t)
+$$
+
+Or, more mathematically, 
+
+$$
+\begin{aligned}
+\mathcal{L}_p (s) &= \int_0^\infty e^{-sx} \lambda e^{-\lambda x} dx \\[8pt]
+&= \lambda \int_0^\infty e^{-(s+\lambda)x} dx \\[8pt]
+&= \frac{\lambda}{s + \lambda} \\[10pt]
+\mathcal{L}_u (s) &= \frac{\mathcal{L}_p}{s(1-\mathcal{L}_p)} \\[8pt]
+&= \frac{\frac{\lambda}{s + \lambda}}{s(1-\frac{\lambda}{s + \lambda})} \\[8pt]
+&= \frac{\lambda}{s^2} \\[10pt]
+\mathcal{L}^{-1}(\mathcal{L}_u (s))(t) &= \lambda t
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 4)}. Let $N_t$ be a counting process of a renewal process $S_n = S_{n-1} + \xi_n$ such that IIDRVs $\xi$ has the density
+
+$$
+p_\xi (x) = \begin{cases}
+e^{-x} (x+1)/2 & x \ge 0 \\
+0 & x <0
+\end{cases}
+$$
+
+$\mathbb{E}(N_t)?$
+
+\textbf{(Answer)} We have
+
+$$
+\mathbb{E}(N_t) = -1/9 + 2t/3 + e^{-(3/2)t}/9
+$$
+
+since 
+
+$$
+\begin{aligned}
+\mathcal{L}_p (s) &= \int_0^\infty e^{-sx} e^{-x}(x+1)/2 \\[8pt]
+&= \frac{1}{2} \int_0^\infty e^{-(s+1)x} x dx + \frac{1}{2} \int_0^\infty e^{-(s+1)x}dx  \\[8pt]
+&= \frac{1}{2(s+1)} (xe^{-(s+1)x} \vert_0^\infty - \int_0^\infty e^{-(s+1)x} dx ) + \frac{1}{2(s+1)} \\[8pt]
+&= \frac{s+2}{2(s+1)^2}\\[10pt]
+\mathcal{L}_u (s) &= \frac{\mathcal{L}_p}{s(1-\mathcal{L}_p)} \\[8pt]
+&= \frac{\frac{s+2}{2(s+1)^2}}{s(1-\frac{s+2}{2(s+1)^2})} \\[8pt]
+&= \frac{s+2}{2s^3 + 3s^2} \\[8pt]
+&= \frac{-1/9}{s} + \frac{2/3}{s^2} + \frac{2/9}{2s+3} \\[10pt]
+\mathcal{L}^{-1}(\mathcal{L}_u (s))(t) &= -1/9 + 2t/3 + e^{-(3/2)t}/9
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 5)}. Let $\xi, \eta$ be RVs and $P(\eta > x) = P (\eta < -x)$, $\forall x >0$, with $P(\eta=0) = 0$. Find the probability of the event that the trajectories of the following stochastic process increase :
+
+$$
+X_t = \xi^2 + t(\eta + 1), \ \ t \ge 0
+$$
+
+\textbf{(Answer)} We have
+
+$$
+P(\frac{d X_t}{dt} > 0,\forall t\ge0) = P(2t + \eta > 0,\forall t\ge0) = P(\eta >0) = 1/2
+$$
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+%----------------------------------------------------------------------------------------
+%   Section 1
+%----------------------------------------------------------------------------------------
+\section{Homogeneous Poisson processes}
+
+
+\subsection{Defintion of Poisson process as a renewal process}
+
+
+\begin{theorem}
+\textbf{Theorem}
+\begin{enumerate}[label=(\roman*)]
+	\item $P_{S_n} (x) = \lambda \frac{(\lambda x)^{n-1}}{(n-1)!} e^{-\lambda x} \mathbf{1}_{x>0}$
+	\item $P(N_t = n) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}$
+\end{enumerate}
+\end{theorem}
+
+\textbf{Proof} 
+
+\textbf{I}
+
+For $n=1$ case, $S_i = \xi_1$
+
+$$
+P_{S_1} (x) = \lambda e^{-\lambda x}, x>0
+$$
+
+Suppose $n=k$ case holds. For $n=k+1$, 
+
+$$
+\begin{aligned}
+P_{S_{n+1}}(x) &= \int_0^x P_{S_n} ( x-y)  P_{S_n} ( x-y) \\[8pt]
+&= \int_0^x \frac{}{} \\[8pt]
+&= \frac{\lambda^{n+1}}{(n-1)!} 
+\end{aligned}
+$$
+
+
+
+
+\textbf{II}
+
+$$
+(1 - e^{-\lambda t} \sum_{k=0}^{n-1} \frac{(\lambda t)^k}{k!}) - (1 - e^{-\lambda t} \sum_{k=0}^n \frac{(\lambda t)^k}{k!}) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}
+$$
+
+
+
+\subsection{Memoryless property}
+
+
+A random variable $X$ process 
+
+$$
+P \{ X > u + v \} = P \{ X > u  \} P \{ X > v \}
+$$
+
+if $P (X > v) > 0$, then
+
+$$
+P \{ X > u + v  | X > v\} = P\{ X > u\}
+$$
+
+
+\textbf{DO NOT confuse with}
+
+$$
+P \{ X > u + v  | X > v\} = P\{ X > u + v\}
+$$
+
+
+\begin{theorem}
+\textbf{Theorem 2}. Let $X$ be a continuous RV with density $p(x)$. Then
+
+\begin{center}
+$X$ : memoryless $\Leftrightarrow p(x) = \lambda e^{-\lambda x}$
+\end{center}
+
+\end{theorem}
+
+
+
+\subsection{Other definitions of Poisson processes}
+
+
+\begin{theorem}
+\textbf{Definition 2}. For $N_t$ : an integer-valued RV,
+
+\begin{itemize}
+	\item 0) $N_0 = 0$, a.s.
+	\item 1) $N_t$ has independent increments 
+	\item 2) $N_t$ has stationary increment 
+	\item 3) $N_t - N_s \sim Pois (\lambda (t-s))$
+\end{itemize}
+\end{theorem}
+
+
+Poisson process is widely used for describing the sum of odds. Note that
+
+
+\begin{theorem}
+\begin{itemize}
+	\item $P\{ N_{t+h} - N_t = 0 \} = 1 - \lambda h + \bar{\bar{o}}(h)$
+	\item $P\{ N_{t+h} - N_t = 1 \} = \lambda h \bar{\bar{o}}(h)$
+	\item $P\{ N_{t+h} - N_t \ge 2 \} = \bar{\bar{o}}(h)$
+\end{itemize}
+\end{theorem}
+
+\textbf{Proof} 
+
+$$
+\mathrm{lim}_{h \to 0} \frac{1 - P\{ N_{t+h} - N_t = 0 \}}{h} = \mathrm{lim}_{h \to 0} \frac{1-e^{-\lambda h}}{h} = \lambda
+$$
+
+by L'Hospital's rule.
+
+
+\begin{theorem}
+\textbf{Definition 3}. For $N_t$ : an integer-valued RV,
+	\item 0) $N_0 = 0$, a.s.
+	\item 1) $N_t$ has independent increments
+	\item 2) $N_t$ has stationary increment 
+	\item 3) $\mathrm{lim}_{h \to 0} \frac{P\{ N_{t+h} - N_t \ge 2 \}}{P\{ N_{t+h} - N_t = 1 \}} = 0 $
+\end{theorem}
+
+
+where $f(h) = \bar{\bar{o}} (g(h))$ means
+
+$$
+\mathrm{lim}_{h\to0} \frac{f(h)}{g(h)} = 0
+$$ 
+
+Note that 
+
+$$
+\frac{1 - P(N_{t+h} - N_t = 0) }{h} - \lambda = \bar{\bar{o}} (1) P\{ N_{t+h} - N_t = 0 \}
+$$
+
+
+
+\pagebreak
+%----------------------------------------------------------------------------------------
+%   Section 2
+%----------------------------------------------------------------------------------------
+\section{Models related to Poisson processes}
+
+\subsection{Nonhomogeneous Poisson process}
+
+
+$N_t$ is called NHPP, if 
+
+\begin{itemize}
+	\item 0) $N_0 = 0$
+	\item 1) $N_t$ has independent increments
+	\item 2) $N_t - N_s \sim Pois(\Lambda(t) - \Lambda(s))$
+\end{itemize}
+
+$$
+S_n = \mathrm{argmin}_t \{ N_t =n \}, \ \ \xi_n = S_n - S_{n-1}
+$$
+
+\subsection{Elements of the queueing theory : M/G/k systems}
+
+We can consider \textbf{queueing} as an example of \textbf{birth and death processes}. 
+
+A queueing process is a process where customers arrive at some designated place where a service of some kind is being rendered(e.g. teller's window). It is assumed that the time between arrivals(\textbf{interarrival time}), and the time spent in providing service for a given
+customer are governed by probabilistic laws . The length of the queue at a
+given time t is represented by X(t)
+
+
+Recalling the defining properties of the \textbf{homogeneous Poisson process}, 
+
+\textbf{I. Arrival Process}
+
+\begin{itemize}
+	\item \textbf{M} : memoryless (Poisson)
+	\item \textbf{D} : deterministic
+	\item \textbf{G} : general
+\end{itemize}
+
+
+\textbf{II. Service Time}
+
+\textbf{III. A Number of Services}
+
+
+\begin{itemize}
+	\item $N_1(t)$, $\lambda_1 = \lambda (1 - G(\tau - t) )$ : \textbf{are still being served at} $\tau$
+	\item $N_2(t)$, $\lambda_2 = \lambda G(\tau - t)$ : \textbf{are already completed by} $\tau$
+\end{itemize}
+
+
+
+Assume $M/G/\infty$. Note that both $N_1(t)$ and $N_2(t)$ are nonhomogeneous processes, because in homogeneous Poisson process
+
+$$
+\lambda(t) = \lambda = const
+$$
+
+which does not hold for either $N_1(t)$ or $N_2(t)$. 
+
+$$
+\begin{aligned}
+P\{ N_1(t) = n_1,  N_2(t) = n_2 \} &= \underbrace{P\{ N_1(t) = n_1,  N_2(t) = n_2 | N(t) = n_1 + n_2 \}}_{\binom{n_1+n_2}{n_1} (1 - G(\tau -t))^{n_1} G(\tau -t)^{n_2} } \\[8pt]
+&\cdot \underbrace{P\{ N(t) = n_1 + n_2 \}}_{e^{-\lambda t} \frac{(\lambda t)^{n_1 + n_2}}{(n_1+n_2)!}}
+\end{aligned}
+$$
+
+
+\subsection{Compound Poisson process}
+
+The amount of claims to an insurance company is modelled by the Poisson process, and the claim sizes are modelled by an exponential distribution. On average there are 100 claims per day, and the mean value of 1 claim is 5000 USD. The process $X_t$ equal to the total amount of claims till time $t$ is a compound Poisson process. 
+
+
+$$
+X_t = \sum_{k=1}^{N_t} \xi_k
+$$
+
+where $\xi: \phi_\xi (u) = \mathbb{E} [e^{iu\xi} ]$
+
+
+
+\begin{theorem}
+\textbf{Theorem}.
+
+$$
+\phi_{X_{\xi_t} - X_{\xi_s}} = e^{\lambda(t-s) \left( \phi_{\xi_1}(u) - 1 \right)}
+$$
+
+where $t > s \ge 0$
+
+\textbf{Corollary}.
+
+$$
+\begin{aligned}
+\mathbb{E}(X_t) &= \lambda t \mathbb{E} \xi_1 \\[8pt]
+\mathrm{Var}(X_t) &= \lambda t \mathbb{E} \xi_1^2
+\end{aligned}
+$$
+
+
+\end{theorem}
+
+
+\textbf{Proof} 
+
+Since both derivative and mathematical expectations are linear, we obtain that
+
+$$
+\begin{aligned}
+\Phi^{(r)}(u) &= \mathbb{E}(i^r \xi^r e^{iu\xi}) \\[8pt]
+\Phi^{(r)}(0) &= \mathbb{E}(i^r \xi^r e^{i\cdot 0 \xi}) = i^r \mathbb{E} (\xi^r)
+\end{aligned}
+$$
+
+Note that 
+
+$$
+\begin{aligned}
+(LHS) &= \mathbb{E} \left[ e^{iu (X_t - X_s)} \right] \\[8pt]
+&= \sum_{k=0}^\infty \mathbb{E} \left[ e^{iu(X_t - X_s)} \vert N_t - N_s = k \right] \\[8pt]
+&= \sum_{k=0}^\infty \mathbb{E} \left[ e^{iu(X_t - X_s)}\right] \\[8pt]
+&= P\left\{ N_t - N_S = k \right\} \\[8pt]
+&= P\left\{ N_t - N_S = k \right\} 
+\end{aligned}
+$$
+
+
+
+\subsection{Quizzes}
+
+\textbf{(Quiz 1)}. Let $N_t$ be a homogeneous Poisson process with intensity $\lambda$. Find
+
+$$
+\mathrm{lim}_{h\to0} P(N_h = 3)
+$$
+
+\textbf{(Answer)} Note
+
+$$
+\mathrm{lim}_{h\to0} P(N_h = 3) = \mathrm{lim}_{h\to0} e^{-\lambda h} (\lambda h)^3/3! = 0
+$$
+
+
+\textbf{(Quiz 2)}. Two friends are chating: one has a messaging speed equal to $3$ messages per minute, another with $2$ messages per minute. Assuming that for every person the process of writing the messages is modeled with Poisson process and these processes are independent, find the probability that there will be sent only 2 messages during the first minute.
+
+\textbf{(Answer)} Note that
+
+$$
+\begin{aligned}
+P = P(N_1^A = 2, N_1^B = 0) + P(N_1^A = 1, N_1^B = 1) + P(N_1^A = 0, N_1^B = 2) &= \\[8pt]
+&= e^{-5} 25/2
+\end{aligned}
+$$
+
+
+
+\textbf{(Quiz 3)}. Find the probability generating function of the the random variable $N_3$, where $N_t$ : homogeneous Poisson process, using the formula 
+
+$$
+PGF = \phi_\alpha (u) = \mathbb{E}(u^\alpha)
+$$
+
+\textbf{(Answer)} Note
+
+$$
+\begin{aligned}
+\mathbb{E}(u^{N_3}) &= \sum_{k=0}^\infty u^k e^{-3\lambda} \frac{(3\lambda)^k}{k!} \\[8pt]
+&= e^{-3\lambda} e^{3\lambda u} \\[8pt]
+&= e^{-3\lambda(1-u)}
+\end{aligned}
+$$
+
+
+
+\textbf{(Quiz 4)}. There is a speed limit on the street near the a school with a speed-register, which identifies a car's ID number with probability 80\%, if a car violates the speed limit. Assume that the number of cars passing the school and violating the speed limit is modelled by the homogeneous Poisson process $N_t$, with $\lambda=20$. Find the probability that during 2 hours after midday there will be 32 cars registered.
+
+
+\textbf{(Answer)} Let the the number of registered cars till time $t$ by $M_t$. Denote $p := 0.8$. 
+
+$$
+\begin{aligned}
+P(M_t - M_s = m) &= \sum_{n=m}^\infty P(M_t - M_s = m | N_t - N_s = n ) P (N_t - N_s = n)\\[8pt]
+&= \sum_{n=m}^\infty \binom{m}{n} p^m (1-p)^{n-m} e^{-\lambda(t-s) \frac{(\lambda(t-s))^n}{n!}} \\[8pt]
+&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!}\sum_{n=m}^\infty \frac{n!}{(n-m)!} (1-p)^n \frac{(\lambda(t-s))^n}{n!} \\[8pt]
+&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!} \sum_{k=0}^\infty \frac{(\lambda (t-s) (1-p) )^{k+m}}{k!} \\[8pt]
+&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!} (\lambda (t-s) (1-p)^m \sum_{k=0}^\infty \frac{(\lambda (t-s) (1-p) )^k}{k!} \\[8pt]
+&= \frac{(\lambda p (t-s))^m}{m!} e^{-\lambda p (t-s)}
+\end{aligned}
+$$
+
+Therefore
+
+$$
+P (M_{14} - M_0 = 16) = \frac{(20\times 0.8 * 2)^{16}}{16!} exp(-20\times0.8\times2) \approx 0.07
+$$
+
+
+
+\textbf{(Quiz 5)}. Purchases in a shop are modelled with non-homogeneous Poisson process: $30t^{5/4}$ purchases are made on average during $t$ hours after the opening of the shop. Find the probability that the interval between $k$ and $k+1$ purchases will be less than or equal to 2 minutes, given that the purchase number $k$ was in the time moment $s$:
+
+\textbf{(Answer)} Note
+
+
+$$
+\begin{aligned}
+P(S_{k+1} - S_k \le 2 | N_s = k) &= P(N_{s+2} - N_s \ge 1| N_s = k) \\[8pt]
+&= P(N_{s+2} - N_s \ge 1 | N_s - N_0 = k) \\[8pt]
+&= 1 - P(N_{s+2} - N_s = 0)
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 6)}. 
+
+The number of downloads of an app in Google-Play is modelled by a nonhomogeneous Poisson process with intensity $\Lambda(t)=t^{13/5}$, where $t$ is measured in hours after app's commencement time. Find the probability that the time between the $1000$th and $1001$st downloads is less than or equal to $36$ seconds (0.01 hour) given $1000$th download time being 14 hours after app's launch.
+
+
+\textbf{(Answer)} Note that
+
+$$
+\begin{aligned}
+P(S_{1001} - S_{1000} \le 0.01 | S_{1000} = 14) &= P(S_{1001} - S_{1000} \le 0.01 | N_{14} = 1000) \\[8pt]
+&= P( N_{14.01} - N_{14} \ge 1 | N_{14} - N_0 = 1000) \\[8pt]
+&= 1- P( N_{14.01} - N_{14} = 0 ) \\[8pt]
+&= 1- exp(-(\Lambda(14.01) - \Lambda(14)) ) \frac{(\Lambda(14.01) - \Lambda(14))^0}{0!} \\[8pt]
+&= 0.83
+\end{aligned}
+$$
+
+
+
+
+
+\pagebreak
+%----------------------------------------------------------------------------------------
+%	Appendix
+%----------------------------------------------------------------------------------------
+\section*{Karlin: Renewal processes}
+\setcounter{section}{0}
+
+
+\section{Review: Basics \& Renewal Processes}
+
+
+
+Let us consider \textbf{Poisson process} as an example of continous time Markov chains,
+
+$$
+\phi_t (w) = \mathbb{E} \{ e^{iwX(t)} \} = \sum_{n=0}^\infty \frac{e^{-\lambda t} (\lambda t)^n e^{iwn}}{n!} = exp[\lambda t (e^{iw} -1)]
+$$
+
+Thus 
+
+$$
+\mathbb{E} (X(t)) = \lambda t \ \ \mathrm{Var}(X(t)) = \lambda t
+$$
+
+
+\section{Poisson Processes: Continuous Time Markov Chains}
+
+
+\subsection{Postulates for the Poisson process}
+
+
+First, 
+
+Notice that the right-hand side is independent of $x$. 
+
+$$
+\begin{aligned}
+P\{ X(t+h) - X(t) = 1 | X(t) = x \} &= \lambda h + o(h), h \to 0_+, (x=0,1,2,\cdots) \\[10pt]
+\Leftrightarrow \mathrm{lim}_{h \to 0+} \frac{P\{ X(t+h) - X(t) = 1 | X(t) = x \}}{h} = \lambda
+\end{aligned}
+$$
+
+
+
+Second
+
+
+$$
+P\{ X(t+h) - X(t) = 0 | X(t) = x \} = 1 - \lambda h + o(h), h \to 0_+
+$$
+
+
+Third,
+
+$$
+X(0) = 0 
+$$
+
+
+\subsection{Pure birth process}
+
+A natural generalization of the Poisson process is to permit the chance of
+an event occurring at a given instant of time to depend upon the number of events which have already occurred. For example, \textbf{the probability of a birth at a given instant is proportional to the population size at that time}, which is known as the \textbf{Yule process}.
+
+
+
+
+The characteristic function of $S_n$ is given by
+
+$$
+\phi_n(w) = \mathbb{E}(exp(iwS_n)) = \prod_{k=0}^{n-1} \mathbb{E}(exp(iw T_k)) = \prod_{k=0}^{n-1} \frac{\lambda_k}{\lambda_k - iw}
+$$
+
+
+\subsection{Yule process}
+
+
+
+$$
+\begin{aligned}
+f_N(s) &= [f(s)]^N \\[8pt]
+&= \left[ \frac{se^{-\beta t}}{1 - (1-e^{-\beta t})s} \right]^N \\[8pt]
+&= (s e^{-\beta t})^N \sum_{m=0}^infty 
+\end{aligned}
+$$
+
+
+
+
+\begin{theorem}
+\textbf{Theorem 2.1}. The waiting times $T_k$ are independent and indentically distributed following an exponential distribution with parameter $\lambda$. 
+\end{theorem}
+
+
+
+\begin{theorem}
+\textbf{Theorem 2.2}. Let $F(x)$ a distribution such that $F(0) = 0$ and $F(x) < 1$ for some $x >0 $, then $F(x)$ is an exponential distribution iff
+
+$$
+F(x+y) - F(y) = F(x)[1-F(y)], \forall x,y \ge 0
+$$
+\end{theorem}
+
+\textbf{Proof}. ($\Rightarrow$) 
+
+
+
+
+\begin{theorem}
+\textbf{Theorem 2.3}. Let $F(x)$ a distribution such that $F(0) = 0$ and $F(x) < 1$ for some $x >0 $, then $F(x)$ is an exponential distribution iff
+
+$$
+F(x+y) - F(y) = F(x)[1-F(y)], \forall x,y \ge 0
+$$
+\end{theorem}
+
+\textbf{Proof}. ($\Rightarrow$) 
+
+
+
+
+\subsection{Birth and Death Processes}
+
+To generalize the pure birth processes, we can permit $X(t)$ to decrease as well as increase, for example, by the death of members. This can be regarded as the continuous time analogs of random walks. 
+
+
+\begin{itemize}
+	\item $P_{i, i+1}(h) = \lambda_i h + o(h), h \to 0_+$, $i \ge 0$
+	\item $P_{i, i-1}(h) = \mu_i h + o(h), h \to 0_+$, $i \ge 1$
+	\item $P_{i,I} (h) = 1 -(\lambda_i + \mu_i) h + o(h), h \to 0_+$, $i \ge 0$
+	\item $P_{ij} (0) = \delta_{ij}$
+	\item $\mu_0 = 0$, $\lambda_0 > 0, \mu_i, \lambda_i > 0, i=1,2,\cdots$
+\end{itemize}
+
+The matrix $A$, the \textbf{infinitesimal generator} of the process,
+
+$$
+A = \begin{bmatrix}
+-\lambda_0 & \lambda_0 & 0 & 0 & \cdots \\
+\mu_1 & -(\lambda_1 + \mu_1)  & \lambda_1 & 0 & \cdots \\
+0 & \mu_2 & -(\lambda_2 + \mu_2) & \lambda_2 & \cdots \\
+0 & 0 & \mu_3 & -(\lambda_3 + \mu_3) & \cdots
+\vdots & \vdots &  \vdots &  \vdots &   & 
+\end{bmatrix}
+$$
+
+
+\section{Problems}
+
+(4.2.) Assume a device fails when a cumulative effect of $k$ shocks occur. If the shocks happen 
+
+$$
+f(t) = \begin{cases}
+\frac{\lambda^k t^{k-1} e^{-\lambda t}}{\Gamma(k)} & t>0 \\[8pt]
+0 & t \le 0
+\end{cases}
+$$
+
+
+(4.6.) Let $X(t)$ be a homogeneous Poisson process with parameter $\lambda$. Determine the covariance between $X(t)$ and $X(t + \tau)$ where $t > 0$ and $\tau > 0$, i.e. compute
+
+$$
+\mathbb{E} \left[ \left( X(t) - \mathbb{E}(X(t)) \right) \left( X(t+\tau) - \mathbb{E}(X(t+\tau)) \right) \right]
+$$
+
+
+
+(4.9.) Let $X(t)$ be a pure birth continuous time Markov chain. Assume that 
+
+$$
+\begin{aligned}
+P(event \in (t, th) | X(t) = odd) &= \lambda_1 h + o(h) \\[8pt]
+P(event \in (t, th) | X(t) = odd) &= \lambda_1 h + o(h) \\[8pt]
+\end{aligned}
+$$
+
+
+For the single-server process with $\lambda < \mu$ the stationary distribution is 
+
+$$
+\pi_n = \frac{\lambda_0 \lambda_1 \cdots \lambda_{n-1} }{\mu_1 \mu_2 \cdots \mu_n} = (\frac{\lambda}{\mu})^n
+$$
+
+which, when normalized, results in
+
+$$
+P_n = \frac{\mu - \lambda}{\mu} (\frac{\lambda}{\mu})^n, \ \ n \ge 0
+$$
+
+
+If the process has been going on a long time and $\lambda < \mu$, the probability of being served immediately upon arrival is 
+
+$$
+P_0 = (1 - \frac{\lambda}{\mu})
+$$
+
+
+If an arriving customer finds $n$ people in front of her, her total waiting time $T$, including his own service time, is the sum of service times of herself and those ahead, all distributed exponentially with param $\mu$, thus 
+
+$$
+\begin{aligned}
+T | n \ \ \mathrm{ahead} &\equiv Gamma(n+1, \mu) \\[8pt]
+\Leftrightarrow \ \ P \{ T \le t | n \ \ \mathrm{ahead}  \} &= \int_0^t \frac{\mu^{n+1} \tau^n e^{-\mu t} }{\Gamma(n+1)} d\tau \\[10pt]
+\therefore \ \ P \{ T \le t\} &= \sum_{n=0}^\infty P \{ T \le t | n \ \ \mathrm{ahead} \} \cdot (\frac{\lambda}{\mu})^n (1 - \frac{\lambda}{\mu})
+\end{aligned}
+$$  
+
+since $(\frac{\lambda}{\mu})^n (1 - \frac{\lambda}{\mu})$ is the probability that in the stationary case a customer on arrival will find $n$ ahead in line. 
+
+
+$$
+\begin{aligned}
+P \{ T \le t\} &= \\[8pt]
+\end{aligned}
+$$
+
+
+
+$$
+\begin{aligned}
+M(t) &= \sum_{j=0}^\infty j P_{ij}(t) \\[8pt]
+M'(t) &= \lambda - \mu M(t) \\[8pt]
+M(t) &= \frac{\lambda}{\mu} (1 - e^{-\mu t}) + i e^{-\mu t} \\[8pt]
+\end{aligned}
+$$
+
+If we let $t \to \infty$, then $M(t) \to \lambda/\mu$, which is the mean value of the stationary distribution given above. 
+
+
+
+
+
+\end{document}
