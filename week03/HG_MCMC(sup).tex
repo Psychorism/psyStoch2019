@@ -46,7 +46,7 @@ ntheorem]{theorem}{}
 
 \begin{document}
 
-\title{\textbf{Markov Chains, }}
+\title{\textbf{Markov Chain Monte Carlo(MCMC)}}
 \author{Hyunwoo Gu}
 \date{}
 
@@ -56,7 +56,9 @@ ntheorem]{theorem}{}
 %----------------------------------------------------------------------------------------
 %   Section 0
 %----------------------------------------------------------------------------------------
-\subsection{Review: Basic Limit Theorems}
+
+
+
 
 
 
@@ -70,20 +72,6 @@ ntheorem]{theorem}{}
 %----------------------------------------------------------------------------------------
 %   Section 1
 %----------------------------------------------------------------------------------------
-
-
-\section{Markov Chains}
-
-
-\textbf{Chapman-Kolmogorov Equation}
-
-
-
-\textbf{Martingales}
-
-
-
-
 
 
 
@@ -140,45 +128,8 @@ $$
 %----------------------------------------------------------------------------------------
 %   Section 3
 %----------------------------------------------------------------------------------------
-\section{Stationarity and Linear Filters}
-
-\subsection{Spectral density of a wide-sense stationary process}
 
 
-\textbf{Bocher}
-
-$\phi(u): \mathbb{R} \to \mathbb{C}, \phi(u) = \mathbb{E} [e^{iu\xi}]$ : characteristic function, iff
-
-\begin{itemize}
-	\item 1) $\phi$ is constant
-	\item 2) $\phi$ is positive semidefinite, $\sum_{j=1}^n z_j \bar{z}_k \phi(u_j - u_k) \ge 0$, $\forall (z_1, \cdots, z_n) \in \mathbb{C}^n, \forall (u_1, \cdots, u_n) \in \mathbb{R}^n$.
-	\item 3) $\phi(0) = 1$
-\end{itemize}
-
-If 1), 2) are met, we have 
-
-$$
-\exists \mu: \phi(\mu) = \int e^{iux} \mu (dx)
-$$
-
-
-
-
-
-
-$X_t$ : weakly stationary. 
-
-$$
-\begin{aligned}
-\sigma &: K(t,s) = \sigma(t-s) \\[8pt]
-\end{aligned}
-$$
-
-if $\sigma$ is constant, and $\int |\sigma (u)| du < \infty $ 
-
-$$
-\mathcal{F}
-$$
 
 
 For example, there does not exist a stochastic process with the covariance $K(t,s) := sin( \lambda (t-s) )$, since it is not positive semi-definite.
@@ -249,40 +200,13 @@ where $\rho(h) = := \begin{cases} 3 & h=0 \\ 2 & h=1 \\ 1 & h=2 \\ 0 & o.w. \end
 
 $$
 \begin{aligned}
-\mathcal{F}[\rho] (u) &= e^{2iu} + 2e^{iu} + 3 \\[8pt]
-[\mathcal{F}[\rho] (u)]^2 &= \mathcal{F} \times \bar{\mathcal{F}} \\[8pt]
-&= (e^{2iu} + 2e^{iu} + 3) \times (e^{-2iu} + 2e^{-iu} + 3) \\[8pt]
-&= 9 + 4 + 1 + 8(e^{iu} + e^{-iu}) + 3(e^{2iu} + e^{-2iu}) \\[8pt]
-&= 14 + 3\cdot 2cos(2u) + 8\cdot 2 cos(u) \cdot g_Y(u) \\[8pt]
-&= \frac{1}{2\pi} (3 + 2cos(2u)) (14 + 3 \cdot 2cos(2u) + 8\cdot 2 cos(u)) \\[8pt]
+\mathcal{F}[\rho] (u) &= \\[8pt]
 \end{aligned}
 $$
 
-
-
-\textbf{(Quiz 4)}. Let the autocovariance function of some stochastic process $X_t$ be $\gamma_X(u) := \begin{cases} 3 & u=0 \\ 1 & u=\pm2 \\ 0 & o.w. \end{cases}$ Find the \textbf{spectral density} of $Y_t := 3X_t + 2X_{t-1} + X_{t-2}$. 
-
-\textbf{(Answer)} Note that for $t > s + h$, we have
-
 $$
-K(t,s) = Cov(W_{t+h} - W_t, W_{s+h} - W_s) = 0
+ =
 $$
-
-For $t \le s + h$, we have
-
-$$
-\begin{aligned}
-K(t,s) &= Cov(W_{t+h} - W_t, W_{s+h} - W_s) \\[8pt]
-&= Cov(W_{t+h} - W_{s+h} + W_{s+h} - W_t, W_{s+h} - W_s) \\[8pt]
-&= Cov(W_{s+h} - W_t, W_{s+h} - W_t + W_t - W_s) \\[8pt]
-&= Var(W_{s+h} - W_t) = h - |t - s|
-g_Y(u) &= g_X(u) |\mathcal{F}[\rho] (u)|^2
-\end{aligned}
-$$
-
-
-
-
 
 
 
@@ -840,58 +764,8 @@ $$
 %----------------------------------------------------------------------------------------
 %	Appendix
 %----------------------------------------------------------------------------------------
-\section*{Karlin: Markov Chains}
+\section*{Karlin: Renewal processes}
 \setcounter{section}{0}
-
-
-By definition, 
-
-
-$$
-\begin{aligned}
-P\left[ X_0 = i_0, \cdots, X_n = i_n \right] &= P[X_n = i_n | X_0 = i_0, \cdots, X_{n-1} = i_{n-1}] \\[8pt]
-&\cdot P(X_0 = i_0, \cdots, X_{n-1} = i_{n-1}) \\[8pt]
-&= 
-\end{aligned}
-$$
-
-
-\section{Examples of Markov Chains}
-
-\subsection{Spatially Homogeneous Markov Chains}
-
-
-\subsection{One-dimensional random walks}
-
-
-
-
-\subsection{Three-dimensional random walks}
-
-
-
-\subsection{A Discrete Queing Markov Chain}
-
-
-
-
-\begin{theorem}
-\textbf{Theorem 2.2}. Let $F(x)$ a distribution such that $F(0) = 0$ and $F(x) < 1$ for some $x >0 $, then $F(x)$ is an exponential distribution iff
-
-$$
-F(x+y) - F(y) = F(x)[1-F(y)], \forall x,y \ge 0
-$$
-\end{theorem}
-
-
-\begin{theorem}
-\textbf{Theorem 2.2}. Let $F(x)$ a distribution such that $F(0) = 0$ and $F(x) < 1$ for some $x >0 $, then $F(x)$ is an exponential distribution iff
-
-$$
-F(x+y) - F(y) = F(x)[1-F(y)], \forall x,y \ge 0
-$$
-\end{theorem}
-
 
 
 \section{Review: Basics \& Renewal Processes}
