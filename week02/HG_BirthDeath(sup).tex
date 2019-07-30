@@ -53,30 +53,10 @@ ntheorem]{theorem}{}
 \maketitle
 
 %----------------------------------------------------------------------------------------
-%	Appendix
+%	Supplementary: Birth and Death Processes
 %----------------------------------------------------------------------------------------
-\section*{Karlin: Renewal processes}
+\section*{Supplementary: Birth and Death Processes}
 \setcounter{section}{0}
-
-
-\section{Review: Basics \& Renewal Processes}
-
-
-
-Let us consider \textbf{Poisson process} as an example of continous time Markov chains,
-
-$$
-\phi_t (w) = \mathbb{E} \{ e^{iwX(t)} \} = \sum_{n=0}^\infty \frac{e^{-\lambda t} (\lambda t)^n e^{iwn}}{n!} = exp[\lambda t (e^{iw} -1)]
-$$
-
-Thus 
-
-$$
-\mathbb{E} (X(t)) = \lambda t \ \ \mathrm{Var}(X(t)) = \lambda t
-$$
-
-
-\section{Poisson Processes: Continuous Time Markov Chains}
 
 
 \subsection{Postulates for the Poisson process}
@@ -112,8 +92,7 @@ $$
 
 \subsection{Pure birth process}
 
-A natural generalization of the Poisson process is to permit the chance of
-an event occurring at a given instant of time to depend upon the number of events which have already occurred. For example, \textbf{the probability of a birth at a given instant is proportional to the population size at that time}, which is known as the \textbf{Yule process}.
+A natural generalization of the Poisson process is to permit the chance of an event occurring at a given instant of time to depend upon the number of events which have already occurred. For example, \textbf{the probability of a birth at a given instant is proportional to the population size at that time}, which is known as the \textbf{Yule process}.
 
 
 
@@ -171,6 +150,24 @@ $$
 
 
 
+$T$ : the waiting time of $X(t)$ in the state $i$. 
+
+
+Letting $G_i(t) := P(T_i \ge t)$, 
+
+$$
+\begin{aligned}
+G_i (t+h) &= G_i(t) G_i(h) = G_i(t) \left[ P_{ii}(h) + o(h) \right] \\[8pt]
+&= G_i(t) [ 1- (\lambda_i + \mu_i)h ] + o(h) \\[10pt]
+\Leftrightarrow \frac{ G_i(t+h) - G_i(t)  }{ h } = -(\lambda_i + \mu_i) G_i(t) + o(1) \\[8pt]
+G_i'(t) &= -(\lambda_i + \mu_i) G_i(t)
+\end{aligned}
+$$
+
+where the last line corresponds to the IVP of with $G_i(0) = 1$
+
+
+
 
 \subsection{Birth and Death Processes}
 
@@ -198,34 +195,49 @@ A = \begin{bmatrix}
 $$
 
 
-\section{Problems}
+\subsection{Differential Equations of Birth and Death Processes}
 
-(4.2.) Assume a device fails when a cumulative effect of $k$ shocks occur. If the shocks happen 
-
-$$
-f(t) = \begin{cases}
-\frac{\lambda^k t^{k-1} e^{-\lambda t}}{\Gamma(k)} & t>0 \\[8pt]
-0 & t \le 0
-\end{cases}
-$$
-
-
-(4.6.) Let $X(t)$ be a homogeneous Poisson process with parameter $\lambda$. Determine the covariance between $X(t)$ and $X(t + \tau)$ where $t > 0$ and $\tau > 0$, i.e. compute
-
-$$
-\mathbb{E} \left[ \left( X(t) - \mathbb{E}(X(t)) \right) \left( X(t+\tau) - \mathbb{E}(X(t+\tau)) \right) \right]
-$$
-
-
-
-(4.9.) Let $X(t)$ be a pure birth continuous time Markov chain. Assume that 
+As in the pure birth and Poisson processes, the transition probabilities $P_{ij}$ satisfy a system of differential equations, known as \textit{Kolmogorov differential equations}. 
 
 $$
 \begin{aligned}
-P(event \in (t, th) | X(t) = odd) &= \lambda_1 h + o(h) \\[8pt]
-P(event \in (t, th) | X(t) = odd) &= \lambda_1 h + o(h) \\[8pt]
+P_{0j}'(t) &= -\lambda_0 P_{0j} (t) + \lambda_0 P_{ij}(t) \\[8pt]
+P_{ij}'(t) &= \mu_i P_{i-1, j} (t) - (\lambda_i + \mu_i) P_{ij}(t) + \lambda_i P_{i+1, j}(t) \\[8pt]
 \end{aligned}
 $$
+
+where the boundary condition $P_{ij}(0) = \delta_{ij}$. 
+
+
+
+\subsection{Examples of Birth and Death Processes}
+
+\subsubsection{Linear Growth with Immigration}
+
+A birth and death process is called a \textbf{linear growth process} if $\lambda_n = \lambda_n + a$ and $\mu_n = \mu n$ with $\lambda, \mu, a >0$. Such 
+
+
+
+\subsubsection{Queueing}
+
+
+
+
+
+\subsection{Birth and Death Processes with Absorbing States}
+
+\textbf{Probability of absorption into state $0$}
+
+
+$$
+\mathbf{u}_i = \frac{\lambda_i}{\mu_i + \lambda_i} \mathbf{u}_{i+1}  + \frac{\mu_i}{\mu_i + \lambda_i} \mathbf{u}_{i-1}
+$$
+
+where $u_0 = 1$. 
+
+
+\textbf{Probability of absorption into state $0$}
+
 
 
 For the single-server process with $\lambda < \mu$ the stationary distribution is 

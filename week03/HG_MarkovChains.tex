@@ -65,6 +65,19 @@ ntheorem]{theorem}{}
 
 
 
+%----------------------------------------------------------------------------------------
+%   Section 0
+%----------------------------------------------------------------------------------------
+\subsection{Review: Basic Limit Theorems}
+
+
+
+
+\subsection{Defintion of Poisson process as a renewal process}
+
+
+
+
 
 \pagebreak
 %----------------------------------------------------------------------------------------
@@ -73,6 +86,42 @@ ntheorem]{theorem}{}
 
 
 \section{Markov Chains}
+
+A discrete time Markov chain $\{ X_n \}$ is a Markov stochastic process whose state space is a countable or finite set. 
+
+
+
+
+
+
+\section{Examples of Markov chains}
+
+\subsection{Spatially homogeneous Markov chains}
+
+
+
+
+
+\begin{theorem}
+\textbf{Theorem 1.1.}. Let $\{a_k \}$, $\{u_k \}$, $\{b_k \}$ be sequences indexed by $k=0, \pm 1, \pm 2, \cdots$ that the GCD of the integer $k$ for which $a_k >0$ is 1. If the renewal equation, for $n = 0, \pm 1, \pm 2, \cdots$
+
+$$
+u_n - \sum_{k=-\infty}^\infty a_{n-k} u_k = b_n
+$$
+
+is satisfied by a bounded sequence $\{ u_n\}$ of real numbers, then $\exists \mathrm{lim}_{n\to \infty} u_n, \exists \mathrm{lim}_{n\to -\infty} u_n$. Furthermore, if
+
+$$
+\mathrm{lim}_{n\to - \infty} u_n = 0
+$$
+
+then 
+
+$$
+\mathrm{lim}_{n\to \infty} u_n
+$$
+
+\end{theorem}
 
 
 \textbf{Chapman-Kolmogorov Equation}
@@ -83,6 +132,40 @@ ntheorem]{theorem}{}
 
 
 
+
+\begin{theorem}
+\textbf{Ergodic theorem}. Let $X_t$ ergodic Markov chain, i.e. irreducible, recurrent, aperiodic. Then
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+\begin{theorem}
+\textbf{Corollary1}. Let $X_t$ ergodic Markov chain, i.e. irreducible, recurrent, aperiodic. Then
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+
+\pagebreak
+%----------------------------------------------------------------------------------------
+%   Section 1
+%----------------------------------------------------------------------------------------
 
 
 
