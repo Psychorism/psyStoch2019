@@ -1,0 +1,109 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Supplementary: \\ Elements of Stochastic Processes}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+%----------------------------------------------------------------------------------------
+%   Section 0
+%----------------------------------------------------------------------------------------
+
+\section{Basic terminology}
+
+\textbf{Lebesgue-Stieltjes integration}
+
+A generaliation of Riemann-Stieltjes integration and Lebesgue integration, which is just the ordinary Lebesgue integral with respect to a measure known as the \textbf{Lebesgue–Stieltjes measure}. We have
+
+\begin{center}
+
+\end{center}
+
+
+The Lebesgue-Stieltjes integration
+
+$$
+\int_a^b f(x) d g(x)
+$$
+
+is defined when $f: [a,b] \to \mathbb{R}$ is \textbf{Borel-measurable} and \textbf{bounded}, and $g : [a,b] \to \mathbb{R}$ is of bounded variation
+
+
+
+\textbf{Radon-Nikodym theorem}
+
+If 
+
+
+\textbf{Expected value}
+
+$$
+\mathbb{E}[g(X)] = \int g(x) dF_X(x)
+$$
+
+
+\textbf{Convolution}
+
+$$
+\mathbb{E}[g(X)] = \int g(x) dF_X(x)
+$$
+
+
+
+
+\textbf{Problems}
+
+
+
+
+
+
+\end{document}

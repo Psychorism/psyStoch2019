@@ -46,7 +46,7 @@ ntheorem]{theorem}{}
 
 \begin{document}
 
-\title{\textbf{Markov Chains, }}
+\title{\textbf{Markov Chains, Gaussian Processes, \\ \& Stationarity}}
 \author{Hyunwoo Gu}
 \date{}
 
@@ -54,49 +54,172 @@ ntheorem]{theorem}{}
 
 
 %----------------------------------------------------------------------------------------
-%   Section 0
-%----------------------------------------------------------------------------------------
-\subsection{Review: Basic Limit Theorems}
-
-
-
-
-\subsection{Defintion of Poisson process as a renewal process}
-
-
-
-%----------------------------------------------------------------------------------------
-%   Section 0
-%----------------------------------------------------------------------------------------
-\subsection{Review: Basic Limit Theorems}
-
-
-
-
-\subsection{Defintion of Poisson process as a renewal process}
-
-
-
-
-
-\pagebreak
-%----------------------------------------------------------------------------------------
 %   Section 1
 %----------------------------------------------------------------------------------------
-
-
-\section{Markov Chains}
+\begin{center}
+\section*{I. Markov Chains}
+\end{center}
+\setcounter{section}{1}
 
 A discrete time Markov chain $\{ X_n \}$ is a Markov stochastic process whose state space is a countable or finite set. 
 
 
 
+\begin{theorem}
+\textbf{Definition}. The \textbf{generating function} $P_{ij}(s)$ of the sequence $\{ P_{ij}^n \}$ is 
+
+$$
+P_{ij} (s) = \sum_{n=0}^\infty P_{ij}^n s^n, \forall |s|<1
+$$
+
+In a similar manner, the generating function of the sequence $\{ f_{ij}^n \}$ is 
+
+$$
+F_{ij}(s) = \sum_{n=0}^\infty f_{ij}^n s^n, \forall |s|
+$$
+\end{theorem}
+
+From the property 
+
+
+\begin{theorem}
+\textbf{Theorem 5.1.}. A state $i$ is recurrent if and only if 
+
+$$
+\sum_{n=1}^\infty P_{ii}^n = \infty
+$$
+\end{theorem}
+
+
+\textbf{Proof} Assume $i$ is recurrent, that is, $\sum_{n=1}^\infty f_{ii}^n = 1$. Then by Lemma 5.1,
+
+$$
+\mathrm{lim}_{s \to 1-} \sum_{n=0}^\infty f_{ii}^n s^n = \mathrm{lim}_{s \to 1-} F_{ii}(s) = 1
+$$
+
+Thus using the fact that 
 
 
 
-\section{Examples of Markov chains}
 
-\subsection{Spatially homogeneous Markov chains}
+\subsection{Ergodic theorem}
+
+\begin{theorem}
+\textbf{Ergodic theorem}. Let $X_t$ ergodic Markov chain, i.e. irreducible, recurrent, aperiodic. Then
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+\begin{theorem}
+\textbf{Corollary1}.
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+\textbf{Proof} 
+
+\textbf{I}
+
+For $i=1, \cdots, M$,
+
+
+$$
+\begin{aligned}
+\left( \pi^\ast P \right)_i &= \sum_{j=1}^M \pi_j^\ast \\[8pt]
+\end{aligned}
+$$
+
+
+where note that 
+
+$$
+\begin{aligned}
+\left( P^{(n+1)} \right)_{ki} &= p_{ki} (n+1) = \sum{j=1}^M p_{kj} (n) p_{ji} \\[10pt]
+\therefore \mathrm{lim}_{n \to \infty} p_{ki} (n+1) = \mathrm{lim}_{n \to \infty} p_{ki} (n) = \pi_i^\ast
+\end{aligned}
+$$
+
+
+
+$$
+P_{S_1} (x) = \lambda e^{-\lambda x}, x>0
+$$
+
+Suppose $n=k$ case holds. For $n=k+1$, 
+
+$$
+\begin{aligned}
+P_{S_{n+1}}(x) &= \int_0^x P_{S_n} ( x-y)  P_{S_n} ( x-y) \\[8pt]
+&= \int_0^x \frac{}{} \\[8pt]
+&= \frac{\lambda^{n+1}}{(n-1)!} 
+\end{aligned}
+$$
+
+
+
+
+\textbf{II}
+
+$$
+(1 - e^{-\lambda t} \sum_{k=0}^{n-1} \frac{(\lambda t)^k}{k!}) - (1 - e^{-\lambda t} \sum_{k=0}^n \frac{(\lambda t)^k}{k!}) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}
+$$
+
+
+
+
+
+
+
+\subsection{Examples of Markov chains}
+
+
+\subsubsection{Spatially homogeneous Markov chains}
+
+Let
+
+
+
+\subsubsection{One-dimensional random walks}
+
+$$
+P = \begin{bmatrix}
+
+\end{bmatrix}
+$$
+
+
+
+
+
+
+
+
+
+\subsubsection{Success runs}
+
+
+
+\subsubsection{Branching processes}
+
+$$
+P[\xi = k] = a_k
+$$
 
 
 
@@ -109,7 +232,11 @@ $$
 u_n - \sum_{k=-\infty}^\infty a_{n-k} u_k = b_n
 $$
 
-is satisfied by a bounded sequence $\{ u_n\}$ of real numbers, then $\exists \mathrm{lim}_{n\to \infty} u_n, \exists \mathrm{lim}_{n\to -\infty} u_n$. Furthermore, if
+is satisfied by a bounded sequence $\{ u_n\}$ of real numbers, then 
+
+$$
+\exists \mathrm{lim}_{n\to \infty} u_n, \exists \mathrm{lim}_{n\to -\infty} u_n
+$$. Furthermore, if
 
 $$
 \mathrm{lim}_{n\to - \infty} u_n = 0
@@ -133,39 +260,185 @@ $$
 
 
 
+
+\subsection{Classifications of states of a Markov chains}
+
+
+\subsubsection{Accessibility}
+
+State $j$ is \textbf{accessible} from state $i$ if $\exists n \ge 0$ such that $P^n_{ij} > 0$, i.e. 
+
+If two states $i$ and $j$ do not communicate, then 
+
+$$
+P^n_{ij} = 0, \forall n \ge 0 \ \ or \ \ P^n_{ji} = 0, \forall n \ge 0 
+$$
+
+The definition of \textbf{communicaiton}: 
+
+\begin{itemize}
+	\item (\textbf{Reflexivity})
+	\item (\textbf{Symmetry})
+	\item (\textbf{Transitivity})
+\end{itemize}
+
+
+
+\subsubsection{Periodicity}
+
+\textbf{Period} of state $i$, $d(i)$ is the greatest common divisor(GCD) of all integers $n \ge 1$ where $P^n_{ii} > 0$. 
+
+$$
+P = \begin{bmatrix}
+0 & 1 & 0 & 0 & \cdots & 0 \\
+0 & 0 & 1 & 0 & \cdots & 0 \\
+\vdots &  &  &  &  & \vdots \\
+0 & 0 & 0 & 0 & \cdots & 1 \\
+1 & 0 & 0 & 0 & \cdots & 0 \\
+\end{bmatrix}
+$$
+
+
 \begin{theorem}
-\textbf{Ergodic theorem}. Let $X_t$ ergodic Markov chain, i.e. irreducible, recurrent, aperiodic. Then
+\textbf{Theorem 1}. Periodicity is a \textbf{class property}, i.e, if $i \leftrightarrow j$ then
 
 $$
-\begin{aligned}
-\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
-\sum_{j=1}^M \pi_j^\ast &= 1
-\end{aligned}
+d(i) = d(j)
 $$
-
 \end{theorem}
 
 
 
+
+\subsubsection{Recurrence}
+
+
 \begin{theorem}
-\textbf{Corollary1}. Let $X_t$ ergodic Markov chain, i.e. irreducible, recurrent, aperiodic. Then
+\textbf{Corollary 5.1.}. If $i \leftrightarrow j$ and if $i$ is recurrent then $j$ is recurrent.
+\end{theorem}
+
+
+
+
+
+
+\subsection*{Quizzes}
+
+\textbf{(Quiz 1)}. Find the stationary distribution of the following $P$:
+
+$$
+P = \begin{bmatrix}
+0 & 1/2 & 0 & 0 & 1/2 \\
+0 & 0 & 1 & 0 & 0 \\
+1/5 & 1/5 & 1/5 & 1/5 & 1/5 \\
+0 & 1/2 & 0 & 0 & 1/2 \\
+0 & 1/2 & 1/2 & 0 & 0 \\
+\end{bmatrix}
+$$
+
+\textbf{(Answer)} The left-eigenvector corresponding to eigenvalue $1$ is as follows:
+
+$$
+(1/12, 3/12, 5/12, 1/12, 2)
+$$
+
+
+
+\textbf{(Quiz 2)}. Jane and Peter are playing chess. For Jane, the probabilities of wining, drawing, and losing a game number $t$ are $(w,d,l)$. Peter is slightly more emotional.
+
+\begin{itemize}
+	\item If he wins in the previous game, then $(w+\epsilon, d, l-\epsilon)$
+	\item If he draws in the previous game, then $(w, d, l)$
+	\item If he loses in the previous game, then $(w-\epsilon, d, l+\epsilon)$
+\end{itemize}
+
+Find the condition which guarantees that the probability of wining in stationry distribution for Peter is larger than that for Jane.
+
+
+\textbf{(Answer)} Note that 
 
 $$
 \begin{aligned}
-\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
-\sum_{j=1}^M \pi_j^\ast &= 1
+P_{Jane} &= \begin{bmatrix}
+w & d & l \\
+w & d & l \\
+w & d & l \\
+\end{bmatrix}
+P_{Peter} &= \begin{bmatrix}
+w + \epsilon& d & l-\epsilon \\
+w & d & l \\
+w - \epsilon & d & l+\epsilon \\
+\end{bmatrix}
 \end{aligned}
 $$
 
-\end{theorem}
+It is direct that $Rank(P_{Jane}^T) = 1$, thus the multiplicity of $\lambda = 0$ is at least $2$. Note that $\lambda =1$ is also an eigenvalue, where the corresponding eigenvector is $(w,d,l)$. 
+
+For $P_{Peter}^T$, we need some algebra to get
+
+$$
+x_1 = \frac{w(1-\epsilon) - l\epsilon}{1-2\epsilon}
+$$
+
+then by $w < x_1$, we have
+
+$$
+l < w
+$$
+
+
+
+\textbf{(Quiz 3)}. 
+
+
+$$
+K(t,s) - Var(X_{min(t,s)})
+$$
+
+
+\textbf{(Answer)} Trivially $0$, since
+
+$$
+Var(X_{min(t,s)}) = min(t,s)
+$$
+
 
 
 
 
 \pagebreak
 %----------------------------------------------------------------------------------------
-%   Section 1
+%   Section 2
 %----------------------------------------------------------------------------------------
+\begin{center}
+\section*{II. Gaussian processes}
+\end{center}
+\setcounter{section}{2}
+\setcounter{subsection}{0}
+
+\subsection{Random vector}
+
+
+
+\subsection{Brownian motion}
+
+\begin{center}
+Brownian motion($B_t$) = Wiener process ($W_t$)
+\end{center}
+
+
+\begin{theorem}
+\textbf{Proposition}. 
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
 
 
 
@@ -223,7 +496,12 @@ $$
 %----------------------------------------------------------------------------------------
 %   Section 3
 %----------------------------------------------------------------------------------------
-\section{Stationarity and Linear Filters}
+\begin{center}
+\section*{III. Stationarity and Linear Filters}
+\end{center}
+\setcounter{section}{3}
+\setcounter{subsection}{0}
+
 
 \subsection{Spectral density of a wide-sense stationary process}
 
@@ -265,6 +543,51 @@ $$
 
 
 For example, there does not exist a stochastic process with the covariance $K(t,s) := sin( \lambda (t-s) )$, since it is not positive semi-definite.
+
+
+$$
+g(x) := 
+$$
+
+
+\textbf{Example 1)} $WN(0, \sigma^2)$
+
+Note that 
+
+$$
+\begin{aligned}
+\gamma(u) &= \sigma^2 1_{\{ u = 0 \}} \\[8pt]
+g(x) &= \frac{\sigma^2}{2\pi}
+\end{aligned}
+$$
+
+
+
+\textbf{Example 2)} $MA(1)$
+
+
+
+\begin{theorem}
+\textbf{Proposition}. 
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+
+
+\subsection{Stochastic integration}
+
+
+
+
 
 
 \subsection*{Quizzes}
@@ -363,557 +686,6 @@ g_Y(u) &= g_X(u) |\mathcal{F}[\rho] (u)|^2
 \end{aligned}
 $$
 
-
-
-
-
-
-
-%----------------------------------------------------------------------------------------
-%   Section 0: Review
-%----------------------------------------------------------------------------------------
-\section*{Review: Renewal process}
-
-\subsection*{Renewal processes}
-
-A \textbf{renewal (counting) process} $\{N(t), t > 0\}$ is a \textbf{nonnegative integer-valued} stochastic process that registers the successive occurrences of an event during the time interval $(0, t]$, where the time durations between consecutive '' events " are positive, IID RVs. 
-
-Let the successive occurence times between
-events be $\{\xi_k\}_{k=1}^\infty$ such that $\xi_i$ is the elapsed time from the $(i-1)$st event until the occurrence of the ith event, where
-
-$$
-F_\xi (x) = P(\xi_k \le x)
-$$
-
-Note that $F_\xi(0) = 0$, which means $\xi_k$ is \textbf{positive} random variables, almost surely. 
-
-Let the \textbf{partial sum process} $S_0 = 0$, $S_n = S_{n-1} + \xi_n$, where $\xi_i >0$ IID. $S_n$ is interpreted as the \textbf{waiting time} until the occurrence of $n$th event. 
-
-
-Let $N_t := \mathrm{argmax}_k \{S_k \le t\}$, which is the \textbf{number of indices} $n$ for which $0 < S_n \le t$. 
-
-In common practice, the counting process $\{N(t), t \ge 0 \}$ and the partial sum process $\{ S_n, n \ge 0 \}$ are interchangeably called the \textbf{renewal process}. 
-
-
-\begin{theorem}
-\textbf{Theorem}. For $S_n = S_{n-1} + \xi_n$, $\xi_i$ IID, we have
-$$u(t) = \mathbb{E} N_t = \sum_{n=1}^\infty F^{n\ast} (t) < \infty$$
-\end{theorem}
-
-
-Note that 
-
-$$
-\begin{aligned}
-\mathcal{L}_u (s) &= \mathcal{L}_F (s) + \mathcal{L}_u (s) \cdot \mathcal{L}_p (s) \\[8pt]
-&= \frac{\mathcal{L}_p(s)}{1-\mathcal{L}_p(s)}
-\end{aligned}
-$$
-
-
-So we can follow the steps:
-
-\begin{itemize}
-	\item $F \to \mathcal{L}_p$
-	\item $\mathcal{L}_p \to \mathcal{L}_u$
-	\item $\mathcal{L}_u \to u$
-\end{itemize}
-
-
-\subsection*{Quizzes}
-
-\textbf{(Quiz 1)}. Let $\eta$ be a random variable with $F_\eta$, and $X_t := e^\eta t^2$. What is the distribution function of $X_{t_1}, \cdots, X_{t_n}$ for $t_1, \cdots, t_n >0$? 
-
-\textbf{(Answer)} We have
-
-$$
-F_{\eta} \{ min \left( ln(x_1/t_1^2), \cdots, ln(x_n/t_n^2) \right) \}
-$$
-
-since
-
-$$
-\begin{aligned}
-F_\mathbf{X} (\mathbf{x}) &= P(X_{t_1} \le x_1, \cdots, X_{t_n} \le x_n) \\[8pt]
-&= P(e^\eta  \le x_1/t_1^2, \cdots, e^\eta  \le x_n/t_n^2)  \\[8pt]
-&= F_\eta (min (ln(x_1/t_1^2), \cdots, n(x_n/t_n^2)))
-\end{aligned}
-$$
-
-
-\textbf{(Quiz 2)}. Let $\eta$ be a random variable with $F_\eta$, and $X_T := \eta + t$. Compute the distribution of $(X_{t_1}, \cdots, X_{t_n})$, where $t_1, \cdots, t_n >0$. 
-
-\textbf{(Answer)} We have
-
-$$
-F_{\eta} \{ min \left( x_1 - t_1, \cdots, x_n - t_n \right) \}
-$$
-
-since
-
-$$
-\begin{aligned}
-F_\mathbf{X} (\mathbf{x}) &= P(X_{t_1} \le x_1, \cdots, X_{t_n} \le x_n) \\[8pt]
-&= P(\eta \le x_1 - t_1, \cdots, \eta \le x_n - t_n)
-\end{aligned}
-$$
-
-
-\textbf{(Quiz 3)}. Let $S_n := S_{n-1} + \xi_n$ be a renewal process and $p_\xi (x) = \lambda e^{-\lambda x}$. $\mathbb{E}(N_t)?$
-
-\textbf{(Answer)} We have
-
-$$
-\mathbb{E}(N_t) = \lambda t
-$$
-
-since
-
-$$
-N_t \sim Poisson(\lambda t)
-$$
-
-Or, more mathematically, 
-
-$$
-\begin{aligned}
-\mathcal{L}_p (s) &= \int_0^\infty e^{-sx} \lambda e^{-\lambda x} dx \\[8pt]
-&= \lambda \int_0^\infty e^{-(s+\lambda)x} dx \\[8pt]
-&= \frac{\lambda}{s + \lambda} \\[10pt]
-\mathcal{L}_u (s) &= \frac{\mathcal{L}_p}{s(1-\mathcal{L}_p)} \\[8pt]
-&= \frac{\frac{\lambda}{s + \lambda}}{s(1-\frac{\lambda}{s + \lambda})} \\[8pt]
-&= \frac{\lambda}{s^2} \\[10pt]
-\mathcal{L}^{-1}(\mathcal{L}_u (s))(t) &= \lambda t
-\end{aligned}
-$$
-
-
-\textbf{(Quiz 4)}. Let $N_t$ be a counting process of a renewal process $S_n = S_{n-1} + \xi_n$ such that IIDRVs $\xi$ has the density
-
-$$
-p_\xi (x) = \begin{cases}
-e^{-x} (x+1)/2 & x \ge 0 \\
-0 & x <0
-\end{cases}
-$$
-
-$\mathbb{E}(N_t)?$
-
-\textbf{(Answer)} We have
-
-$$
-\mathbb{E}(N_t) = -1/9 + 2t/3 + e^{-(3/2)t}/9
-$$
-
-since 
-
-$$
-\begin{aligned}
-\mathcal{L}_p (s) &= \int_0^\infty e^{-sx} e^{-x}(x+1)/2 \\[8pt]
-&= \frac{1}{2} \int_0^\infty e^{-(s+1)x} x dx + \frac{1}{2} \int_0^\infty e^{-(s+1)x}dx  \\[8pt]
-&= \frac{1}{2(s+1)} (xe^{-(s+1)x} \vert_0^\infty - \int_0^\infty e^{-(s+1)x} dx ) + \frac{1}{2(s+1)} \\[8pt]
-&= \frac{s+2}{2(s+1)^2}\\[10pt]
-\mathcal{L}_u (s) &= \frac{\mathcal{L}_p}{s(1-\mathcal{L}_p)} \\[8pt]
-&= \frac{\frac{s+2}{2(s+1)^2}}{s(1-\frac{s+2}{2(s+1)^2})} \\[8pt]
-&= \frac{s+2}{2s^3 + 3s^2} \\[8pt]
-&= \frac{-1/9}{s} + \frac{2/3}{s^2} + \frac{2/9}{2s+3} \\[10pt]
-\mathcal{L}^{-1}(\mathcal{L}_u (s))(t) &= -1/9 + 2t/3 + e^{-(3/2)t}/9
-\end{aligned}
-$$
-
-
-\textbf{(Quiz 5)}. Let $\xi, \eta$ be RVs and $P(\eta > x) = P (\eta < -x)$, $\forall x >0$, with $P(\eta=0) = 0$. Find the probability of the event that the trajectories of the following stochastic process increase :
-
-$$
-X_t = \xi^2 + t(\eta + 1), \ \ t \ge 0
-$$
-
-\textbf{(Answer)} We have
-
-$$
-P(\frac{d X_t}{dt} > 0,\forall t\ge0) = P(2t + \eta > 0,\forall t\ge0) = P(\eta >0) = 1/2
-$$
-
-
-
-
-
-
-
-
-
-
-
-\pagebreak
-%----------------------------------------------------------------------------------------
-%   Section 1
-%----------------------------------------------------------------------------------------
-\section{Homogeneous Poisson processes}
-
-
-\subsection{Defintion of Poisson process as a renewal process}
-
-
-\begin{theorem}
-\textbf{Theorem}
-\begin{enumerate}[label=(\roman*)]
-	\item $P_{S_n} (x) = \lambda \frac{(\lambda x)^{n-1}}{(n-1)!} e^{-\lambda x} \mathbf{1}_{x>0}$
-	\item $P(N_t = n) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}$
-\end{enumerate}
-\end{theorem}
-
-\textbf{Proof} 
-
-\textbf{I}
-
-For $n=1$ case, $S_i = \xi_1$
-
-$$
-P_{S_1} (x) = \lambda e^{-\lambda x}, x>0
-$$
-
-Suppose $n=k$ case holds. For $n=k+1$, 
-
-$$
-\begin{aligned}
-P_{S_{n+1}}(x) &= \int_0^x P_{S_n} ( x-y)  P_{S_n} ( x-y) \\[8pt]
-&= \int_0^x \frac{}{} \\[8pt]
-&= \frac{\lambda^{n+1}}{(n-1)!} 
-\end{aligned}
-$$
-
-
-
-
-\textbf{II}
-
-$$
-(1 - e^{-\lambda t} \sum_{k=0}^{n-1} \frac{(\lambda t)^k}{k!}) - (1 - e^{-\lambda t} \sum_{k=0}^n \frac{(\lambda t)^k}{k!}) = e^{-\lambda t} \frac{(\lambda t)^n}{n!}
-$$
-
-
-
-\subsection{Memoryless property}
-
-
-A random variable $X$ process 
-
-$$
-P \{ X > u + v \} = P \{ X > u  \} P \{ X > v \}
-$$
-
-if $P (X > v) > 0$, then
-
-$$
-P \{ X > u + v  | X > v\} = P\{ X > u\}
-$$
-
-
-\textbf{DO NOT confuse with}
-
-$$
-P \{ X > u + v  | X > v\} = P\{ X > u + v\}
-$$
-
-
-\begin{theorem}
-\textbf{Theorem 2}. Let $X$ be a continuous RV with density $p(x)$. Then
-
-\begin{center}
-$X$ : memoryless $\Leftrightarrow p(x) = \lambda e^{-\lambda x}$
-\end{center}
-
-\end{theorem}
-
-
-
-\subsection{Other definitions of Poisson processes}
-
-
-\begin{theorem}
-\textbf{Definition 2}. For $N_t$ : an integer-valued RV,
-
-\begin{itemize}
-	\item 0) $N_0 = 0$, a.s.
-	\item 1) $N_t$ has independent increments 
-	\item 2) $N_t$ has stationary increment 
-	\item 3) $N_t - N_s \sim Pois (\lambda (t-s))$
-\end{itemize}
-\end{theorem}
-
-
-Poisson process is widely used for describing the sum of odds. Note that
-
-
-\begin{theorem}
-\begin{itemize}
-	\item $P\{ N_{t+h} - N_t = 0 \} = 1 - \lambda h + \bar{\bar{o}}(h)$
-	\item $P\{ N_{t+h} - N_t = 1 \} = \lambda h \bar{\bar{o}}(h)$
-	\item $P\{ N_{t+h} - N_t \ge 2 \} = \bar{\bar{o}}(h)$
-\end{itemize}
-\end{theorem}
-
-\textbf{Proof} 
-
-$$
-\mathrm{lim}_{h \to 0} \frac{1 - P\{ N_{t+h} - N_t = 0 \}}{h} = \mathrm{lim}_{h \to 0} \frac{1-e^{-\lambda h}}{h} = \lambda
-$$
-
-by L'Hospital's rule.
-
-
-\begin{theorem}
-\textbf{Definition 3}. For $N_t$ : an integer-valued RV,
-	\item 0) $N_0 = 0$, a.s.
-	\item 1) $N_t$ has independent increments
-	\item 2) $N_t$ has stationary increment 
-	\item 3) $\mathrm{lim}_{h \to 0} \frac{P\{ N_{t+h} - N_t \ge 2 \}}{P\{ N_{t+h} - N_t = 1 \}} = 0 $
-\end{theorem}
-
-
-where $f(h) = \bar{\bar{o}} (g(h))$ means
-
-$$
-\mathrm{lim}_{h\to0} \frac{f(h)}{g(h)} = 0
-$$ 
-
-Note that 
-
-$$
-\frac{1 - P(N_{t+h} - N_t = 0) }{h} - \lambda = \bar{\bar{o}} (1) P\{ N_{t+h} - N_t = 0 \}
-$$
-
-
-
-\pagebreak
-%----------------------------------------------------------------------------------------
-%   Section 2
-%----------------------------------------------------------------------------------------
-\section{Models related to Poisson processes}
-
-\subsection{Nonhomogeneous Poisson process}
-
-
-$N_t$ is called NHPP, if 
-
-\begin{itemize}
-	\item 0) $N_0 = 0$
-	\item 1) $N_t$ has independent increments
-	\item 2) $N_t - N_s \sim Pois(\Lambda(t) - \Lambda(s))$
-\end{itemize}
-
-$$
-S_n = \mathrm{argmin}_t \{ N_t =n \}, \ \ \xi_n = S_n - S_{n-1}
-$$
-
-\subsection{Elements of the queueing theory : M/G/k systems}
-
-We can consider \textbf{queueing} as an example of \textbf{birth and death processes}. 
-
-A queueing process is a process where customers arrive at some designated place where a service of some kind is being rendered(e.g. teller's window). It is assumed that the time between arrivals(\textbf{interarrival time}), and the time spent in providing service for a given
-customer are governed by probabilistic laws . The length of the queue at a
-given time t is represented by X(t)
-
-
-Recalling the defining properties of the \textbf{homogeneous Poisson process}, 
-
-\textbf{I. Arrival Process}
-
-\begin{itemize}
-	\item \textbf{M} : memoryless (Poisson)
-	\item \textbf{D} : deterministic
-	\item \textbf{G} : general
-\end{itemize}
-
-
-\textbf{II. Service Time}
-
-\textbf{III. A Number of Services}
-
-
-\begin{itemize}
-	\item $N_1(t)$, $\lambda_1 = \lambda (1 - G(\tau - t) )$ : \textbf{are still being served at} $\tau$
-	\item $N_2(t)$, $\lambda_2 = \lambda G(\tau - t)$ : \textbf{are already completed by} $\tau$
-\end{itemize}
-
-
-
-Assume $M/G/\infty$. Note that both $N_1(t)$ and $N_2(t)$ are nonhomogeneous processes, because in homogeneous Poisson process
-
-$$
-\lambda(t) = \lambda = const
-$$
-
-which does not hold for either $N_1(t)$ or $N_2(t)$. 
-
-$$
-\begin{aligned}
-P\{ N_1(t) = n_1,  N_2(t) = n_2 \} &= \underbrace{P\{ N_1(t) = n_1,  N_2(t) = n_2 | N(t) = n_1 + n_2 \}}_{\binom{n_1+n_2}{n_1} (1 - G(\tau -t))^{n_1} G(\tau -t)^{n_2} } \\[8pt]
-&\cdot \underbrace{P\{ N(t) = n_1 + n_2 \}}_{e^{-\lambda t} \frac{(\lambda t)^{n_1 + n_2}}{(n_1+n_2)!}}
-\end{aligned}
-$$
-
-
-\subsection{Compound Poisson process}
-
-The amount of claims to an insurance company is modelled by the Poisson process, and the claim sizes are modelled by an exponential distribution. On average there are 100 claims per day, and the mean value of 1 claim is 5000 USD. The process $X_t$ equal to the total amount of claims till time $t$ is a compound Poisson process. 
-
-
-$$
-X_t = \sum_{k=1}^{N_t} \xi_k
-$$
-
-where $\xi: \phi_\xi (u) = \mathbb{E} [e^{iu\xi} ]$
-
-
-
-\begin{theorem}
-\textbf{Theorem}.
-
-$$
-\phi_{X_{\xi_t} - X_{\xi_s}} = e^{\lambda(t-s) \left( \phi_{\xi_1}(u) - 1 \right)}
-$$
-
-where $t > s \ge 0$
-
-\textbf{Corollary}.
-
-$$
-\begin{aligned}
-\mathbb{E}(X_t) &= \lambda t \mathbb{E} \xi_1 \\[8pt]
-\mathrm{Var}(X_t) &= \lambda t \mathbb{E} \xi_1^2
-\end{aligned}
-$$
-
-
-\end{theorem}
-
-
-\textbf{Proof} 
-
-Since both derivative and mathematical expectations are linear, we obtain that
-
-$$
-\begin{aligned}
-\Phi^{(r)}(u) &= \mathbb{E}(i^r \xi^r e^{iu\xi}) \\[8pt]
-\Phi^{(r)}(0) &= \mathbb{E}(i^r \xi^r e^{i\cdot 0 \xi}) = i^r \mathbb{E} (\xi^r)
-\end{aligned}
-$$
-
-Note that 
-
-$$
-\begin{aligned}
-(LHS) &= \mathbb{E} \left[ e^{iu (X_t - X_s)} \right] \\[8pt]
-&= \sum_{k=0}^\infty \mathbb{E} \left[ e^{iu(X_t - X_s)} \vert N_t - N_s = k \right] \\[8pt]
-&= \sum_{k=0}^\infty \mathbb{E} \left[ e^{iu(X_t - X_s)}\right] \\[8pt]
-&= P\left\{ N_t - N_S = k \right\} \\[8pt]
-&= P\left\{ N_t - N_S = k \right\} 
-\end{aligned}
-$$
-
-
-
-\subsection{Quizzes}
-
-\textbf{(Quiz 1)}. Let $N_t$ be a homogeneous Poisson process with intensity $\lambda$. Find
-
-$$
-\mathrm{lim}_{h\to0} P(N_h = 3)
-$$
-
-\textbf{(Answer)} Note
-
-$$
-\mathrm{lim}_{h\to0} P(N_h = 3) = \mathrm{lim}_{h\to0} e^{-\lambda h} (\lambda h)^3/3! = 0
-$$
-
-
-\textbf{(Quiz 2)}. Two friends are chating: one has a messaging speed equal to $3$ messages per minute, another with $2$ messages per minute. Assuming that for every person the process of writing the messages is modeled with Poisson process and these processes are independent, find the probability that there will be sent only 2 messages during the first minute.
-
-\textbf{(Answer)} Note that
-
-$$
-\begin{aligned}
-P = P(N_1^A = 2, N_1^B = 0) + P(N_1^A = 1, N_1^B = 1) + P(N_1^A = 0, N_1^B = 2) &= \\[8pt]
-&= e^{-5} 25/2
-\end{aligned}
-$$
-
-
-
-\textbf{(Quiz 3)}. Find the probability generating function of the the random variable $N_3$, where $N_t$ : homogeneous Poisson process, using the formula 
-
-$$
-PGF = \phi_\alpha (u) = \mathbb{E}(u^\alpha)
-$$
-
-\textbf{(Answer)} Note
-
-$$
-\begin{aligned}
-\mathbb{E}(u^{N_3}) &= \sum_{k=0}^\infty u^k e^{-3\lambda} \frac{(3\lambda)^k}{k!} \\[8pt]
-&= e^{-3\lambda} e^{3\lambda u} \\[8pt]
-&= e^{-3\lambda(1-u)}
-\end{aligned}
-$$
-
-
-
-\textbf{(Quiz 4)}. There is a speed limit on the street near the a school with a speed-register, which identifies a car's ID number with probability 80\%, if a car violates the speed limit. Assume that the number of cars passing the school and violating the speed limit is modelled by the homogeneous Poisson process $N_t$, with $\lambda=20$. Find the probability that during 2 hours after midday there will be 32 cars registered.
-
-
-\textbf{(Answer)} Let the the number of registered cars till time $t$ by $M_t$. Denote $p := 0.8$. 
-
-$$
-\begin{aligned}
-P(M_t - M_s = m) &= \sum_{n=m}^\infty P(M_t - M_s = m | N_t - N_s = n ) P (N_t - N_s = n)\\[8pt]
-&= \sum_{n=m}^\infty \binom{m}{n} p^m (1-p)^{n-m} e^{-\lambda(t-s) \frac{(\lambda(t-s))^n}{n!}} \\[8pt]
-&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!}\sum_{n=m}^\infty \frac{n!}{(n-m)!} (1-p)^n \frac{(\lambda(t-s))^n}{n!} \\[8pt]
-&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!} \sum_{k=0}^\infty \frac{(\lambda (t-s) (1-p) )^{k+m}}{k!} \\[8pt]
-&= (\frac{p}{1-p})^m \frac{e^{-\lambda (t-s)}}{m!} (\lambda (t-s) (1-p)^m \sum_{k=0}^\infty \frac{(\lambda (t-s) (1-p) )^k}{k!} \\[8pt]
-&= \frac{(\lambda p (t-s))^m}{m!} e^{-\lambda p (t-s)}
-\end{aligned}
-$$
-
-Therefore
-
-$$
-P (M_{14} - M_0 = 16) = \frac{(20\times 0.8 * 2)^{16}}{16!} exp(-20\times0.8\times2) \approx 0.07
-$$
-
-
-
-\textbf{(Quiz 5)}. Purchases in a shop are modelled with non-homogeneous Poisson process: $30t^{5/4}$ purchases are made on average during $t$ hours after the opening of the shop. Find the probability that the interval between $k$ and $k+1$ purchases will be less than or equal to 2 minutes, given that the purchase number $k$ was in the time moment $s$:
-
-\textbf{(Answer)} Note
-
-
-$$
-\begin{aligned}
-P(S_{k+1} - S_k \le 2 | N_s = k) &= P(N_{s+2} - N_s \ge 1| N_s = k) \\[8pt]
-&= P(N_{s+2} - N_s \ge 1 | N_s - N_0 = k) \\[8pt]
-&= 1 - P(N_{s+2} - N_s = 0)
-\end{aligned}
-$$
-
-
-\textbf{(Quiz 6)}. 
-
-The number of downloads of an app in Google-Play is modelled by a nonhomogeneous Poisson process with intensity $\Lambda(t)=t^{13/5}$, where $t$ is measured in hours after app's commencement time. Find the probability that the time between the $1000$th and $1001$st downloads is less than or equal to $36$ seconds (0.01 hour) given $1000$th download time being 14 hours after app's launch.
-
-
-\textbf{(Answer)} Note that
-
-$$
-\begin{aligned}
-P(S_{1001} - S_{1000} \le 0.01 | S_{1000} = 14) &= P(S_{1001} - S_{1000} \le 0.01 | N_{14} = 1000) \\[8pt]
-&= P( N_{14.01} - N_{14} \ge 1 | N_{14} - N_0 = 1000) \\[8pt]
-&= 1- P( N_{14.01} - N_{14} = 0 ) \\[8pt]
-&= 1- exp(-(\Lambda(14.01) - \Lambda(14)) ) \frac{(\Lambda(14.01) - \Lambda(14))^0}{0!} \\[8pt]
-&= 0.83
-\end{aligned}
-$$
 
 
 
