@@ -6,3 +6,6 @@
 ![note4](https://github.com/Psychorism/psyStoch/blob/master/week06/images/note4.jpg)</br>
 ![note5](https://github.com/Psychorism/psyStoch/blob/master/week06/images/note5.jpg)</br>
 ![note6](https://github.com/Psychorism/psyStoch/blob/master/week06/images/note6.jpg)</br>
+
+## Supplementary Information
+![note-s](https://github.com/Psychorism/psyStoch/blob/master/week06/images/note-s.jpg)</br>
