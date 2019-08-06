@@ -1,0 +1,241 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Stationarity \& Linear Filters}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%   Section 3
+%----------------------------------------------------------------------------------------
+\section*{Stationarity and Linear Filters}
+
+\subsection{Spectral density of a wide-sense stationary process}
+
+
+\textbf{Bocher}
+
+$\phi(u): \mathbb{R} \to \mathbb{C}, \phi(u) = \mathbb{E} [e^{iu\xi}]$ : characteristic function, iff
+
+\begin{itemize}
+	\item 1) $\phi$ is constant
+	\item 2) $\phi$ is positive semidefinite, $\sum_{j=1}^n z_j \bar{z}_k \phi(u_j - u_k) \ge 0$, $\forall (z_1, \cdots, z_n) \in \mathbb{C}^n, \forall (u_1, \cdots, u_n) \in \mathbb{R}^n$.
+	\item 3) $\phi(0) = 1$
+\end{itemize}
+
+If 1), 2) are met, we have 
+
+$$
+\exists \mu: \phi(\mu) = \int e^{iux} \mu (dx)
+$$
+
+
+
+$X_t$ : weakly stationary. 
+
+$$
+\begin{aligned}
+\sigma &: K(t,s) = \sigma(t-s) \\[8pt]
+\end{aligned}
+$$
+
+if $\sigma$ is constant, and $\int |\sigma (u)| du < \infty $ 
+
+$$
+\mathcal{F}
+$$
+
+
+For example, there does not exist a stochastic process with the covariance $K(t,s) := sin( \lambda (t-s) )$, since it is not positive semi-definite.
+
+
+$$
+g(x) := 
+$$
+
+
+\textbf{Example 1)} $WN(0, \sigma^2)$
+
+Note that 
+
+$$
+\begin{aligned}
+\gamma(u) &= \sigma^2 1_{\{ u = 0 \}} \\[8pt]
+g(x) &= \frac{\sigma^2}{2\pi}
+\end{aligned}
+$$
+
+
+
+\textbf{Example 2)} $MA(1)$
+
+
+
+\begin{theorem}
+\textbf{Proposition}. 
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+
+
+\subsection{Stochastic integration}
+
+
+
+\subsection*{Quizzes}
+
+\textbf{(Quiz 1)}. Let $Y_n$ be a stochastic process, such that
+
+$$
+Y_{n+1} := \alpha Y_n + X_n
+$$
+
+for $n=0, 1, \cdots$. Assume $Y_0 := 0, |\alpha| < 1$ and $X_n$ : a sequence of IID standard normal RVs. Determine whether $Y_n$ is stationary and find its mean and variance.
+
+
+\textbf{(Answer)} $\forall t > s$
+
+$$
+\begin{aligned}
+K(t,s) &= Cov(\alpha^{t-1} X_0 + \cdots \alpha^0 X_{t-1}, \alpha^{s-1} X_0 + \cdots + \alpha^0 X_{s-1}) \\[8pt]
+&= \alpha^{t-1} \alpha^{s-1} + \alpha^{t-2} \alpha^{s-2} + \cdots + \alpha^{t-s} \\[8pt]
+&= \alpha^{t-s} \frac{1-\alpha^{2s}}{1-\alpha^2}
+\end{aligned}
+$$
+
+where $K(t,s)$ also depends on $s$, not only on $t-s$.
+
+
+
+
+\textbf{(Quiz 2)}. Let $W_t$ be a Brownian motion and define $X_t := (1-t) W_{t/(1-t)}$, for $t \in (0,1)$. Is $X_t$ stationary? 
+
+\textbf{(Answer)} No,
+
+$$
+\begin{aligned}
+K(t,s) &= (1-t)(1-s) Cov(W_{t/(1-t)}, W_{s/(1-s)}) \\[8pt]
+&= (1-t)(1-s) Cov(W_{t/(1-t)} - W_{s/(1-s)} + W_{s/(1-s)}, W_{s/(1-s)} - W_0) \\[8pt]
+&= (1-t)(1-s) Var(W_{s/(1-s)}) = s(1-t)
+\end{aligned}
+$$
+
+which is not weakly stationary. 
+
+
+\textbf{(Quiz 3)}. Let $X_t$ be a process with independent and stationry increments and $\exists h>0$. Moreover, $\mathbb{E}(X_t) = 0, \mathbb{E}|X_t|^2 < \infty$. Is $Y_t = X_{t+h} - X_t$ a wide-sense stationary process? 
+
+\textbf{(Answer)} Yes,
+
+Note that if increments of a process is stationry, then the process is stationary.
+
+
+
+\textbf{(Quiz 4)}. Let the autocovariance function of some stochastic process $X_t$ be $\gamma_X(u) := \begin{cases} 3 & u=0 \\ 1 & u=\pm2 \\ 0 & o.w. \end{cases}$ Find the \textbf{spectral density} of $Y_t := 3X_t + 2X_{t-1} + X_{t-2}$. 
+
+\textbf{(Answer)} Note that 
+
+$$
+\begin{aligned}
+g_X(u) &= \frac{1}{2\pi} ( 3 + e^{-2iu} + e^{2iu}) \\[8pt]
+&= \frac{1}{2\pi} (3 + 2 cos(2u)) \\[10pt]
+g_Y(u) &= g_X(u) |\mathcal{F}[\rho] (u)|^2
+\end{aligned}
+$$
+
+where $\rho(h) = := \begin{cases} 3 & h=0 \\ 2 & h=1 \\ 1 & h=2 \\ 0 & o.w. \end{cases}$. Therefore
+
+$$
+\begin{aligned}
+\mathcal{F}[\rho] (u) &= e^{2iu} + 2e^{iu} + 3 \\[8pt]
+[\mathcal{F}[\rho] (u)]^2 &= \mathcal{F} \times \bar{\mathcal{F}} \\[8pt]
+&= (e^{2iu} + 2e^{iu} + 3) \times (e^{-2iu} + 2e^{-iu} + 3) \\[8pt]
+&= 9 + 4 + 1 + 8(e^{iu} + e^{-iu}) + 3(e^{2iu} + e^{-2iu}) \\[8pt]
+&= 14 + 3\cdot 2cos(2u) + 8\cdot 2 cos(u) \cdot g_Y(u) \\[8pt]
+&= \frac{1}{2\pi} (3 + 2cos(2u)) (14 + 3 \cdot 2cos(2u) + 8\cdot 2 cos(u)) \\[8pt]
+\end{aligned}
+$$
+
+
+
+\textbf{(Quiz 4)}. Let the autocovariance function of some stochastic process $X_t$ be $\gamma_X(u) := \begin{cases} 3 & u=0 \\ 1 & u=\pm2 \\ 0 & o.w. \end{cases}$ Find the \textbf{spectral density} of $Y_t := 3X_t + 2X_{t-1} + X_{t-2}$. 
+
+\textbf{(Answer)} Note that for $t > s + h$, we have
+
+$$
+K(t,s) = Cov(W_{t+h} - W_t, W_{s+h} - W_s) = 0
+$$
+
+For $t \le s + h$, we have
+
+$$
+\begin{aligned}
+K(t,s) &= Cov(W_{t+h} - W_t, W_{s+h} - W_s) \\[8pt]
+&= Cov(W_{t+h} - W_{s+h} + W_{s+h} - W_t, W_{s+h} - W_s) \\[8pt]
+&= Cov(W_{s+h} - W_t, W_{s+h} - W_t + W_t - W_s) \\[8pt]
+&= Var(W_{s+h} - W_t) = h - |t - s|
+g_Y(u) &= g_X(u) |\mathcal{F}[\rho] (u)|^2
+\end{aligned}
+$$
+
+
+
+
+
+\end{document}

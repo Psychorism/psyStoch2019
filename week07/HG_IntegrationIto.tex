@@ -1,0 +1,370 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Ergodicity, Differentiability, \\ \& Continuity}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+\section{Ergodicity}
+
+\subsection{Notion of ergodicity}
+
+
+\begin{theorem}
+\textbf{Law of Large Numbers}. Let $\xi_1, \cdots $ IID such that $\mathbb{E} \xi_1 < \infty$. Then
+
+$$
+\frac{1}{N} \sum_{n=1}^N \xi_n \overset{P}{\to} \mathbb{E}(\xi_1)
+$$
+
+\end{theorem}
+
+Let $X_T$ a stochastic process,
+
+$$
+\frac{1}{N} \sum_{t=1}^T X_t \overset{P}{\to} c
+$$
+
+
+$$
+\begin{aligned}
+\xi_n \overset{as}{\to} \xi &\Leftrightarrow P \left\{ w: \xi_n(w)  \to \xi(w) \right\} = 1 \\[8pt]
+\xi_n \overset{L^2}{\to} \xi &\Leftrightarrow \mathbb{E}(\xi_n - \xi)^2 \to 0 \\[8pt]
+\xi_n \overset{P}{\to} \xi &\Leftrightarrow \forall \epsilon >0 P(|\xi_n - \xi| > \epsilon) \to 0 \\[8pt]
+\xi_n \overset{d}{\to} \xi &\Leftrightarrow P(\xi_n \le x) \to P(\xi \le x), \forall x \in \mathbb{R}
+\end{aligned}
+$$
+
+
+
+\subsection{Ergodicity of wide-sense stationary processes}
+
+\begin{theorem}
+\textbf{Proposition}. 
+
+Let $X_t$ with $|K(s,t)| \le \alpha $ such that $\exists \alpha$. 
+
+$$
+\begin{aligned}
+C(T) &:= cov(X_T, M_T) \\[8pt]
+M_T &:= \frac{1}{T} \sum_{t=1}^T X_t
+\end{aligned}
+$$
+
+$$
+Var(M_T) \overset{T \to \infty}{\to} 0 \Leftrightarrow C(T) \overset{T \to \infty}{\to} 0
+$$
+
+\textbf{Corollary}. Let $X_t$: weakly stationary, and $\gamma(\cdot)$ : autocovariance function. Then
+
+\begin{itemize}
+	\item (i) $\frac{1}{T} \sum_{r=0}^{T-1} \gamma(r) \to 0$ when $T \to \infty$
+	\item (ii) $\gamma(r) \to 0 $ when $r \to \infty$
+\end{itemize}
+
+\end{theorem}
+
+Note that clearly $\mathbb{E} (X_t) = const$ then $cov(X_t, X_s) = \gamma(t-s)$. 
+
+
+\textbf{Proof}. I.
+
+$$
+\begin{aligned}
+\mathbb{E}(X_t) = c &\Leftrightarrow \mathbb{E}(M_T) = c \\[8pt]
+\mathrm{Var}(M_T) &= \mathbb{E} \left[ (M_T - c)^2 \right] \overset{\ast}{\to} 0 \\[8pt]
+\Rightarrow M_T \overset{L^2}{\to} c &\Rightarrow M_T \overset{P}{\to} c
+\end{aligned}
+$$
+
+then $X_t$ : ergodic. 
+
+For ($\ast$) part, check 
+
+$$
+C(T) = cov(X_T, \frac{1}{T} \sum_{t=1}^T X_T) = \frac{1}{T} \sum_{t=1}^T \gamma(T-t) = \frac{1}{T} \sum_{r=0}^{T-1} \gamma(r) \to 0
+$$
+
+
+II. (\textbf{Stolz-Cesaro theorem})
+
+Let $a_b, b_n$ where $b_n$ : strictly increasing \& unbounded. Then
+
+$$
+\mathrm{lim}_{n \to \infty} \frac{a_n - a_{n-1}}{b_n - b_{n-1}} = q \Rightarrow \frac{a_n}{b_n} \overset{n\to\infty}{\to} q
+$$
+
+Take
+
+$$
+\begin{aligned}
+a_n &:= \sum_{r=0}^{n-1} \gamma(r)\\[8pt]
+b_n &= n
+\end{aligned}
+$$
+
+Note that 
+
+$$
+\frac{a_n - a_{n-1}}{b_n - b_{n-1}}  = \gamma(n-1) \to 0 = q
+$$
+
+
+For example, $N_t$ : Poisson process with $\lambda$. 
+
+For $p > 0$, $X_t := N_{t+p} - N_t$. 
+
+$$
+\begin{aligned}
+\mathbb{E}(X_t) &= \lambda(t + p) - \lambda t = \lambda p \\[8pt]
+K(t,s) &= \gamma(t-s) \\[8pt]
+\gamma(r) &= \begin{cases} \lambda (p - |r| ) & |r| \le p \\ 0 & |r| > p \end{cases}
+\end{aligned}
+$$
+
+$$
+\gamma(r) \to 0
+$$
+
+
+
+For example, $X_t := A cos(wt) + B sin(wt)$, where $A,B$ random with $cov(A,B) = 0$
+
+with $w := \pi /20$. 
+
+$$
+\begin{aligned}
+\mathbb{E}(A) &= \mathbb{E}(B) =0 \\[8pt]
+Var(A) &= Var(B) = 1 \\[10pt]
+\mathbb{E}(X_t) &= 0 \\[8pt]
+K(t,s) &= cos\left( w(t-s)  \right) \\[8pt]
+\gamma(r) &= cos(wr)
+\end{aligned}
+$$
+
+
+Note that it is \textbf{NOT true} that a stochastic process is stationary if and only if it is ergodic.
+
+
+Assume that $X_t$ is weakly statinary and 
+
+$$
+\frac{1}{T} \sum_{r=0}^{T-1} \gamma(r) \to 0
+$$
+
+but $\gamma(r) \to 0$ when $r \to \infty$. Then $X_t$ is ergodic. 
+
+
+
+
+\pagebreak
+\section{Stochastic Differentiation}
+
+
+\subsection{Definition of a stochastic derivative}
+
+
+$X_t$ is differentiable at $t=t_0$, if 
+
+$$
+\frac{X_{t_0 + h} - X_{t_0}}{h} \overset{L^2}{\to} \eta := X^1_{t_0}
+$$
+
+for $h \to 0$. 
+
+$$
+\mathbb{E} \left(  \frac{X_{t_0 + h}  - X_{t_0}}{h} - \eta \right)^2 \overset{\to}{h \to 0} 0
+$$
+
+
+
+\begin{theorem}
+\textbf{Proposition}. Let $X_t$ : $\mathbb{E} (X_t^2) < \infty$ Then
+
+$$
+X_t: \ \ diff \ \ t=t_0 \Leftrightarrow \begin{cases}
+m(t) = \mathbb{E}(X_t) & diff \ \ t=t_0 \\
+\frac{\partial^2}{\partial t \partial s} K(t,s) & \exists (t_0, t_0)
+\end{cases}
+$$
+
+\end{theorem}
+
+
+
+
+\textbf{Ex1}. Let $X_t$ is weakly stationary, i.e., $m(t) = const$, and $K(t,s) = \gamma(t-s)$. 
+
+$$
+\frac{\partial^2 K}{\partial t \partial s} \Large|_{(t_0,t_0)} = - \gamma''(0)
+$$
+
+For example, $\gamma(r) = e^{-L|r|}$, then $X_t$ is not differentiable. 
+
+For another example, $\gamma(r) = cos(\alpha r)$, then $X_t$ is differentiable. 
+
+
+\textbf{Ex2}. Brownian motion is not diff at any $t=t_0$. 
+
+$$
+\begin{aligned}
+K(t,s) &= min(t,s) \\[10pt]
+K(t_0 + h, t_0) - K(t_0, t_0) &= \frac{min(t_0, t_0+h) - t_0}{h} \\[8pt]
+&= \begin{cases} 0 & h >0 \\ 1 & h <0 \end{cases}
+\end{aligned}
+$$
+
+thus there does not exist a result $h\to 0$.  
+
+\textbf{Ex3}. Let $X_t$ : independent increments with $X_0 = 0$. Then 
+
+$$
+K(t,s) = cov(X_t, X_s) \overset{t>s}{=} cov(X_t - X_s, X_s) + Cov(X_s, X_s) = var(X_{min(t,s)})
+$$
+
+
+
+\subsection{Continuity in the mean-squared sense}
+
+
+Let
+
+$$
+X_t \overset{L^2}{\to} X_{t_0} \Leftrightarrow \mathbb{E} (X_t - X_{t_0})^2 \overset{\to}{t\to t_0} 0
+$$
+
+
+such that $\mathbb{E} (X_t) = 0$. 
+
+
+\begin{theorem}
+\textbf{Proposition}.  
+
+\begin{itemize}
+	\item $K(t,s)$ is const $(t_0, t_0)$, then $X_t$ is const in the mean squared sense $t=t_0$
+	\item $X_t$ : const in the mean squared sense $t=t_0, s_0$, then $K(t,s)$ is const at $(t_0, s_0)$.
+\end{itemize}
+\end{theorem}
+
+
+\textbf{Proof}. (i)
+$$
+\begin{aligned}
+\mathbb{E} (X_t - X_{t_0})^2 &= K(t,t) - 2K(t,t_0) + K(t_0, t_0) \overset{t \to t_0}{\to} 0 \\[8pt]
+\end{aligned}
+$$
+
+(ii)
+$$
+\begin{aligned}
+K(t,s) \pm K(t_0, s) - K(t_0,s_0) &= K(t,s) - K(t_0,s) + K(t_0, s) - K(t_0, s_0) \\[8pt]
+|K(t,s) - K(t_0, s)| &= \mathbb{E} \left[ (X_t - X_{t_0}) X_s \right] \\[8pt]
+&\le \sqrt{\mathbb{E} (X_t - X_{t_0})^2 } \cdot \sqrt{\mathbb{E} X_s^2 } \to 0
+\end{aligned}
+$$
+
+
+
+\begin{theorem}
+\textbf{Corollary}.  
+
+$K(t,s)$ is const at $t_0, s_0$ $\Leftrightarrow$ $K(t,s)$ is const at $(t_0, t_0)$
+
+\end{theorem}
+
+\textbf{Proof}. Let $K(t,s)$ is const at diagonal, i.e. $(t_0, t_0)$. Then by \textbf{(i)}, we have $X_t$ : const at $t=t_0$. 
+
+Then by \textbf{(i)}, we have $K(t,s)$ is const at $(t_0, s_0)$. 
+
+
+THe following are the correct statements: 
+
+\begin{itemize}
+	\item If $K(t,s)$ is continuous at any $(t_0, s_0) \in \mathbb{R}^2$, then $X_t$ is continuous in MSS at $\forall t$. 
+	\item If $X_t$ is continuous in MSS at $t_0, s_0$ then $K(t,s)$ is continuous at $(t_0, s_0)$ and $(s_0, t_0)$.
+	\item If $K(t,s)$ is continuous at the diagonal, it is also continuous at any $(t_0, s_0) \in \mathbb{R}^2$
+\end{itemize}
+
+
+
+
+
+\subsection*{Quizzes}
+
+
+\textbf{(Quiz 1)}. Let $X_t := cos(wt + \theta)$ be a stochastic process and $\theta \sim Unif(0,2\pi)$, with $w=\pi/10$. Classify this process.
+
+\textbf{(Answer)} \textbf{Ergodic} and \textbf{weak stationary}. 
+
+
+\textbf{(Quiz 2)}. Let $X_t := \epsilon_t + \xi cos(\pi t/12)$, $t=1,2,\cdots$, where $\xi, \epsilon_1, \epsilon_2, \cdots$ are IID standard normal random variables.
+
+\textbf{(Answer)} Not \textbf{weak stationry}, but \textbf{ergodic}.
+
+
+\textbf{(Quiz 3)}. Assume that for a process $X_t$ it is known that $\mathbb{E} (X_t) = \alpha + \beta t$, $cov(X_t, X_{t+h} = e^{-h \lambda}$ for all $h \ge 0, t >0$, and some constants $\lambda >0, \alpha, \beta$. Classify the process $Y_t := X_{t+1} - X_t$. 
+
+\textbf{(Answer)} $Y_t$ is weakly stationary and ergodic.
+
+
+\textbf{(Quiz 4)}. Let $X_t := \sigma W_t + ct$, where $W_t$ is Brownian motion, $\sigma, c >0$. Choose the correct statements about this process. 
+
+\textbf{(Answer)} $X_t$ has \textbf{continuous trajectories}. 
+
+
+\textbf{(Quiz 5)}. Let $X_t$ have an autocovariance function $\gamma(r) := e^{-\alpha |r|}$. Is $Y_t := X_t + w$ an ergodic process?
+
+
+\textbf{(Answer)} Yes, if $w$ is a constant. 
+
+
+
+\end{document}

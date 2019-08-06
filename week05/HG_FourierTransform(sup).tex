@@ -1,0 +1,69 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Fourier Transform}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+\subsection*{Ideas of Derivation}
+
+Suppose $f(x)$ : a periodic of $2\pi$
+
+$$
+\begin{aligned}
+\hat{f}(n) &= \int_{-\infty}^\infty f(y) exp(-iny) \\[8pt]
+\end{aligned}
+$$
+
+
+
+
+\end{document}
