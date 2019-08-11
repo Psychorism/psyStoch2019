@@ -46,7 +46,7 @@ ntheorem]{theorem}{}
 
 \begin{document}
 
-\title{\textbf{Stochastic Integration \\ \& Ito Formula}}
+\title{\textbf{Levy processes}}
 \author{Hyunwoo Gu}
 \date{}
 
@@ -56,175 +56,122 @@ ntheorem]{theorem}{}
 %----------------------------------------------------------------------------------------
 %   Section 1
 %----------------------------------------------------------------------------------------
-\section{Stochastic Integration}
+\section{Introduction to the theory of Levy processes}
 
-\subsection{Different types of stochastic integrals}
-
-We have 
-
+Here we will be able to: 
 
 \begin{itemize}
-	\item $\int_a^b X_t(\omega) dt$
-	\item $\int_a^b $
-	\item 
-	\item
+	\item understand the main properties of Levy processes
+	\item construct ta Levy process from an infinitely 
 \end{itemize}
 
 
-The limit should be understood 
+\subsection{Different types of stochastic integrals}
 
-$$
-X_t 
-$$
+\subsection{Examples of Levy processes}
 
+The class of \textbf{infinitely divisible distributions}. 
 
-
-\subsection{Integrals of the type $\int X_t dt$}
-
-
-\subsection{Integrals of the type $\int f(t) d W_t$}
-
-
-
-
-\subsection{Integrals of the type $\int X_t d W_t$}
-
-
-Assume $W_t$ is a Brownian motion. The interval from $0$ to $T$ is divided into $n$ parts by points $t_1,\cdots,t_{n-1}$ and $t_0=0,t_n=T$. We have
-
-$$
-\mathrm{lim}_{n\to\infty} \sum_{i=1}^n \left( W_{t_i} - W_{t_{i-1}} \right)^2 = t
-$$
-
-
-$$
-\int_a^b X_t dW_t
-$$
-
-where $X_t \in \mathcal{L}^2$ and $W_t$: $\mathcal{F}_t$-Brownian motion. 
-
-\textbf{Stage1}. 
-
-$$
-\begin{aligned}
-X_t &= \sum_{i=1}^n \xi_{i-1} \mathbf{1}_{t_{i-1} \le t < t_i} \\[8pt]
-\end{aligned}
-$$
-
-\textbf{Stage2}. For $X_t \in \mathcal{L}^2_{ad}$ and $X_t^n$ : step processes,
-
-$$
-\begin{aligned}
-\int_a^b \mathbb{E} &= \\[8pt]
-I(X_t) &= \mathrm{lim}_{n\to\infty} 
-\end{aligned}
-$$
-
-
-Now let us focus on how to construct the sequence 
 
 
 
 \begin{theorem}
-\textbf{Theorem}. Let $m(t), K(t,s)$ be continuous. Then 
+\textbf{Definition}. An RV $\xi$ is a \textbf{infinitely divisible distribution}, if 
 
 $$
-\begin{aligned}
- &= \\[8pt]
-\end{aligned}
+\xi \overset{d}{\equiv} Y_1 \oplus \cdots \oplus Y_n
 $$
-
 
 Note that 
 
 $$
 \phi_\xi(u) = 
 $$
+
+
 \end{theorem}
 
 
-This theorem basically means that one can exactly take the sequence $X_{t_n}$ as a sequence of step processes to construct sequence on the stage 2. 
+
+It is not true that the distribution is stable iff it is infinitely divisible. 
 
 
 
+\begin{theorem}
+\textbf{Definition}. An RV $\xi$ is a \textbf{infinitely divisible distribution}, if 
 
-\pagebreak
-%----------------------------------------------------------------------------------------
-%   Section 2
-%----------------------------------------------------------------------------------------
-\section{Ito Formula}
-
-
-\subsection{Integrals of the type $\int X_t d Y_t$}
+$\exists \psi: \mathbb{R} \to \mathbb{C}$ such that
 
 $$
-\int_a^l X_t dH_t
+\phi_{L_t} (u) = \mathbb{E} \left[ e^{iuL_t} \right] = e^{t \psi(u)}
 $$
 
-where $H_t$ : Ito process. 
+\end{theorem}
 
 
-
-\subsection{Ito's formula}
-
-
-
-$$
-\begin{aligned}
-df(t,H_t) &= f_1'(t,H_t)dt + f_2'(t) \\[8pt]
-\end{aligned}
-$$
-
-
-\subsection{Black-Scholes model}
-
-$$
-dX_t = X_t \mu dt + x_t \sigma dW_t, \sigma >0
-$$
+\textbf{Example 1}. 
 
 
 
 
-\subsection{Vasicek model}
+\textbf{Example 12}. 
 
-The \textbf{Vasicek model} is defined as the solution for the following DE:
 
-$$
-dX_t = (a - b X_t) dt + c dW_t
-$$
-
-where $b,c > 0$. 
+\subsection{Characteristic Exponent}
 
 
 
 
-\subsection{Ornstein-Uhlenbeck process}
+
+\subsection{Properties of Levy Characteristic Exponent}
+
+\textbf{Levy measure}. 
+
+
+\subsection{Levy-Khintchine triplet}
 
 
 $$
-m dV_t = dW_t - \lambda V_t dt
+\phi_{X_t}(u) = exp \left[ t (iu\mu - \sigma^2 u^2 /2) + \int_\mathbb{R} \left( e^{iux} + 1 - iux \mathbf{1}_{|x| < 1} \right) \right]
 $$
 
-where $W_t$ : Brownian motion, $\lambda$ : friction coefficient. 
-
-
-$$
-\begin{aligned}
-f(t,x) &= x e^{\lambda t/m} \\[8pt]
-\end{aligned}
-$$
-
-we have the solution 
-
+\textbf{Example 1}. For $X_t$ : of bounded variation,
 
 $$
-V_t = e^{\lambda}
+\sum_{k=1}^n | X_{t_k} - X_{t_{k-1}} |  \overset{max |t_i - t_{i-1}| \to 0}{\to} 
 $$
 
-If we assume that $V_0 \sim N \left( 0, \frac{1}{2\lambda m} \right) \perp W_t$
+
+$\sigma=0$
+
+Note that the Brownian motion is not a process of bounded variation.
 
 
 
+
+\subsection{Modeling of jump-type}
+
+How to estimate that the Levy measure of a Levy process from the following data? 
+
+$$
+X_t: X_\Delta
+$$
+
+
+Levy process can be used to model the properties of jobs. 
+
+
+Let $X_t$ be of bounded variation, and 
+
+$$
+\phi_{X_\Delta} (u) := exp \left\{  \Delta \left( iu\mu + \int_\mathbb{R} (e^{iux} - 1) S(x) dx \right)  \right\}
+$$
+
+Note that 
+
+$$
+\phi_{X_\Delta} (u) := exp \left\{  \Delta \left( iu\mu + \int_\mathbb{R} (e^{iux} - 1) S(x) dx \right)  \right\}
+$$
 
 
 

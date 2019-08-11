@@ -1,0 +1,154 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Brownian Motions}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+%----------------------------------------------------------------------------------------
+%   Section 0
+%----------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+\section{Joint Probabilities for Brownian Motion}
+
+The transition probability densi
+
+\begin{theorem}
+\textbf{Definition 2.1.} Brownian motion is a stochastic process $\{ X(t) : t \ge 0 \}$ with the following properties
+
+\begin{itemize}
+	\item 
+\end{itemize}
+
+
+\end{theorem}
+
+
+
+\begin{theorem}
+\textbf{Theorem 2.1.} The conditional density of $X(t)$ for $t_1 < t < t_2$ given $X(t_1) = A$, $X(t_2) = B$ is a normal density with the mean
+
+$$
+A + \frac{B-A}{t_2 - t_1} (t - t_1)
+$$
+
+and the variance
+
+$$
+\frac{(t_2 - t) (t-t_1)}{ t_2 - t-1}
+$$
+\end{theorem}
+
+
+
+
+\textbf{Proof}. Let $H$ be the interoccurrence distribution for $N(t)$. Then 
+
+
+\subsection{Continuity of Paths and the Maximum Variables}
+
+The physical origins of the Brownian motion process suggest that the possible realizations $X(t)$, (i.e. \textbf{sample path}) whose movements result from continuous collisions in the surronding medium are continuous functions. 
+
+
+
+
+
+
+
+
+\begin{theorem}
+\textbf{Theorem 3.1.} The probability that $X(t)$ has at least one zero in the interval $(t_0, t_1)$, given $X(0) = 0$, is
+
+$$
+\alpha = \frac{2}{\pi} \mathrm{arccos} \sqrt{t_0/t_1}
+$$
+\end{theorem}
+
+
+\subsection{Variations and Extensions}
+
+If $X(t)$ is a standard Brownian motion process, then the processes 
+
+$$
+\begin{aligned}
+X_1(t) &= c X(t/c^2) \\[8pt]
+X_2(t) &= \begin{cases}
+t X(1/t) & t>0 \\
+0 & t=0
+\end{cases} \\[8pt]
+X_3(t) &= X(t+h) - X(h) 
+\end{aligned}
+$$
+
+for $c>0, h>0$.  
+
+
+
+
+\subsection{Brownian Motion Absorbed at the Origin}
+
+Suppose
+
+
+
+
+
+
+\end{document}
+
+
+

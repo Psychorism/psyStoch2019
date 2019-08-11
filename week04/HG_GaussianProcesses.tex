@@ -1,0 +1,139 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Gaussian Processes}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+
+\section{Random vector}
+
+
+
+\section{Brownian motion}
+
+\begin{center}
+Brownian motion($B_t$) = Wiener process ($W_t$)
+\end{center}
+
+
+\begin{theorem}
+\textbf{Proposition}. 
+
+$$
+\begin{aligned}
+\exists \mathrm{lim}_{n\to\infty} P_{ij}(n) =& \pi_j^\ast > 0 \\[8pt]
+\sum_{j=1}^M \pi_j^\ast &= 1
+\end{aligned}
+$$
+
+\end{theorem}
+
+
+
+
+
+\subsection*{Quizzes}
+
+\textbf{(Quiz 1)}. Let $X_t$ be a Brownian motion. Find
+
+$$
+K(t,s) - Var(X_{min(t,s)})
+$$
+
+
+\textbf{(Answer)} Trivially $0$, since
+
+$$
+Var(X_{min(t,s)}) = min(t,s)
+$$
+
+
+
+\textbf{(Quiz 2)}. Let $Y_{n+1} := a Y_n + X_n$, where $n=0,1,\cdots$, $Y_0 := 0, |a| < 1$, $X_0, X_1, \cdots \overset{iid}{\sim} N(0,1)$. Find $cov(Y_4, Y_3)$. 
+
+
+\textbf{(Answer)} Note that 
+
+$$
+\begin{aligned}
+Cov(Y_4, Y_3) &= cov(a^3 X_0 + a^2 X_1 + a X_2 + X_3, a^2 X_0 + a X_1 + X_2) \\[8pt]
+&= a^5 + a^3 + a
+\end{aligned}
+$$
+
+
+
+
+\textbf{(Quiz 3)}. 
+
+
+$$
+K(t,s) - Var(X_{min(t,s)})
+$$
+
+
+\textbf{(Answer)} Trivially $0$, since
+
+$$
+Var(X_{min(t,s)}) = min(t,s)
+$$
+
+
+
+
+
+
+
+\end{document}
+
+
+

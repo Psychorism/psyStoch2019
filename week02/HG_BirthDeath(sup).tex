@@ -59,6 +59,44 @@ ntheorem]{theorem}{}
 \setcounter{section}{0}
 
 
+\subsection{Birth-death Markov Chains}(6.4. from \textit{Gallager})
+
+A \textit{birth-death Markov chain} is a Markov chain where the state space is the set of nonnegative integers, i.e.
+
+
+
+A transition from $i$ to $i+1$ is regarded as a birth and $i+1$ to $i$ is regarded as a death. 
+
+
+
+Let us denote $p_i := P_{i,i+1}$ and $q_i := P_{i,i-1}$, thus $P_{ii} = 1 - p_i - q_i$. So what is the steady-state probabilities of these BD chains?
+
+Note that the number of transitions from $i$ to $i+1$ differs by at most $1$ from the number of transitions 
+
+
+
+Thus if we visualizea renewal-reward process with renwals on occurrences of state $i$ and unit reward on transitions from $i$ to $i+1$, the limiting time-average number of transitions per unit time is $\pi_i p_i$. Similarly, the limiting time-average number of transitions per unit time from $i+1$ to $i$ is $\pi_{i+1} q_{i+1}$. Thus by equating in limit,
+
+$$
+\pi_i p_i = \pi_{i+1} q_{i+1}, \ \ \forall i\ge 0
+$$
+
+
+
+It is convenient to define $\rho_i$ as $p_i / q_{i+1}$. Then we have $\pi_{i+1} = \rho_i \pi_i$, and iterating this,
+
+$$
+\pi_i = \pi_0 \prod_{j=0}^{i-1} \rho_j, \ \ \pi_0 := \frac{1}{1 + \sum_{i=1}^\infty \prod_{j=0}^{i-1} \rho_j}
+$$
+
+If $\sum_{i=1}^\infty \prod_{j=0}^{i-1} \rho_j < \infty$, then $\pi_0$ is positive and \textbf{all the states are positive recurrent}. If this sum of products is infinite, then no state is positive recurrent. 
+
+
+\textbf{Example 7.3(Gallager)}
+
+
+
+
 \subsection{Postulates for the Poisson process}
 
 
@@ -218,6 +256,10 @@ A birth and death process is called a \textbf{linear growth process} if $\lambda
 
 
 
+
+
+
+
 \subsubsection{Queueing}
 
 
@@ -237,6 +279,35 @@ where $u_0 = 1$.
 
 
 \textbf{Probability of absorption into state $0$}
+
+
+
+\begin{theorem}
+\textbf{Theorem 7.1.}. Consider a BDP with birth and death parameters $\lambda_n$ and $\mu_n$ with $n \ge 1$, where $\lambda_0 = 0$ so that $0$ is an absorbing state. 
+
+\textbf{The probability of absorption into state $0$ from the intial state $m$} is given as 
+
+$$
+\begin{cases}
+\frac{ \sum_{i=m}^\infty \left( \prod_{j=1}^i \mu_j/\lambda_j \right)  }{ 1+ \sum_{i=1}^\infty \left( \prod_{j=1}^i \mu_j/\lambda_j \right)} & \sum_{i=1}^\infty \left( \prod_{j=1}^i \mu_j/\lambda_j \right) < \infty \\
+1 & \sum_{i=1}^\infty \left( \prod_{j=1}^i \mu_j/\lambda_j \right) = \infty
+\end{cases}
+$$
+
+The \textbf{mean time to absorption} is
+
+
+
+\end{theorem}
+
+\textbf{Proof}. ($\Rightarrow$) 
+
+
+
+\subsection{Finite State Continuous Time Markov Chains}
+
+
+
 
 
 
@@ -290,6 +361,26 @@ M(t) &= \frac{\lambda}{\mu} (1 - e^{-\mu t}) + i e^{-\mu t} \\[8pt]
 $$
 
 If we let $t \to \infty$, then $M(t) \to \lambda/\mu$, which is the mean value of the stationary distribution given above. 
+
+
+
+\textbf{4.3.} Consider a pure de ath proce ss where Jl n = nJl fo r n = 1, 2., . .. , i.e. , P {X(t +h) = j! X(t) == k} = 0 for j > k and t and k positive. Assume an initial population of
+size i. Find Pn(t) = P{X(t) = n} , EX(t), and Var X(t).
+
+\textbf{Answers}. We have
+
+
+$$
+\begin{aligned}
+P_n(t) &= \binom{i}{n} e^{-n\mu t} (1 - e^{-n\mu t})^{(1-n)t} \\[8pt]
+\mathbb{E} \left[ X(t) \right] &= e^{-n\mu t} \\[8pt]
+\mathrm{Var} \left[ X(t) \right] &= e^{-n\mu t} (1 - e^{-n\mu t}) \\[8pt]
+\end{aligned}
+$$
+
+
+
+
 
 
 
