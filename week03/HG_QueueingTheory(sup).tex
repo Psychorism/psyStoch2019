@@ -1,0 +1,89 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{The Queueing Theory}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+%----------------------------------------------------------------------------------------
+%   Section 1
+%----------------------------------------------------------------------------------------
+\section{Definitions}
+
+The \textbf{first} character describes the \textbf{arrival process} to the queue.
+
+\begin{itemize}
+	\item \textbf{M}emorylessness: Poisson arrival process\item \textbf{D}eterministic: interarrival interval is nonrandom
+	\item \textbf{G}eneral: general interarrival distribution
+\end{itemize}
+
+The \textbf{second} character describes the \textbf{service process}, with $M$: exponentially distributed service times. 
+
+The \textbf{third} character describes the \textbf{number of servers}.  
+
+Sometimes a fourth character is added which gives the \textbf{number of customers} that can be saved in the queue plus service facility. 
+
+It is often assumed that the service times are IID, independent of the arrival epochs, and independent of which server is used. 
+
+
+\textbf{M/M/1 queue}(Gallager). A queueing system with a Poisson arrival system with rate $\lambda$ and a single server that serves arriving customers in order with a service time distribution $F(y) = 1 - exp(-\mu y)$. 
+
+The service times are IID and independent of the interarrival intervals. During any period when the server is busy, customers leave the system according to a Poisson process
+
+
+
+\textbf{M/G/$\infty$ queue}(Gallager). A queueing system with Poisson arrivals, a general service distribution, and an infinite number of servers. From the infinite number of servers, no arriving customers are ever queued. The service time $Y_i$ of customer $i$ is IID over $i$ with CDF $G(y)$. 
+
+
+
+
+
+\end{document}

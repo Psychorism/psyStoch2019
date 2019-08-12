@@ -1,0 +1,323 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Limit theorems for Markov Chains}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+%----------------------------------------------------------------------------------------
+%   Section 1
+%----------------------------------------------------------------------------------------
+\begin{theorem}
+\textbf{Theorem 1.2(The basic limit theorem of Markov chains)}. 
+
+(a) Consider a \textbf{irreducible}, \textbf{ergodic}(recurrent and aperiodic) Markov chain. Let $P_{ii}^n$ the probability of entering state $i$ at the $n$th transition, $n=0,1,2,\cdots$, given that $X(O) = i$ (the initial state is $i$) . By our earlier convention $P_{ii}^0 = 1$. Let $f_{ii}^n$ the probability of first returning to state $i$ at the $n$th transition, $n=0,1,2,\cdots$ where $f_{ii}^0 = 0$. Thus 
+
+$$
+P^n_{ii} - \sum_{k=0}^n f_{ii}^{n-k} P_{ii}^k = \begin{cases}
+1 & n=0 \\ 
+0 & n>0
+\end{cases}
+$$
+
+Then,
+
+$$
+\mathrm{lim}_{n\to\infty} P_{ii}^n = \frac{1}{\sum_{n=0}^\infty n f_{ii}^n}
+$$
+
+(b) Under the same conditions as in (a), 
+
+$$
+\mathrm{lim}_{n\to\infty} P^n_{ji} = \mathrm{lim}_{n\to\infty} P_{ii}^n.
+$$
+\end{theorem}
+
+
+\textbf{Proof}. 
+
+
+Under these circumstances we prove that $\mathrm{lim}_{n\to\infty} \gamma_n = c$. In fact,
+
+$$
+\begin{aligned}
+y_n - c &= \sum_{k=0}^n a_{n-k} x_k - c\sum_{m=0}^\infty a_m \\[8pt]
+&= \sum_{k=0}^n a_{n-k} (x_k -c) - c \sum_{m=n+1}^\infty a_m
+\end{aligned}
+$$
+
+For $\epsilon >0$ prescribed we determine $K(\epsilon)$ so that $\vert x_k - c \vert < \epsilon / 3$ for all $k \ge K(\epsilon)$. 
+
+$$
+y_n - c = \sum_{k=0}^{K(\epsilon)} a_{n-k} (x_k -c) + \sum_{k=K(\epsilon)+1}^n a_{n-k} (x_k -c) - c \sum_{m=n+1}^\infty a_m
+$$
+
+and so 
+
+$$
+\vert y_n - c \vert \le \sum_{k=0}^{K(\epsilon)} a_{n-k} (x_k -c) + \sum_{k=K(\epsilon)+1}^n a_{n-k} (x_k -c) - c \sum_{m=n+1}^\infty a_m
+$$
+
+where 
+
+$$
+M = \mathrm{max}_{k \ge 0} \vert x_k - c \vert
+$$
+
+
+We choose $N(\epsilon)$ so that $|c| \sum_{m=n+1}^\infty a_m < \epsilon /3$ and 
+
+$$
+\sum_{k=0}^{K(t)} a_{n-k} \equiv \sum_{m=n-K(t)}^n a_m < \frac{\epsilon}{3M} \ \ n \ge N(\epsilon)
+$$
+
+Then 
+
+
+\textbf{Remark 1.3.} Let $C$ be a recurrent class. Then $P_{ij}^n = 0$, for $i \in C, j \notin C$, and every $n$. Hence, once in $C$ it i snot possible to leave $C$. 
+
+
+\begin{theorem}
+\textbf{Theorem 1.3.} In a \textbf{positive recurrent aperiodic} class with states $j=0,1,2,\cdots$, 
+
+$$
+\mathrm{lim}_{n\to \infty} P^n_{jj} = \pi_j = \sum_{i=0}^\infty \pi_i P_{ij}, \ \ \sum_{i=0}^\infty \pi_i =1
+$$
+
+and the $\pi$'s are uniquely determined by the set of equations
+\end{theorem}
+
+
+
+\subsection{Absorption Probabilities}
+
+\textbf{Remark 3.1.} If there are only a finite number of states, M, then there
+are no null states and not all states can be transient . In fact, since
+Lf 01 Pij == 1 for all n, it cannot happen that limn-+ oo Pij = 0 for all j.
+The same argument restricted to recurrent classes shows that there are
+no null states . Let C, C 1 , C2 , • . • denote recurrent classes . We define
+ni(C) as the probability that the process will be ultimately absorbed into
+the recurrent class C if the initial state is the transient state i. (Recall
+that once the process enters a recurrent class, it never leaves it.)
+
+
+
+
+\begin{theorem}
+\textbf{Theorem 1.3.} In a \textbf{positive recurrent aperiodic} class with states $j=0,1,2,\cdots$, 
+
+$$
+\mathrm{lim}_{n\to \infty} P^n_{jj} = \pi_j = \sum_{i=0}^\infty \pi_i P_{ij}, \ \ \sum_{i=0}^\infty \pi_i =1
+$$
+
+and the $\pi$'s are uniquely determined by the set of equations
+\end{theorem}
+
+
+
+\textbf{Proof}. Clearly $\pi_i^n (C) = \sum_{k \in C} \pi_{ik}^n (C)$ where $\pi_{ik}^n(C)$ represents the probability starting from state $i$ of being absorbed at the $n$th transition into class $C$ at state $k$. We have
+
+$$
+\pi_i(C) = \sum_{\nu = 1 }
+$$
+
+
+Therefore $\forall \epsilon >0$, $\exists$ a finite number of states $C' \subset C$ and an integer $N(\epsilon) = N$ such that 
+
+$$
+\vert \pi_i(C) - \sum_{\nu=1}^n \sum_{k \in C'} \pi_{ik}^\nu (C) \vert < \epsilon
+$$
+
+i.e.
+
+
+
+Combining these relations, we have 
+
+
+\textbf{Example (The gambler's ruin on $n+1$ states)}. 
+
+
+
+
+$$
+P = \begin{bmatrix}
+1 & 1 & 0 & 0 & \cdots & 0 \\
+0 & 0 & 1 & 0 & \cdots & 0 \\
+\vdots &  &  &  &  & \vdots \\
+0 & 0 & 0 & 0 & \cdots & 1 \\
+1 & 0 & 0 & 0 & \cdots & 0 \\
+\end{bmatrix}
+$$
+
+
+
+\subsection{Criteria for Recurrence}
+
+Let us prove theorems which will be useful in determining whether a
+given Markov chain is recurrent or transient and then we apply them to
+several examples
+
+\begin{theorem}
+\textbf{Theorem 4.1.} Let $\mathcal{B}$ be an irreducible Markov chain whose state space is labeled by the nonnegative integers. Then a necessary and sufficient condition that $\mathcal{B}$ be transient (i.e. each state is a transient state) is taht the system of equations
+
+$$
+\sum_{j=0}^\infty P_{ij} \gamma_j = \gamma_i, \ \ i\neq0
+$$
+
+have a bounded nonconstant solution.
+
+\end{theorem}
+
+\textbf{Proof}. For the sufficiency, let the transition matrix for $\mathcal{B}$ be
+
+$$
+P = \Vert P_{ij} \Vert = \begin{bmatrix}
+\end{bmatrix}
+$$
+
+where the zero state has been converted into an absorbing barrier while the transition probabilities governing the motion among the other states are unchanged. Let us denote 
+
+
+
+
+If the chain is recurrent, then 
+
+$$
+\mathrm{lim}_{n\to\infty} \tilde{P}_{i0}^n = 1
+$$
+
+and 
+
+
+where
+
+
+
+\begin{theorem}
+\textbf{Theorem 4.2.} In an irreducible Markov chain a sufficient condition for recurrence is that there exists a sequence $\{ \gamma_i \}$ such that
+
+$$
+\sum_{j=0}^\infty P_{ij} \gamma_j \le \gamma_i \ \ i \neq 0, \gamma_i \to \infty
+$$
+
+\end{theorem}
+
+\textbf{Proof}. Using the same notation as in the previous theorem, we have
+
+$$
+\sum_{j=0}^\infty \hat{P}_{ij} \gamma_j \le \gamma_i, \ \ \forall i
+$$
+
+Since 
+
+
+
+Given $\epsilon$, we choose $M(\epsilon)$ such that $1/\gamma_i \le \epsilon$ for $i \ge M(\epsilon)$. Now
+
+$$
+\sum_{j=0}^{M-1} \tilde{P}_{ij}^m \gamma_j + \sum_{j=M}^\infty \tilde{P}_{ij}^m \gamma_j \le \gamma_i
+$$
+
+and so
+
+$$
+\sum_{j=0}^{M-1} \tilde{P}_{ij}^m \gamma_j + \mathrm{min}_{r \ge M} \{ \gamma_r \} \sum_{j=M}^\infty \tilde{P}_{ij}^m \le \gamma_i
+$$
+
+
+Since 
+
+$$
+\sum_{j=0}^\infty \tilde{P}_{ij}^m = 1
+$$
+
+we have
+
+$$
+\sum_{j=0}^{M-1} \tilde{P}_{ij}^m \gamma_j + \mathrm{min}_{r \ge M} \{ \gamma_r \} \left( 1 - \sum_{j=0}^{M-1} \tilde{P}_{ij}^m \right) \le \gamma_i
+$$
+
+
+As observed in the proof of the preceding theorem, 
+
+$$
+\mathrm{lim}_{n\to\infty} \tilde{P}^n_{ij} = 0, \ \ j\neq 0
+$$
+
+Thus passing to the limit as $m \to \infty $, we obtain for each $i$,
+
+$$
+\tilde{\pi}_i (C_0)\gamma_0 + \mathrm{min}_{r \ge M} \{ \gamma_r \} (1 - \tilde{\pi}_i (C_0)) \le \gamma_i
+$$
+
+
+\subsection{A Queueing Example}
+
+
+If $\sum k a_k \le 1$, the process is recurrent.
+
+In order to ascertain whether the process $\mathcal{B}$ is null recurrent or positive recurrent we first deal with the following auxiliary problem of some independent interest.
+
+We set 
+
+$$
+G(s) = \frac{b_{-1}}{s} + b_0 + b_1 s + b_2 s^2 + \cdots
+$$
+
+
+Our is to determine $U(s)$ in terms of $G(s)$. To this end we write the usual renewal relations 
+
+$$
+\gamma_1 = b_{-1}, \ \ \gamma_k = \sum_{j=0}^\infty b_j \gamma_{j-1}^{(j+1)}, \ \ k \ge 2
+$$
+
+\end{document}

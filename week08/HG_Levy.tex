@@ -158,6 +158,13 @@ X_t: X_\Delta
 $$
 
 
+CIR model for the stochastic volatility is 
+
+$$
+c \sqrt{V_t} d W_t
+$$
+
+
 Levy process can be used to model the properties of jobs. 
 
 
@@ -174,34 +181,64 @@ $$
 $$
 
 
+Let $X_t$ be a Levy process of bounded variation with Levy triplet $(\mu, \sigma^2, \nu)$ and Levy density $s(x)$. The correct form of the characteristic exponent is given as
+
+$$
+\psi (u) = iu \left( \mu - \int_{|x| < 1} x s(x) dx  \right) + \int_\mathbb{R} (e^{iux} - 1) s(x) dx
+$$
+
+with $\mu$ probably equal to zero. Note that it is also true that nonzero $\mu$ can be of bounded variation. 
+
+
 
 \subsection*{Quizzes}
 
 
-\textbf{(Quiz 1)}. Let $X_t := cos(wt + \theta)$ be a stochastic process and $\theta \sim Unif(0,2\pi)$, with $w=\pi/10$. Classify this process.
 
-\textbf{(Answer)} \textbf{Ergodic} and \textbf{weak stationary}. 
-
-
-\textbf{(Quiz 2)}. Let $X_t := \epsilon_t + \xi cos(\pi t/12)$, $t=1,2,\cdots$, where $\xi, \epsilon_1, \epsilon_2, \cdots$ are IID standard normal random variables.
-
-\textbf{(Answer)} Not \textbf{weak stationry}, but \textbf{ergodic}.
+\textbf{(Quiz 1-3)}. $X_t := bt + \sigma W_t + c N_t$, where $W_t$: Brownian motion, $N_t$: a Poisson process with $\lambda$, and $W_t, N_t$ independent, $b,c \in \mathbb{R}$, $\sigma \ge 0$. Denote the Levy measure of this process bt $\nu$.  
 
 
-\textbf{(Quiz 3)}. Assume that for a process $X_t$ it is known that $\mathbb{E} (X_t) = \alpha + \beta t$, $cov(X_t, X_{t+h} = e^{-h \lambda}$ for all $h \ge 0, t >0$, and some constants $\lambda >0, \alpha, \beta$. Classify the process $Y_t := X_{t+1} - X_t$. 
+\textbf{(Quiz 1)}. Find the characteristic function of this process.
 
-\textbf{(Answer)} $Y_t$ is weakly stationary and ergodic.
+\textbf{(Answer)}. $exp \{ iubt + \lambda t (e^{icu} - 1) - \frac{t(\sigma u)^2}{2} \}$
+
+\textbf{(Quiz 2)}. What are the mean, variance, covariance function of this process?
+
+\textbf{(Answer)}. No answer. 
+
+\textbf{(Quiz 3)}. What is measure $\nu$ of a Borel set $B$? 
+
+\textbf{(Answer)}. $\nu(B) = \lambda$, if $1 \in B$ and $0$ otherwise.
+
+Considering that the jump part of the Levy process discussed is
+
+\begin{itemize}
+	\item $c$: real number
+	\item $N_t$ : Poisson process with $\lambda$
+\end{itemize}
+
+Thus $\nu(B) = \lambda \mathbf{1}_{c \in B}$. Computing the integral in the characteristic exponent, returns a pointwise evaluation in the point $c$, $\lambda (e^{iuc} - 1)$.
 
 
-\textbf{(Quiz 4)}. Let $X_t := \sigma W_t + ct$, where $W_t$ is Brownian motion, $\sigma, c >0$. Choose the correct statements about this process. 
+\textbf{(Quiz 4)}. Let $X_t$ be a Levy process. What is the correct expression for $\mathrm{Var} (X_t)$ in terms of characteristic exponent $\psi$? 
 
-\textbf{(Answer)} $X_t$ has \textbf{continuous trajectories}. 
-
-
-\textbf{(Quiz 5)}. Let $X_t$ have an autocovariance function $\gamma(r) := e^{-\alpha |r|}$. Is $Y_t := X_t + w$ an ergodic process?
+\textbf{(Answer)}. $\mathrm{Var} (X_t) = -t \psi''(0)$
 
 
-\textbf{(Answer)} Yes, if $w$ is a constant. 
+\textbf{(Quiz 5)}. Let $X_t$ be a Levy process, assuming $X_1 \sim N(0,1)$. Find the mean and the variance of $X_t$
+
+\textbf{(Answer)}. $\mathbb{E} [X_t] = 0, \mathrm{Var} (X_t) = t$.
+
+
+\textbf{(Quiz 6)}. Let $X_t = bt + N_t$, where $N_t$ is a Poisson process with $\lambda$ and $b \in \mathbb{R}$. Find the Levy triplet of this process. 
+
+\textbf{(Answer)}. $(b + \lambda, 0, \nu$, where $\nu(B) =\lambda \mathbf{1}_{1 \in B}$ for any Borel set $B$.
+
+The first term of a Levy triplet should correspond to the coefficient of the drift term, i.e. $b$, if $X$ is of the form
+
+$$
+X_t = bt + \sigma W_t + c N_t
+$$
 
 
 

@@ -231,31 +231,84 @@ If we assume that $V_0 \sim N \left( 0, \frac{1}{2\lambda m} \right) \perp W_t$
 \subsection*{Quizzes}
 
 
-\textbf{(Quiz 1)}. Let $X_t := cos(wt + \theta)$ be a stochastic process and $\theta \sim Unif(0,2\pi)$, with $w=\pi/10$. Classify this process.
+\textbf{(Quiz 1)}. Let $I(f) = \int_0^1 t^2 dW_t$. Find the mean of $I(f)$. 
 
-\textbf{(Answer)} \textbf{Ergodic} and \textbf{weak stationary}. 
-
-
-\textbf{(Quiz 2)}. Let $X_t := \epsilon_t + \xi cos(\pi t/12)$, $t=1,2,\cdots$, where $\xi, \epsilon_1, \epsilon_2, \cdots$ are IID standard normal random variables.
-
-\textbf{(Answer)} Not \textbf{weak stationry}, but \textbf{ergodic}.
+\textbf{(Answer)} 0
 
 
-\textbf{(Quiz 3)}. Assume that for a process $X_t$ it is known that $\mathbb{E} (X_t) = \alpha + \beta t$, $cov(X_t, X_{t+h} = e^{-h \lambda}$ for all $h \ge 0, t >0$, and some constants $\lambda >0, \alpha, \beta$. Classify the process $Y_t := X_{t+1} - X_t$. 
+\textbf{(Quiz 2)}. Let $I(f) = \int_0^1 t^2 dW_t$. Find the variance of $I(f)$. 
 
-\textbf{(Answer)} $Y_t$ is weakly stationary and ergodic.
+\textbf{(Answer)} 1/2 (Not correct)
+
+1 (Not correct)
+
+5/4 (Not correct)
+
+\textbf{(Quiz 3)}. Let $N_t$ be a Poisson process. Find the mean, covariance function and variance of $I(f) := \int_0^t N_s ds$, for $t > s \ge 0$. 
+
+\textbf{(Answer)} 
+
+$$
+\begin{aligned}
+\mathbb{E}[I(f)] &= \lambda t^2 /2 \\[8pt]
+\mathrm{Var}[I(f)] &= \lambda t^3 /3 \\[8pt]
+K(t,s) &= \lambda \left( -\frac{t^3}{6} + \frac{st^2}{2} \right)
+\end{aligned}
+$$
 
 
-\textbf{(Quiz 4)}. Let $X_t := \sigma W_t + ct$, where $W_t$ is Brownian motion, $\sigma, c >0$. Choose the correct statements about this process. 
+\textbf{(Quiz 4)}. Let 
+$$
+X_t := \begin{cases}
+\xi_1, &t \in [0, 1) \\
+\xi_2, &t \in [1, 2) \\
+\xi_3, &t \ge 2
+\end{cases}
+$$, where $\xi_1, \xi_2, \xi_3$ are IID RVs having exponential distribution with parameter $\lambda$. Find the mean and the variance of $\int_0^T X_t dt$
 
-\textbf{(Answer)} $X_t$ has \textbf{continuous trajectories}. 
+\textbf{(Answer)} 
+
+$$
+\begin{aligned}
+\mathbb{E}[\int_0^T X_t dt] &= T/\lambda \\[8pt]
+\mathrm{Var}[\int_0^T X_t dt] &= \begin{cases}
+\frac{T^2}{\lambda^2} & 1 > T \\
+\frac{1}{\lambda^2} + \frac{(T-1)^2}{\lambda^2} & 1 \le T < 2 \\
+\frac{2}{\lambda^2} + \frac{(T-2)^2}{\lambda^2} & 1 \le T \ge 2
+\end{cases}
+\end{aligned}
+$$
 
 
-\textbf{(Quiz 5)}. Let $X_t$ have an autocovariance function $\gamma(r) := e^{-\alpha |r|}$. Is $Y_t := X_t + w$ an ergodic process?
+\textbf{(Quiz 5)}. Find the equivalent expression for the stochastic integral $\int_0^T W_t^2 dW_t$, where $W_t$ is a Brownian motion.
 
 
-\textbf{(Answer)} Yes, if $w$ is a constant. 
+\textbf{(Answer)} 
+
+$$
+\frac{1}{3} W_T^3 - \int_0^T W_s ds
+$$
 
 
+\textbf{(Quiz 6)}. Compute the variance of the stochastic integral $\int_0^TW_t dW_t$, where $W_t$ is a Brownian motion
+
+\textbf{(Answer)} If $\zeta \sim N(0,1)$, then $\sqrt{T} \zeta \sim N(0,T)$ and $W_T^2 = \left( \sqrt{T} \zeta \right)^2 = T \zeta^2 = T\xi$, where $\xi \sim \chi^2(1)$. Since $\mathrm{Var} \xi = 2\cdot 1$, $\mathrm{Var} W_T^2 = 2 T^2$. 
+
+Since $W_T \sim N(0,T)$, $\mathrm{Var} (W_T^2)$ can be found as the fourth moment of SDN. 
+
+$$
+\frac{T^2}{2}
+$$
+
+
+\textbf{(Quiz 7)}. Choose the process $X_t$ which satisfies the following property:
+
+$$
+X_t = X_0 + \int_0^t X_s d W_s + \int_0^t e^{W_s + s/2} ds
+$$
+
+\textbf{(Answer)} 
+
+$e^{W_s + s/2} + e^{W_s - s/2}$
 
 \end{document}
