@@ -99,11 +99,13 @@ $$
 
 \subsection{Integrals of the type $\int f(t) d W_t$}
 
+Now we consider
+
 $$
 \int_a^b f(t) dW_t
 $$
 
-which is known as \textbf{Wiener integral}. 
+which is known as \textbf{Wiener integral}. Let us constrain our attention to $f$ such that
 
 $$
 f \in \mathcal{L}^2 \left( [a,b] \right)
@@ -115,6 +117,7 @@ $$
 f_n \overset{\mathcal{L}^2}{\to} f \Leftrightarrow \langle f_n -f, f_n-f\rangle \to 0
 $$
 
+\bigskip
 
 \textbf{Stage 1}. Consider a \textbf{step function}
 
@@ -131,7 +134,6 @@ $$
 
 \begin{theorem}
 \textbf{Theorem}. Denote $\int_a^b f(t) dW_t = I(f)$. If $f$ : step function, then
-
 $$
 I(f) \sim N \left(0, \int_a^b f^2(x) dx \right)
 $$
@@ -143,12 +145,57 @@ $$
 \mathrm{Var} \left[ \sum_{i=1}^n \alpha_i \left( W_{t_i} - W_{t_{i-1}} \right) \right] = \sum_{i=1}^n \alpha_i^2 \mathrm{Var} \left( W_{t_i} - W_{t_{i-1}}\right) = \sum_{i=1}^n \alpha_i^2 (t_i - t_{i-1}) = \int f^2(x) dx
 $$
 
+\textbf{Stage 2}. Consider a sequence of \textbf{step functions}, $\{ f_n \}$, such that $f_n \overset{\mathcal{L}^2}{\to} f$, i.e. $\int_a^b \left( \right)^2 dt \overset{n\to\infty}{\to} 0$. Then
+
+$$
+I(f) := \mathrm{lim}_{n\to\infty} I(f_n) = \mathrm{lim}_{n\to\infty} \int_a^b f_n(t) dW_t
+$$
+
+where the limit is understood in a mean squared sense, i.e.
+
+$$
+\mathbb{E} \left[ \left( I(f_n) - I(f) \right)^2 \right] \overset{n\to\infty}{\to} 0
+$$
+
+The above implies that the limit of $I(f_n)$ does not depend on the choice of $f_n$.
+
+
+\begin{theorem}
+\textbf{Theorem}. Let $\{ f_n \}, \{ \hat{f}_n \}$ be sequences of step functions such that $f_n \overset{\mathcal{L}^2}{\to} f, \tilde{f}_n \to f$, then
+$$
+\mathrm{lim}_{n\to\infty} I(f_n) = \mathrm{lim}_{n\to\infty} I(\tilde{f}_n)
+$$
+\end{theorem}
+
+\textbf{Proof}. Note that $I(f_n) - I(\tilde{f}_n) = I (f_n - \tilde{f}_n)$, where $f_n - \tilde{f}_n$ : step function, $\forall n$, and it follows $N \left( 0, L \right)$, where $L$ : L2 norm between $f_n$, $\tilde{f}_n$. Thus,
+
+$$
+\mathbb{E} \left( \left( I(f_n) - I(f) \right)^2 \right) = \int_a^b \left( f_n(x) - \tilde{f}_n(d) \right)^2 dx \overset{n\to\infty}{\to} 0
+$$
+
+
+
+\begin{theorem}
+\textbf{Theorem}. $\forall f \in \mathcal{L}^2 (a,b)$
+$$
+I(f) \sim N \left(0, \int_a^b f^2(x) dx \right)
+$$
+\end{theorem}
+
+\textbf{Proof}. Since $f$ can be represented $\mathrm{lim} f_n$,
+
+$$
+I(f) = \mathrm{lim}_{n\to\infty} I(f_n)
+$$
+
+where $I(f_n) \sim N \left(0, \int_a^b f_n^2(x) dx \right)$, and using the ergodicity of Gaussian process, i.e. for all invariant event $E$, after time shift, either $P(E) = 1$ or $P(E) = 0$.
+
 
 \subsection{Integrals of the type $\int X_t d W_t$}
 
-Recall that \textbf{filtration} is a seuqnece of $\sigma$-algebras $\mathcal{F}_t$ on $(\Omega, \mathcal{F}, \mathbb{P})$: $\mathcal{F}_t \subset \mathcal{F}_s, \forall t \le s$. 
+Recall that \textbf{filtration} is a sequence of $\sigma$-algebras $\mathcal{F}_t$ on $(\Omega, \mathcal{F}, \mathbb{P})$: $\mathcal{F}_t \subset \mathcal{F}_s, \forall t \le s$. 
 
-Given the filtration, we can define the space of the processes $X_t$, $\mathcal{L}_{ad} \left( [a,b], \Omega \right)$. This space has the following properties:
+Given the filtration, we can define the space of the processes $X_t$, $\mathcal{L}_{ad} \left( [a,b], \Omega \right)$ with the following defining properties:
 
 \begin{itemize}
 	\item 1. $X_t$ : $\mathcal{F}_t$-adapted where $X_t$: $\mathcal{F}_t$-measurable for all $t$
@@ -161,7 +208,7 @@ $$
 \{ X_t \in B\} \subset \mathcal{F}_t, \forall t, \forall B \in \mathcal{B}(\mathbb{R})
 $$
 
-Additionally, $W_t$ is $\mathcal{F}_t$-Brownian motion if 
+Additionally, $W_t$ is defined $\mathcal{F}_t$-Brownian motion if 
 
 \begin{itemize}
 	\item 1) $W_t$ : $\mathcal{F}_t$-adapted
@@ -304,10 +351,10 @@ $$
 
 \begin{theorem}
 \textbf{Theorem}. Let $H_t$ be a Ito process, and $f(t,x)$: twice differentiable, continuous. Then
+$$
+f(t,H_t) = f(0,H_0) + \int_0^t f_1' (s, H_s) dx + \int_0^t f_2'(s, H_s) dH_s + \frac{1}{2} \int_0^t f_{22}'' (s,H_s)\sigma_s^2 ds
+$$
 
-$$
-f(t,H_t) = f(0,H_0) + \int_0^t f_1' (s, H_s) dx + \int_0^t (s, H_s) dH_s + \frac{1}{2} \int_0^t f_{22}'' (s,H_s)\sigma_s^2 ds
-$$
 \end{theorem}
 
 
@@ -324,7 +371,7 @@ where $f$: antiderivative of $g$ wrt the second argument, i.e. $f_2' = g$. Note 
 $$
 \begin{aligned}
 f(t, W_t) &= f(0,0) + \int_0^t f_1' (s,W_s) ds + \int_0^t g(s,W_s) dW_s + \frac{1}{2} \int_0^t g_2' (s,W_s) ds \\[10pt]
-\int_0^t g(s,W_s) dW_s = f(t,W_t) - f(0,0) - \int_0^t f_1' (s,W_s) + \frac{1}{2}g_2'(s,W_s) ds
+\int_0^t g(s,W_s) dW_s &= f(t,W_t) - f(0,0) - \int_0^t f_1' (s,W_s) + \frac{1}{2}g_2'(s,W_s) ds
 \end{aligned}
 $$
 
@@ -412,13 +459,15 @@ which is \textbf{stationary} in both and weak and wide senses.
 
 \textbf{(Quiz 1)}. Let $I(f) = \int_0^1 t^2 dW_t$. Find the mean of $I(f)$. 
 
-\textbf{(Answer)} $0$.
+\textbf{(Answer)}
 
-Let $F(t,x) = xt^2$. Then $t^2 = \frac{\partial F_2}{}'$. Thus 
+Let $f(t,x) = xt^2$. Then $f_2' := \frac{\partial f}{\partial x} = t^2$. Thus 
 
 $$
 \begin{aligned}
- &= \\[8pt]
+f(1,W_t) = W_1 1^2 &= 0 + \int_0^1 2t W_t dt + \int_0^1 t^2 dW_t + 0  \\[8pt]
+\int_0^1 t^2 dW_t &= W_1 - \int_0^1 2t W_t dt \\[8pt]
+\therefore \ \ \mathbb{E} \left( \int_0^1 t^2 dW_t \right) &= 0 - \int_0^1 2t\mathbb{E}W_t dt = 0
 \end{aligned}
 $$
 
@@ -431,6 +480,7 @@ $$
 $$
 \begin{aligned}
 \mathrm{Var} \left( \int_0^1 t^2 dW_t \right) &= \mathrm{Var} W_1 + \mathrm{Var} \int_0^1 2t W_t dt - 2\mathrm{cov} \left( W_1, \int_0^1 2t W_t dt \right) \\[8pt]
+&= 1 + 2 \int_0^1 \int_0^t cov(2tW_t, 2sW_s) ds dt 
 \end{aligned}
 $$
 
@@ -442,16 +492,17 @@ $$
 Note that 
 
 $$
-\mathbb{E}[I(f)] = \lambda t^2 /2 \\[8pt]
+\mathbb{E}[I(f)] = \int_0^t \mathbb{E}N_s dx = \lambda t^2 /2 \\[8pt]
 $$
+
+and 
 
 $$
 \begin{aligned}
-\mathrm{Var}[I(f)] &= \lambda t^3 /3 \\[8pt]
-K(t,s) &= \lambda \left( -\frac{t^3}{6} + \frac{st^2}{2} \right)
+K(T,S) &= 2 \int_0^T \int_0^S cov(N_t, N_s)dtds \\[8pt]
+&= 2 \left\{ \int_0^S \int_0^S cov(N_t, N_s) dt ds + \int_0^S \int_S^T cov(N_t, N_s) dt ds  \right\} \\[8pt]
 \end{aligned}
 $$
-
 
 
 
@@ -469,7 +520,7 @@ $$, where $\xi_1, \xi_2, \xi_3$ are IID RVs having exponential distribution with
 $$
 \begin{aligned}
 \mathbb{E} \left[\int_0^T X_t dt \right] &= \int_0^T \mathbb{E}X_t dt \\[8pt]
-&= \int_0^T 1/\lambda \\[8pt]
+&= \int_0^T 1/\lambda dt \\[8pt]
 &= \frac{T}{\lambda}
 \end{aligned}
 $$
@@ -484,15 +535,16 @@ $$
 \end{aligned}
 $$
 
+For $1 \le T < 2$, 
+
 $$
 \begin{aligned}
-\mathrm{Var}[\int_0^T X_t dt] &= \begin{cases}
-\frac{T^2}{\lambda^2} & 1 > T \\
-\frac{1}{\lambda^2} + \frac{(T-1)^2}{\lambda^2} & 1 \le T < 2 \\
-\frac{2}{\lambda^2} + \frac{(T-2)^2}{\lambda^2} & 1 \le T \ge 2
-\end{cases}
+\mathrm{Var} \left[\int_0^T X_t dt \right] &= \mathrm{Var} \left[\int_0^1 X_t dt + \int_1^T X_t dt \right] \\[8pt]
+&= \mathrm{Var}[\int_0^1 \xi_1 dt] + \mathrm{Var}[\int_1^T \xi_2 dt] \\[8pt]
+&= 2 \int_0^1\int_0^t cov()
 \end{aligned}
 $$
+
 
 
 \textbf{(Quiz 5)}. Find the equivalent expression for the stochastic integral $\int_0^T W_t^2 dW_t$, where $W_t$ is a Brownian motion.
@@ -500,39 +552,63 @@ $$
 
 \textbf{(Answer)} 
 
+Let $f(t,W_t) = W_t^3 /3$ then
+
 $$
-\frac{1}{3} W_T^3 - \int_0^T W_s ds
+\begin{aligned}
+f_1(t,W_t) &= 0 \\[8pt]
+f_2(t,W_t) &= W_t^2 \\[8pt]
+f_{22}(t,W_t) &= 2W_t
+\end{aligned}
+$$
+
+Thus we have
+
+$$
+\frac{1}{3} W_T^3 = 0 + 0 + \int_0^T W_t^2 dW_t + \frac{1}{2} \int_0^T 2W_s \sigma_s^2 ds
+$$
+
+therefore,
+
+$$
+\int_0^T W_t^2 dW_t = \frac{1}{3} W_T^3 - \int_0^T W_s ds
 $$
 
 
 \textbf{(Quiz 6)}. Compute the variance of the stochastic integral $\int_0^TW_t dW_t$, where $W_t$ is a Brownian motion
 
-\textbf{(Answer)} $\frac{T^2}{2}$
-
-Note that 
-
-$$
-f(t,x) = W_t^2/2, f_2(t,x) = W_t, 
-$$
-
-
-If $\zeta \sim N(0,1)$, then $\sqrt{T} \zeta \sim N(0,T)$ and $W_T^2 = \left( \sqrt{T} \zeta \right)^2 = T \zeta^2 = T\xi$, where $\xi \sim \chi^2(1)$. Since $\mathrm{Var} \xi = 2\cdot 1$, $\mathrm{Var} W_T^2 = 2 T^2$. 
-
-Since $W_T \sim N(0,T)$, $\mathrm{Var} (W_T^2)$ can be found as the fourth moment of SDN. 
-
-$$
-\frac{T^2}{2}
-$$
-
-
-\textbf{(Quiz 7)}. Choose the process $X_t$ which satisfies the following property:
-
-$$
-X_t = X_0 + \int_0^t X_s d W_s + \int_0^t e^{W_s + s/2} ds
-$$
-
 \textbf{(Answer)} 
 
-$e^{W_s + s/2} + e^{W_s - s/2}$
+Letting $f(t,W_t) = W_t^2/2$, we have
+
+$$
+\begin{aligned}
+f_1(t,W_t) &= 0 \\[8pt]
+f_2(t,W_t) &= W_t \\[8pt]
+f_{22}(t,W_t) &= 1
+\end{aligned}
+$$
+
+Thus
+
+$$
+\frac{1}{2} W_T^2 = 0 + 0 + \int_0^T W_t dW_t + \int_0^T \sigma_s^2 ds
+$$
+
+implying
+
+$$
+\int_0^T W_t dW_t = \frac{1}{2} W_T^2 - T
+$$
+
+thus
+
+$$
+ \begin{aligned}
+ \mathrm{Var} \int_0^T W_t dW_t &= \mathrm{Var} \left( W_T^2/2\right) \\[8pt]
+ &= \frac{1}{4} \left(N(0,T)\right)^4 = T^2/2
+ \end{aligned}
+ $$ 
+
 
 \end{document}
