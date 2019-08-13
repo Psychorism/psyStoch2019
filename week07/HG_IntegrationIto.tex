@@ -60,50 +60,139 @@ ntheorem]{theorem}{}
 
 \subsection{Different types of stochastic integrals}
 
-We have 
-
+We consider the following types of \textbf{stochastic integrals}: 
 
 \begin{itemize}
-	\item $\int_a^b X_t(\omega) dt$
-	\item $\int_a^b $
-	\item 
-	\item
+	\item $\int_a^b X_t dt$
+	\item $\int_a^b f(t) dW_t $
+	\item $\int_a^b X_t dW_t$
+	\item $\int_a^b X_t dH_t$
 \end{itemize}
-
-
-The limit should be understood 
-
-$$
-X_t 
-$$
-
 
 
 \subsection{Integrals of the type $\int X_t dt$}
 
+Consider the first case. For $X_t : \Omega \times \mathbb{R}_+ \to \mathbb{R}$, we fix some omega, and for any omega the integral is a \textbf{Riemann integral}.  
+
+$$
+\int_a^b X_t(\omega) dt = \mathrm{lim} \sum_{k=1}^n X_{t_{k-1}}(\omega) ( t_k - t_{k-1})
+$$
+
+for $a = t_0 < t_1 < \cdots < t_n = b$. Note that 
+
+$$
+\mathbb{E} \left( \sum_{k=1}^n X_{t_{k-1}}(\omega) ( t_k - t_{k-1}) -\int_a^b X_t dt  \right)^2 \to 0
+$$
+
+\begin{theorem}
+\textbf{Theorem}. Let $m(t), K(t,s)$ be continuous. Then \textbf{there exists} $\int_a^b X_t dt$
+\end{theorem}
+
+
+$$
+\begin{aligned}
+\mathbb{E} \int_a^b X_t dt &= \int_a^b \mathbb{E}X_t dt \\[8pt]
+\mathrm{Var} \int_a^b X_t dt &= \int_a^b \int_a^b K(t,s) dt ds
+\end{aligned}
+$$
+
 
 \subsection{Integrals of the type $\int f(t) d W_t$}
 
+$$
+\int_a^b f(t) dW_t
+$$
 
+which is known as \textbf{Wiener integral}. 
+
+$$
+f \in \mathcal{L}^2 \left( [a,b] \right)
+$$
+
+Recalling that the inner product of two functions is defined $\langle f,g \rangle := \int_a^b fg dx$, we define
+
+$$
+f_n \overset{\mathcal{L}^2}{\to} f \Leftrightarrow \langle f_n -f, f_n-f\rangle \to 0
+$$
+
+
+\textbf{Stage 1}. Consider a \textbf{step function}
+
+$$
+f(x) = \sum_{i=1}^n \alpha_i \mathbf{1}_{t_{i-1} \le x < t_i}
+$$
+
+with $a = t_0 < t_1 < \cdots < t_n = b$, and $\alpha_i \in \mathbb{R}$. Then 
+
+$$
+\int_a^b f(t) dW_t = \sum_{i=1}^n \alpha_i \left( W_{t_i} - W_{t_{i-1}} \right)
+$$
+
+
+\begin{theorem}
+\textbf{Theorem}. Denote $\int_a^b f(t) dW_t = I(f)$. If $f$ : step function, then
+
+$$
+I(f) \sim N \left(0, \int_a^b f^2(x) dx \right)
+$$
+\end{theorem}
+
+\textbf{Proof}. Find $\mathbb{E} \left[ \sum_{i=1}^n \alpha_i \left( W_{t_i} - W_{t_{i-1}} \right) \right]$ and 
+
+$$
+\mathrm{Var} \left[ \sum_{i=1}^n \alpha_i \left( W_{t_i} - W_{t_{i-1}} \right) \right] = \sum_{i=1}^n \alpha_i^2 \mathrm{Var} \left( W_{t_i} - W_{t_{i-1}}\right) = \sum_{i=1}^n \alpha_i^2 (t_i - t_{i-1}) = \int f^2(x) dx
+$$
 
 
 \subsection{Integrals of the type $\int X_t d W_t$}
 
+Recall that \textbf{filtration} is a seuqnece of $\sigma$-algebras $\mathcal{F}_t$ on $(\Omega, \mathcal{F}, \mathbb{P})$: $\mathcal{F}_t \subset \mathcal{F}_s, \forall t \le s$. 
 
-Assume $W_t$ is a Brownian motion. The interval from $0$ to $T$ is divided into $n$ parts by points $t_1,\cdots,t_{n-1}$ and $t_0=0,t_n=T$. We have
+Given the filtration, we can define the space of the processes $X_t$, $\mathcal{L}_{ad} \left( [a,b], \Omega \right)$. This space has the following properties:
+
+\begin{itemize}
+	\item 1. $X_t$ : $\mathcal{F}_t$-adapted where $X_t$: $\mathcal{F}_t$-measurable for all $t$
+	\item 2. $\int_a^b \mathbb{E}X_t^2 dt < \infty $
+\end{itemize}
+
+Note that $X_t$: $F_t$-measurable for all $t$ means
+
+$$
+\{ X_t \in B\} \subset \mathcal{F}_t, \forall t, \forall B \in \mathcal{B}(\mathbb{R})
+$$
+
+Additionally, $W_t$ is $\mathcal{F}_t$-Brownian motion if 
+
+\begin{itemize}
+	\item 1) $W_t$ : $\mathcal{F}_t$-adapted
+	\item 2) $W_t - W_s \perp \mathcal{F}_s$, $\forall t > s$
+\end{itemize}
+
+First, we will define the integral for \textbf{step processes}: 
+
+$$
+\sum \xi_{i-1} \mathbf{t_{i-1} \le t < t_i}
+$$
+
+Second, $X_t \in \mathcal{L}^2_{ad}$
+
+
+For example, assume $W_t$ is a Brownian motion. The interval from $0$ to $T$ is divided into $n$ parts by points $t_1,\cdots,t_{n-1}$ and $t_0=0,t_n=T$. We have
 
 $$
 \mathrm{lim}_{n\to\infty} \sum_{i=1}^n \left( W_{t_i} - W_{t_{i-1}} \right)^2 = t
 $$
 
 
+Let us \textbf{formally define} 
+
 $$
 \int_a^b X_t dW_t
 $$
 
-where $X_t \in \mathcal{L}^2$ and $W_t$: $\mathcal{F}_t$-Brownian motion. 
+where $X_t \in \mathcal{L}^2$ and $W_t$: $\mathcal{F}_t$-Brownian motion. Note that the definition heavily depends on the notion of \textbf{filtration}. 
 
-\textbf{Stage1}. 
+\textbf{Stage1}. If
 
 $$
 \begin{aligned}
@@ -111,40 +200,65 @@ X_t &= \sum_{i=1}^n \xi_{i-1} \mathbf{1}_{t_{i-1} \le t < t_i} \\[8pt]
 \end{aligned}
 $$
 
-\textbf{Stage2}. For $X_t \in \mathcal{L}^2_{ad}$ and $X_t^n$ : step processes,
+then
 
 $$
-\begin{aligned}
-\int_a^b \mathbb{E} &= \\[8pt]
-I(X_t) &= \mathrm{lim}_{n\to\infty} 
-\end{aligned}
+I (X_t) := \sum_{i=1}^n \xi_{i-1} \left( W_{t_i} - W_{t_{i-1}} \right)
 $$
 
+\textbf{Stage2}. For $X_t \in \mathcal{L}^2_{ad}$ and $X_t^n$ : step processes, and 
 
-Now let us focus on how to construct the sequence 
+$$
+\int_a^b \mathbb{E} (X_t^n - X_t)^2 dt \to 0 \\[8pt]
+$$
 
+then
 
+$$
+I(X_t) := \mathrm{lim}_{n\to\infty} I(X_t^n) 
+$$
+
+in the sense that $\mathbb{E} (X_t^n - X_t)^2 \to 0$.
+
+Now let us focus on how to construct such a step sequence 
 
 \begin{theorem}
 \textbf{Theorem}. Let $m(t), K(t,s)$ be continuous. Then 
 
 $$
 \begin{aligned}
- &= \\[8pt]
+X_t^n &:= \sum_{i=1}^n X_{t_{i-1}} \mathbf{t_{i-1} \le t < t_i} \\[8pt]
+X_t^n &\to X_t
 \end{aligned}
 $$
 
+in the sense that $\int_a^b \mathbb{E} (X_t^n - X_t)^2 \to 0$.
+\end{theorem}
+
+\textbf{Proof}
 
 Note that 
 
 $$
+\begin{aligned}
+\mathbb{E} (X_t - X_s)^2 &= \mathbb{E}X_t^2 - 2\mathbb{E}X_t X_s + \mathbb{E} X_s^2 \\[8pt]
+&= \left(K(t,t) + m^2(t) \right) - 2 \left( K(t,s) + m(t)m(s) \right) + \left( K(s,s) + m^2(s) \right) \to 0
+\end{aligned}
+$$
+
+as $s \to t$. Thus the process is \textbf{continuous in the mean squared sense}, i.e. $X_t^n \overset{ n\to\infty} {\to} X_t$. Note that the legality of the change of limit and integral is guaranteed by \textbf{Leibniz theorem}. Note that 
+
+$$
+\begin{aligned}
+\int  &= \\[8pt]
+\end{aligned}
+$$
+
+$$
 \phi_\xi(u) = 
 $$
-\end{theorem}
-
 
 This theorem basically means that one can exactly take the sequence $X_{t_n}$ as a sequence of step processes to construct sequence on the stage 2. 
-
 
 
 
@@ -154,77 +268,142 @@ This theorem basically means that one can exactly take the sequence $X_{t_n}$ as
 %----------------------------------------------------------------------------------------
 \section{Ito Formula}
 
-
-\subsection{Integrals of the type $\int X_t d Y_t$}
+\subsection{Integrals of the type $\int X_t d H_t$}
 
 $$
-\int_a^l X_t dH_t
+\int_a^b X_t dH_t
 $$
 
-where $H_t$ : Ito process. 
+where $H_t$ : Ito process, which can be represented as
 
+$$
+H_t = H_0 + \int_0^t b_s ds + \int_0^t \sigma_s dW_s
+$$
+
+We assume that there is some \textbf{filtration} behind this integral, $\mathcal{F}_t$. In other words, $b_s, \sigma_s$ : processes adapted to $\mathcal{F}_t$, $W_t$ is $\mathcal{F}_t$-Brownain motion, and $H_0$ us a RV measruable wrt $\mathcal{F}_0$.
+
+Here, $H_t$ is such a process, and $X_t$ is some process adapted to the same filtration.  
+
+If
+
+$$
+X_t: \int_a^b |X_s b_x| + X_s^2 b_x^2 dx < \infty
+$$
+
+then 
+
+$$
+\int_a^b X_t dH_t = \int_a^b b_s X_s dx + \int_a^b \sigma_s X_s dW_s
+$$
+
+Note that the first integral is the first type. The second integral is the third type of the integrals. We have the \textbf{equivalent representation}:
+
+$$
+dH_t = b_t dt + \sigma_t d W_t
+$$
+
+\begin{theorem}
+\textbf{Theorem}. Let $H_t$ be a Ito process, and $f(t,x)$: twice differentiable, continuous. Then
+
+$$
+f(t,H_t) = f(0,H_0) + \int_0^t f_1' (s, H_s) dx + \int_0^t (s, H_s) dH_s + \frac{1}{2} \int_0^t f_{22}'' (s,H_s)\sigma_s^2 ds
+$$
+\end{theorem}
 
 
 \subsection{Ito's formula}
 
+Let us show how the Ito formula can be used for calculating the stochastic integrals of the following type:
 
+$$
+\int_0^t g(s, W_s) dW_s
+$$
+
+where $f$: antiderivative of $g$ wrt the second argument, i.e. $f_2' = g$. Note that $H_t = W_t$. 
 
 $$
 \begin{aligned}
-df(t,H_t) &= f_1'(t,H_t)dt + f_2'(t) \\[8pt]
+f(t, W_t) &= f(0,0) + \int_0^t f_1' (s,W_s) ds + \int_0^t g(s,W_s) dW_s + \frac{1}{2} \int_0^t g_2' (s,W_s) ds \\[10pt]
+\int_0^t g(s,W_s) dW_s = f(t,W_t) - f(0,0) - \int_0^t f_1' (s,W_s) + \frac{1}{2}g_2'(s,W_s) ds
 \end{aligned}
 $$
 
 
+For instance, consider $\int_0^t W_s dW_s$.
+
+
 \subsection{Black-Scholes model}
 
+Black-Scholes formula is widely used for \textbf{modeling of stock prices}.
+
 $$
-dX_t = X_t \mu dt + x_t \sigma dW_t, \sigma >0
+dX_t = X_t \mu dt + x_t \sigma dW_t, \ \ \sigma >0
 $$
 
+Note that
 
+$$
+X_t = X_0 + \mu \int_0^t X_s dx + \sigma \int_0^t X_s dW_s
+$$
+
+where $f(t,x) := \mathrm{ln}(x)$. 
 
 
 \subsection{Vasicek model}
 
-The \textbf{Vasicek model} is defined as the solution for the following DE:
+The \textbf{Vasicek model} is defined as the solution for the following stochastic DE:
 
 $$
 dX_t = (a - b X_t) dt + c dW_t
 $$
 
-where $b,c > 0$. 
+where $b,c > 0$. This model is a so called \textbf{mirror model}. There is a sense considering the following relationship:
 
+$$
+b\left( 1/b - X_t \right) dt
+$$
 
+thus $b$ is called the speed of reversion. 
+
+$$
+\begin{aligned}
+d \left( X_t e^{bt} \right) &= b X_t e^{bt} dt + e^{bt} \left( \right) \\[8pt]
+&= ae^{bt} dt + ce^{bt} dW_t
+\end{aligned}
+$$
+
+Therefore the solution of the above stochastic differential equation is the following:
+
+$$
+X_t = e^{-bt} X_0 + \frac{a}{b} (1-e^{-bt}) + c\int_0^t e^{b(s-t)} dW_s
+$$e
 
 
 \subsection{Ornstein-Uhlenbeck process}
-
 
 $$
 m dV_t = dW_t - \lambda V_t dt
 $$
 
-where $W_t$ : Brownian motion, $\lambda$ : friction coefficient. 
-
+where $W_t$ : Brownian motion, $\lambda$ : friction coefficient. We use Ito formula with the following function $f$,
 
 $$
-\begin{aligned}
-f(t,x) &= x e^{\lambda t/m} \\[8pt]
-\end{aligned}
+f(t,x) = x e^{\lambda t/m}
 $$
 
 we have the solution 
 
+$$
+V_t = e^{\lambda t/m} \left( V_0 + \frac{1}{\mu} \int_0^t e^{\lambda s/m} dW_s \right)
+$$
+
+If we assume that $V_0 \sim N \left( 0, \frac{1}{2\lambda m} \right) \perp W_t$, then $V_t$ is a Gaussian process such that
 
 $$
-V_t = e^{\lambda}
+K(t,s) = \frac{m}{2\lambda} e^{-\frac{\lambda}{m} |t-s| }
 $$
 
-If we assume that $V_0 \sim N \left( 0, \frac{1}{2\lambda m} \right) \perp W_t$
-
-
-
+which is \textbf{stationary} in both and weak and wide senses.
 
 
 
@@ -233,28 +412,47 @@ If we assume that $V_0 \sim N \left( 0, \frac{1}{2\lambda m} \right) \perp W_t$
 
 \textbf{(Quiz 1)}. Let $I(f) = \int_0^1 t^2 dW_t$. Find the mean of $I(f)$. 
 
-\textbf{(Answer)} 0
+\textbf{(Answer)} $0$.
+
+Let $F(t,x) = xt^2$. Then $t^2 = \frac{\partial F_2}{}'$. Thus 
+
+$$
+\begin{aligned}
+ &= \\[8pt]
+\end{aligned}
+$$
+
 
 
 \textbf{(Quiz 2)}. Let $I(f) = \int_0^1 t^2 dW_t$. Find the variance of $I(f)$. 
-
-\textbf{(Answer)} 1/2 (Not correct)
-
-1 (Not correct)
-
-5/4 (Not correct)
-
-\textbf{(Quiz 3)}. Let $N_t$ be a Poisson process. Find the mean, covariance function and variance of $I(f) := \int_0^t N_s ds$, for $t > s \ge 0$. 
 
 \textbf{(Answer)} 
 
 $$
 \begin{aligned}
-\mathbb{E}[I(f)] &= \lambda t^2 /2 \\[8pt]
+\mathrm{Var} \left( \int_0^1 t^2 dW_t \right) &= \mathrm{Var} W_1 + \mathrm{Var} \int_0^1 2t W_t dt - 2\mathrm{cov} \left( W_1, \int_0^1 2t W_t dt \right) \\[8pt]
+\end{aligned}
+$$
+
+
+\textbf{(Quiz 3)}. Let $N_t$ be a Poisson process. Find the mean, covariance function and variance of $I(f) := \int_0^t N_s ds$, for $t > s \ge 0$. 
+
+\textbf{(Answer)} 
+
+Note that 
+
+$$
+\mathbb{E}[I(f)] = \lambda t^2 /2 \\[8pt]
+$$
+
+$$
+\begin{aligned}
 \mathrm{Var}[I(f)] &= \lambda t^3 /3 \\[8pt]
 K(t,s) &= \lambda \left( -\frac{t^3}{6} + \frac{st^2}{2} \right)
 \end{aligned}
 $$
+
+
 
 
 \textbf{(Quiz 4)}. Let 
@@ -270,7 +468,24 @@ $$, where $\xi_1, \xi_2, \xi_3$ are IID RVs having exponential distribution with
 
 $$
 \begin{aligned}
-\mathbb{E}[\int_0^T X_t dt] &= T/\lambda \\[8pt]
+\mathbb{E} \left[\int_0^T X_t dt \right] &= \int_0^T \mathbb{E}X_t dt \\[8pt]
+&= \int_0^T 1/\lambda \\[8pt]
+&= \frac{T}{\lambda}
+\end{aligned}
+$$
+
+For $T < 1$, 
+
+$$
+\begin{aligned}
+\mathrm{Var} \left[\int_0^T X_t dt \right] &= 2 \int_0^T \int_0^t \mathrm{cov}(\xi_1, \xi_1)dsdt \\[8pt]
+&= \int_0^T 2t/\lambda^2 dt \\[8pt]
+&= \frac{T^2}{\lambda^2}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
 \mathrm{Var}[\int_0^T X_t dt] &= \begin{cases}
 \frac{T^2}{\lambda^2} & 1 > T \\
 \frac{1}{\lambda^2} + \frac{(T-1)^2}{\lambda^2} & 1 \le T < 2 \\
@@ -292,7 +507,16 @@ $$
 
 \textbf{(Quiz 6)}. Compute the variance of the stochastic integral $\int_0^TW_t dW_t$, where $W_t$ is a Brownian motion
 
-\textbf{(Answer)} If $\zeta \sim N(0,1)$, then $\sqrt{T} \zeta \sim N(0,T)$ and $W_T^2 = \left( \sqrt{T} \zeta \right)^2 = T \zeta^2 = T\xi$, where $\xi \sim \chi^2(1)$. Since $\mathrm{Var} \xi = 2\cdot 1$, $\mathrm{Var} W_T^2 = 2 T^2$. 
+\textbf{(Answer)} $\frac{T^2}{2}$
+
+Note that 
+
+$$
+f(t,x) = W_t^2/2, f_2(t,x) = W_t, 
+$$
+
+
+If $\zeta \sim N(0,1)$, then $\sqrt{T} \zeta \sim N(0,T)$ and $W_T^2 = \left( \sqrt{T} \zeta \right)^2 = T \zeta^2 = T\xi$, where $\xi \sim \chi^2(1)$. Since $\mathrm{Var} \xi = 2\cdot 1$, $\mathrm{Var} W_T^2 = 2 T^2$. 
 
 Since $W_T \sim N(0,T)$, $\mathrm{Var} (W_T^2)$ can be found as the fourth moment of SDN. 
 

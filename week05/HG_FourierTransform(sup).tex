@@ -52,15 +52,46 @@ ntheorem]{theorem}{}
 
 \maketitle
 
-\subsection*{Ideas of Derivation}
+\subsection*{Definition}
 
-Suppose $f(x)$ : a periodic of $2\pi$
+
+\begin{theorem}
+\textbf{Definition}. For some $0 \le m \le N-1$, define the shift by $m$ as follows:
+
+$$
+y_m[n] = \begin{cases} 
+x[n-m+N] & 0 \le n < m \\
+x[n-m] & m \le n \le N-1
+\end{cases}
+$$
+
+Then we have the DFT of the circular shift $y_m[n]$ of $x[n]$ by $m$ is given by
+
+$$
+Y_m[k] = X[k] e^{-i \frac{2\pi km}{N}}
+$$
+\end{theorem}
+
+We can think of the Fourier transform as a \textbf{trigonometric interpolation method}, where 
 
 $$
 \begin{aligned}
-\hat{f}(n) &= \int_{-\infty}^\infty f(y) exp(-iny) \\[8pt]
+\psi(x_k) &= \frac{A_0}{2} + \sum_{m=1}^{M-1} \left\{ \right\} \\[8pt]
 \end{aligned}
 $$
+
+
+\subsection*{Ideas of Derivation}
+
+Suppose $f(x)$ : a periodic of $2\pi$. Then $\hat{f}(\omega)$ is not defined since $f \notin L^1(\mathbb{R})$ unless $\int_0^{2\pi} |f(x)| dx = 0$. Therefore
+
+$$
+\begin{aligned}
+\hat{f}(n) &= \int_{-\infty}^\infty f(y) exp(-iny) dy \\[8pt]
+\end{aligned}
+$$
+
+
 
 
 \subsection*{Properties}
@@ -107,6 +138,8 @@ $$
 
 \subsection*{Examples}
 
+\textbf{Example 1}.
+
 Let $f(t) := e^{-at} \mathbf{1}_{t>0}$ for $a >0$. Then
 
 $$
@@ -116,6 +149,42 @@ $$
 $$
 
 since $e^{-at - i\omega t} = e^{-at} \left( cos(-\omega t) + i sin( - \omega t) \right) $ 
+
+
+
+\textbf{Example 2}.
+
+For the PDF of Gaussian $(\mu, \sigam^2)$,
+
+$$
+g(x) = \frac{1}{\sigma \sqrt{2\pi}} exp\left( -x^2/(2\sigma^2) \right)
+$$
+
+the Fourier transform is given as
+
+$$
+G(\omega) = e^{-\frac{\omega^2 \sigma^2}{2}}
+$$
+
+Note that $g'(x) = -xg(x)/\sigma^2$
+
+
+
+Denote that $\omega = e^{ix}, \omega_k = e^{ix_k}$
+
+Note that for $0 \le j$, $l \le N-1$, 
+
+$$
+\sum
+$$
+
+
+$$
+\begin{aligned}
+\psi(x_k) &= \frac{A_0}{2} + \sum_{m=1}^M \left\{ \frac{A_m}{2} \left( e^{imx_k} + e^{i(M-m)x_k} \right) + \frac{B_m}{2i} \left( e^{imx_k} - e^{i(M-m)x_k} \right) \right\} \\[8pt]
+\end{aligned}
+$$
+
 
 
 
