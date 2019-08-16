@@ -273,7 +273,42 @@ In a simpler form, we say that
 
 
 
+\subsection{Generalizations and Variations}
 
+\subsubsection{Stationary renewal processes}
+
+A delayed renewal process for which the first life has the following distribution function is called a \textbf{stationary renewal process}. 
+
+$$
+G(x) = \mu^{-1} \int_0^x [1 - F(x)] dy
+$$
+
+
+
+\subsection{Cumulative and Related Processes}
+
+Suppose 
+
+\subsubsection{Renewal Processes Involving Two Components to Each Renewal Interval}
+
+Interpreting $Y_i$ as a cost or value associated with the $i$th renewal cycle. 
+
+
+
+\textbf{Terminating renewal processes}
+
+Suppose we allow the possibility of infinite interoccurence 
+
+
+
+Thus we have
+
+$$
+\begin{aligned}
+\mathrm{lim}_{t\to\infty} \hat{A}(t) &= \mathrm{lim}_{t\to\infty} e^{\lambda t} [M(\infty) - M(t) ] \\[8pt]
+&= \left\{ \lambda \int_0^\infty x e^{\lambda x} dF(x) \right\}^{-1}
+\end{aligned}
+$$
 
 
 
@@ -486,6 +521,18 @@ and, for all $n$, let $N_{ni} (t), i=1,\cdots,n$ be independent renewal counting
 
 
 Hence, the distribution of the superposition $N_n(t)$ converges to the Poisson process. 
+
+
+
+\begin{theorem}
+\textbf{Theorem 7.1}. Let $\{  X_n \}$ be a renewal process for which $\mu = \mathbb{E} [ X_1] < \infty$, $\sigma^2 = \mathbb{E}\left[ (X_1 - \mu)^2 \right] < \infty$. Then 
+
+$$
+\mathrm{lim}_{t\to\infty} Pr \left\{ \frac{N(t)-t/\mu}{\sqrt{t\sigma^2/\mu^3}} < x \right\} = \Phi(x)
+$$
+
+where $\Phi(\cdot)$ : standard normal integral.
+\end{theorem}
 
 
 

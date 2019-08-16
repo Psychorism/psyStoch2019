@@ -83,6 +83,62 @@ The service times are IID and independent of the interarrival intervals. During 
 \textbf{M/G/$\infty$ queue}(Gallager). A queueing system with Poisson arrivals, a general service distribution, and an infinite number of servers. From the infinite number of servers, no arriving customers are ever queued. The service time $Y_i$ of customer $i$ is IID over $i$ with CDF $G(y)$. 
 
 
+%----------------------------------------------------------------------------------------
+%   Section 2
+%----------------------------------------------------------------------------------------
+
+
+\section{Examples}
+
+\subsection{Example 1}
+
+Let us consider the following queueing model, where the transition matrix is given as
+
+$$
+P_{ij} = \begin{bmatrix}
+\end{bmatrix}
+$$
+
+This decomposition, in conjunc­tion with the Markov property, yields the following expression for the average recurrence time:
+
+
+\textbf{Case 1}. 
+
+
+Referring again to the queueing process., we identify the $b$'s and the $a$'s by $a_k = bk _ 1$ and let $Z_{ij} =$ length of time (number of transitions) re­quired., starting in state $i$, to reach state $j < i$ for the first time. 
+
+is precisely the random variable $Z$ examined above whose generating function $U(s)$ was determined. Since
+
+
+\subsection{Example 2}
+
+The state of the process is the length of the waiting line where, in each unit of time, one person arrives and $k$ persons are served with probability $a_k > 0$, $k=0,1,\cdots$. 
+
+
+if there are at least transition probability matrix may be easily evaluated as
+
+
+
+Therefore, if $L kak < 1$ the system admits no bounded solution and therefore, in particular, no stationary distribution exists so that the process is either null recurrent or transient. 
+
+We now prove that the system of equation
+
+
+To sum up, if
+
+\begin{itemize}
+	\item $\sum k a_k < 1$, the process is \textbf{transient}
+	\item $\sum k a_k = 1$, the process is \textbf{null recurrent}
+	\item $\sum k a_k > 1$, the process is \textbf{positive recurrent}
+\end{itemize}
+
+$$
+\begin{aligned}
+\sum k a_k <1 &= 1, \\[8pt]
+\end{aligned}
+$$
+
+
 
 
 

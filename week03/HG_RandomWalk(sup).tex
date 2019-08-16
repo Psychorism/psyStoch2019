@@ -1,0 +1,86 @@
+\documentclass[12pt]{article} 
+
+\usepackage{geometry}
+\geometry{a4paper} 
+
+\usepackage{graphicx} 
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\usepackage{float} 
+\usepackage{wrapfig} 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{dsfont}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-2pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\linespread{1.2} 
+\setlength{\parskip}{\baselineskip} % vertical spaces
+\setlength\parindent{0pt} % remove all indentation from paragraphs
+
+
+\usepackage{ntheorem}
+\usepackage{mdframed}
+
+\theoremstyle{nonumberbreak}
+\theoremheaderfont{\bfseries}
+\newmdtheoremenv[%
+linecolor=gray,leftmargin=10,%
+rightmargin=10,
+backgroundcolor=gray!20,%
+innertopmargin=0pt,%
+ntheorem]{theorem}{}
+
+
+
+
+\begin{document}
+
+\title{\textbf{Random Walk}}
+\author{Hyunwoo Gu}
+\date{}
+
+\maketitle
+
+
+%----------------------------------------------------------------------------------------
+%   Section 1
+%----------------------------------------------------------------------------------------
+\section{Random Walk}
+
+We apply the \textbf{recurrence criteria}  to the random walk induced by the Markov matrix
+
+
+random walk process at hand has a stationary distribution if and only if
+
+
+
+Now consider the system of equations
+
+We can prescribed $\gamma_0, \gamma_1$ arbitrarily and then 
+
+
+
+Therefore, we have
+
+\begin{itemize}
+	\item $\sum_{i=0}^\infty \frac{1}{p_i \pi_i} = \infty$ : recurrent 
+	\begin{itemize}
+		\item $\sum_{i=0}^\infty \pi_i = \infty$ : null recurrent
+		\item $\sum_{i=0}^\infty \pi_i < \infty$ : positive recurrent
+	\end{itemize}
+	\item $\sum_{i=0}^\infty \frac{1}{p_i \pi_i} < \infty$ : transient
+\end{itemize}
+
+
+\end{document}
