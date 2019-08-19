@@ -55,28 +55,36 @@ ntheorem]{theorem}{}
 %----------------------------------------------------------------------------------------
 %	Supplementary
 %----------------------------------------------------------------------------------------
-\section{The discrete-time Renewal Equation}
 
-\subsection{The Renewal Theorem}
-
-Recall that 
+\section{Definitions and Related Concepts}
 
 $$
-M(t) = \mathbb{E} [ N(t) ] = \sum_{j=1}^\infty F_j(t)
+\mathbb{E} N(t) = M(t)
 $$
 
-where $F_j(t) = Pr[ S_j \le t]$ for $t \ge 0$. We call $M(t)$ a \textbf{renewal function}.
+where $M(t)$ is called the \textbf{renewal function}.
 
 
-Let us now show that the renewal function $M(t)$ satisfies the equation
 
-$$
-\begin{aligned}
-M(t) &= F(t) + \int_0^t M(t-y) dF(y), \ \ t \ge 0 \\[8pt]
-\Leftrightarrow M(t) &= F(t) + F \ast M(t), \ \ t \ge 0
-\end{aligned}
-$$
+\section{Examples}
 
+\subsection{Poisson Processes}
+
+\subsection{Counter Processes}
+
+\subsection{Traffic Flow}
+
+\subsection{Renewal Processes in Markov Chains}
+
+
+\section{More on Some Special Renewal Processes}
+
+\subsection{Poisson Processes}
+
+\subsection{Total Mean Life}
+
+
+\section{Renewal Equations and Elementary Renewal Theorem}
 
 
 \textbf{Renewal Equations}
@@ -86,6 +94,10 @@ An integral equation of the following form is called a \textbf{renewal equation}
 $$
 A(t) = a(t) + \int_0^t A(t-x) dF(x), \ \ t \ge 0
 $$
+
+
+
+
 
 
 \begin{theorem}
@@ -201,7 +213,28 @@ $$
 
 
 
-\section{The Continuous-time Renewal Theorem}
+
+
+\section{The Renewal Theorem}
+
+Recall that 
+
+$$
+M(t) = \mathbb{E} [ N(t) ] = \sum_{j=1}^\infty F_j(t)
+$$
+
+where $F_j(t) = Pr[ S_j \le t]$ for $t \ge 0$. We call $M(t)$ a \textbf{renewal function}.
+
+
+Let us now show that the renewal function $M(t)$ satisfies the equation
+
+$$
+\begin{aligned}
+M(t) &= F(t) + \int_0^t M(t-y) dF(y), \ \ t \ge 0 \\[8pt]
+\Leftrightarrow M(t) &= F(t) + F \ast M(t), \ \ t \ge 0
+\end{aligned}
+$$
+
 
 $$
 M(t + h) - M(t) \to \frac{h}{\mu}, \ \ t \to \infty
@@ -273,9 +306,9 @@ In a simpler form, we say that
 
 
 
-\subsection{Generalizations and Variations}
+\section{Generalizations and Variations of Renewal Theorem}
 
-\subsubsection{Stationary renewal processes}
+\subsection{Stationary renewal processes}
 
 A delayed renewal process for which the first life has the following distribution function is called a \textbf{stationary renewal process}. 
 
@@ -295,9 +328,11 @@ Interpreting $Y_i$ as a cost or value associated with the $i$th renewal cycle.
 
 
 
-\textbf{Terminating renewal processes}
+\subsection{Terminating renewal processes}
 
-Suppose we allow the possibility of infinite interoccurence 
+Suppose we allow the possibility of infinite interoccurence times in a renewal process. Such a process is called a \textbf{terminating} renewal process, since the renewals cease at the first infinite interoccurrence time.
+
+Let $L = F(\infty) = Pr \{ X_k < \infty \} < 1$ and $1 - L = Pr \{ X_k = \infty \} > 0$. Then the total number of renewals in all time, denoted by $N(\infty)$
 
 
 
@@ -337,9 +372,6 @@ $$
 \mathrm{lim}_{t\to\infty} \{ M(t) - \mu^{-1}t \} = \frac{\sigma^2 - \mu^2}{2\mu^2}
 $$
 
-
-
-\section{Applications of the Renewal Theorem}
 
 \subsection{Delayed Renewal Processes}
 
@@ -452,10 +484,7 @@ $$
 
 
 
-
-
-
-\subsection{Superposition of Renewal Processes}
+\section{Superposition of Renewal Processes}
 
 \begin{theorem}
 \textbf{Definition 9.1}. The triangular array $\{ N_{ni}(t) \}$ is called \textbf{infinitesimal} if for every $t \ge 0$,
@@ -464,6 +493,26 @@ $$
 \mathrm{lim}_{n \to \infty} \mathrm{max}_{1 \le i \le k_n} F_{ni} (t) = 0
 $$
 \end{theorem}
+
+Note that
+
+\begin{theorem}
+\textbf{Lemma 9.1}. Let $\{ N_{ni}(t) \}$ be an infinitesimal array of interoccurrence distribution $\{ F_{ni} (t) \}$. Let $\{ F_{ni}^{\ast f} (t) \}$ denote the $j$-fold convolution of $F_{ni}(t)$. Suppose for some finite nondecreasing function $c(t)$ that 
+
+$$
+\mathrm{lim}_{n\to\infty} \mathrm{sup} \sum_{i=1}^{k_n} F_{ni}(t) \le c(t), \ \ \forall t
+$$
+
+Then 
+
+\begin{itemize}
+	\item (a) $\mathrm{lim}_{n\to\infty} \sum_{j=1}^{k_n} \sum_{j=2}^\infty [F_{ni}(t)]^j = 0$
+	\item (b) $\mathrm{lim}_{n\to\infty} \sum_{j=1}^{k_n} \sum_{j=2}^\infty [F_{ni}(t)]^j = 0$
+\end{itemize}
+
+\end{theorem}
+
+\textbf{Proof}
 
 
 

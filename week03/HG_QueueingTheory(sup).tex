@@ -99,7 +99,26 @@ P_{ij} = \begin{bmatrix}
 \end{bmatrix}
 $$
 
+
+If $\sum k a_k \le 1$, the process is recurrent.
+
+In order to ascertain whether the process $\mathcal{B}$ is null recurrent or positive recurrent we first deal with the following auxiliary problem of some independent interest.
+
+We set 
+
+$$
+G(s) = \frac{b_{-1}}{s} + b_0 + b_1 s + b_2 s^2 + \cdots
+$$
+
+
+Our is to determine $U(s)$ in terms of $G(s)$. To this end we write the usual renewal relations 
+
+$$
+\gamma_1 = b_{-1}, \ \ \gamma_k = \sum_{j=0}^\infty b_j \gamma_{j-1}^{(j+1)}, \ \ k \ge 2
+$$
+
 This decomposition, in conjunc­tion with the Markov property, yields the following expression for the average recurrence time:
+
 
 
 \textbf{Case 1}. 

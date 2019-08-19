@@ -56,6 +56,27 @@ ntheorem]{theorem}{}
 %----------------------------------------------------------------------------------------
 %   Section 1
 %----------------------------------------------------------------------------------------
+\section{Discrete Renewal Equation}
+
+
+\begin{theorem}
+\textbf{Theorem 1.1}.
+
+
+$$
+u_n - \sum_{k=-\infty}^\infty a_{n-k} u_k = b_n
+$$
+
+for $n \in \mathbb{Z}$,
+
+\end{theorem}
+
+\textbf{Proof(long)}. 
+
+
+
+Next, we have the following ergodic theorem for this case. 
+
 \begin{theorem}
 \textbf{Theorem 1.2(The basic limit theorem of Markov chains)}. 
 
@@ -124,6 +145,11 @@ Then
 
 \textbf{Remark 1.3.} Let $C$ be a recurrent class. Then $P_{ij}^n = 0$, for $i \in C, j \notin C$, and every $n$. Hence, once in $C$ it i snot possible to leave $C$. 
 
+for one $i$ in an aperiodic recurrent class, then $\pi_j > 0$ for all $j$ in the class of i.
+
+
+is recurrent we speak of the class as \textbf{null recurrent} or \textbf{weakly ergodic}.
+
 
 \begin{theorem}
 \textbf{Theorem 1.3.} In a \textbf{positive recurrent aperiodic} class with states $j=0,1,2,\cdots$, 
@@ -139,26 +165,17 @@ and the $\pi$'s are uniquely determined by the set of equations
 
 \subsection{Absorption Probabilities}
 
-\textbf{Remark 3.1.} If there are only a finite number of states, M, then there
-are no null states and not all states can be transient . In fact, since
-Lf 01 Pij == 1 for all n, it cannot happen that limn-+ oo Pij = 0 for all j.
-The same argument restricted to recurrent classes shows that there are
-no null states . Let C, C 1 , C2 , • . • denote recurrent classes . We define
-ni(C) as the probability that the process will be ultimately absorbed into
-the recurrent class C if the initial state is the transient state i. (Recall
-that once the process enters a recurrent class, it never leaves it.)
+\textbf{Remark 3.1.} If there are only a finite number of states, $M$, then there are no null states and not all states can be transient. In fact, since $\sum_{j=0}^{M-1} P_{ij}^n = 1$ for all $n$, it cannot happen that $\mathrm{lim}_{n\to\infty} P^n_{ij} = 0$ for all $j$.
 
+The same argument restricted to recurrent classes shows that there are no null states. Let $C, C_1, C_2,\cdots$ denote recurrent classes. We define $\pi_i(C)$ as the probability that the process will be ultimately absorbed into the recurrent class $C$ if the initial state is the transient state $i$. 
 
 
 
 \begin{theorem}
-\textbf{Theorem 1.3.} In a \textbf{positive recurrent aperiodic} class with states $j=0,1,2,\cdots$, 
-
+\textbf{Theorem 3.1.} Let $j \in C$, where $C$: an aperiodic recurrent class. Then for $i \in T$, we have
 $$
-\mathrm{lim}_{n\to \infty} P^n_{jj} = \pi_j = \sum_{i=0}^\infty \pi_i P_{ij}, \ \ \sum_{i=0}^\infty \pi_i =1
+\mathrm{lim}_{n\to\infty} P_{ij}^n = \pi_i(C) \mathrm{lim}_{n\to\infty} P_{jj}^n = \pi_i(C)\pi_j
 $$
-
-and the $\pi$'s are uniquely determined by the set of equations
 \end{theorem}
 
 
@@ -300,24 +317,6 @@ $$
 $$
 
 
-\subsection{A Queueing Example}
 
-
-If $\sum k a_k \le 1$, the process is recurrent.
-
-In order to ascertain whether the process $\mathcal{B}$ is null recurrent or positive recurrent we first deal with the following auxiliary problem of some independent interest.
-
-We set 
-
-$$
-G(s) = \frac{b_{-1}}{s} + b_0 + b_1 s + b_2 s^2 + \cdots
-$$
-
-
-Our is to determine $U(s)$ in terms of $G(s)$. To this end we write the usual renewal relations 
-
-$$
-\gamma_1 = b_{-1}, \ \ \gamma_k = \sum_{j=0}^\infty b_j \gamma_{j-1}^{(j+1)}, \ \ k \ge 2
-$$
 
 \end{document}
