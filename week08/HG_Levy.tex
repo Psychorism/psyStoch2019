@@ -28,7 +28,7 @@
 \setlength{\parskip}{\baselineskip} % vertical spaces
 \setlength\parindent{0pt} % remove all indentation from paragraphs
 
-
+\usepackage{multirow}
 \usepackage{ntheorem}
 \usepackage{mdframed}
 
@@ -66,7 +66,38 @@ Here we will be able to:
 \end{itemize}
 
 
-\subsection{Different types of stochastic integrals}
+\subsection{Definition of a Levy process}
+
+Levy processes are widely used for modelings of jump dynamics. 
+
+\begin{center}
+	\begin{tabular}{ |c|c|c| } 
+		\hline
+		$N_t$ & $W_t$ & Levy \\
+		\hline
+		$N_0=0$ & $W_0=0$ & $L_0=0$ \\ 
+		inpt. incr. & inpt. incr. & inpt. incr. \\ 
+		sta. incr. & sta. incr. & sta. incr. \\ 
+		$N_t-N_s \sim Pois(\lambda (t-s))$ & 
+		$W_t-W_s \sim N(0,t-s)$ &
+		$L_t-L_s \sim P(t-s)$ \\
+		\hline
+	\end{tabular}
+\end{center}
+
+where $P(\cdot)$: \textbf{infinite divisible} distribution. 
+
+
+\subsection{Stochastic continuity and cadlag paths}
+
+$L_t$ is \textbf{stochastically continuous} if $L_{t+h} \overset{P,h\to 0}{\to} L_t$, or $\forall \epsilon >0$
+
+$$
+P [ | L_{t+h} - L_t] > \epsilon ] \overset{h\to0}{\to} 0
+$$
+
+The sample path of \textbf{Levy process} follows a cadlag path. 
+
 
 \subsection{Examples of Levy processes}
 
@@ -82,23 +113,26 @@ $$
 \xi \overset{d}{\equiv} Y_1 \oplus \cdots \oplus Y_n
 $$
 
-Note that 
-
-$$
-\phi_\xi(u) = 
-$$
-
-
 \end{theorem}
-
 
 
 It is not true that the distribution is stable iff it is infinitely divisible. 
 
 
 
+
+\textbf{Example 1}. 
+
+
+\textbf{Example 2}. 
+
+
+\subsection{Characteristic Exponent}
+
+
+
 \begin{theorem}
-\textbf{Definition}. An RV $\xi$ is a \textbf{infinitely divisible distribution}, if 
+\textbf{Proposition}. For $\forall$ Levy process $L_t$
 
 $\exists \psi: \mathbb{R} \to \mathbb{C}$ such that
 
@@ -108,48 +142,81 @@ $$
 
 \end{theorem}
 
-
-\textbf{Example 1}. 
-
-
-
-
-\textbf{Example 12}. 
-
-
-\subsection{Characteristic Exponent}
-
-
-
-
-
 \subsection{Properties of Levy Characteristic Exponent}
 
 \textbf{Levy measure}. 
 
 
-\subsection{Levy-Khintchine triplet}
+\begin{theorem}
+\textbf{Definition}. 
+
+$$
+\nu (B) = \mathbb{E} [\# t \in [0,1] : \Delta X_t \in B]
+$$
+
+for any $B \subset \mathbb{R} - \{ 0 \}$
+\end{theorem}
+
+
+\subsection{Levy-Khintchine theorem}
 
 
 $$
-\phi_{X_t}(u) = exp \left[ t (iu\mu - \sigma^2 u^2 /2) + \int_\mathbb{R} \left( e^{iux} + 1 - iux \mathbf{1}_{|x| < 1} \right) \right]
+\phi_{X_t}(u) = exp \left[ t (iu\mu - \sigma^2 u^2 /2) + \int_\mathbb{R} \left( e^{iux} + 1 - iux \mathbf{1}_{|x| < 1} \right) \nu (dx) \right] 
 $$
 
 \textbf{Example 1}. For $X_t$ : of bounded variation,
 
 $$
-\sum_{k=1}^n | X_{t_k} - X_{t_{k-1}} |  \overset{max |t_i - t_{i-1}| \to 0}{\to} 
+\sum_{k=1}^n | X_{t_k} - X_{t_{k-1}} |  \overset{max |t_i - t_{i-1}| \to 0}{\longrightarrow} < \infty
+$$
+
+Note that the Brownian motion is not a process of bounded variation. $X_t$ is of bounded variation iff
+
+$$
+\sigma=0, \int_{|x|<1} x\nu (dx) < \infty
+$$
+
+By letting $\sigma \equiv 0$, we have
+
+$$
+\phi_{X_t}(u) = exp\left\{ t \left( iu \tilde{\mu} + \int(e^{iux}-1)\nu(dx) \right) \right\}
+$$
+
+where $\tilde{\mu} := \mu - \int_{|x|<1} x d\nu(dx)$. 
+
+
+\textbf{Example 2}. For $X_t$ : \textbf{compound Poisson process}, 
+
+$$
+\sigma = 0, \int_\mathbb{R} \nu(dx) = \nu(\mathbb{R}) < \infty
 $$
 
 
-$\sigma=0$
+\textbf{Example 3}. For $X_t$ : \textbf{Subordinators}, 
 
-Note that the Brownian motion is not a process of bounded variation.
+$$
+X_t \ge 0 \ \ a.s. \Leftrightarrow X_t \ge X_s \ \ a.s.
+$$
 
 
 
 
-\subsection{Modeling of jump-type}
+\textbf{Properties}. 
+
+We have the following property:
+
+$$
+\int_{|x| < 1} x^2 \nu (dx) < \infty, \int_{|x| > 1} \nu (dx) < \infty
+$$
+
+$$
+J := \int_{|x|<1} \left( e^{iux} -1 -0  \right)
+$$
+
+
+
+\subsection{Modeling of jump-type dynamics}
 
 How to estimate that the Levy measure of a Levy process from the following data? 
 
@@ -191,6 +258,42 @@ with $\mu$ probably equal to zero. Note that it is also true that nonzero $\mu$ 
 
 
 
+\subsection{Time-changed stochastic processes. Monroe theorem}
+
+The following are the \textbf{stylized facts} of financial data. 
+
+\textbf{1. Stochastic time change} 
+
+For $\{ X_t \}$: Levy process, and a subordinator $T(s)$, and thus $X_{T(s)}$. The \textbf{Monroe's theorem} states the equivalence of the set of $W_{T(s)}$ types and the set of submartingales, where $W, T$ are possibly dependent. 
+
+Assume that $W \perp T$. Note that 
+
+$$
+\phi_{X_{T(s)}} (u) = \mathcal{L}_{T(s)} \left( - \psi(u) \right)
+$$
+
+where $\psi(u)$ is the characteristic exponent of process $X$. 
+
+
+
+\textbf{2. Stochastic volatility}
+
+For \textbf{Black-Scholes},
+
+$$
+d(ln S_t) = \left( \mu - \sigma^2/2 \right)dt + \sigma dW_t
+$$ 
+
+where the volatility parameter $\sigma \to V_t \ge 0$. For example, \textbf{Cox-Ingersoll-Ross} is defined as the SDE
+
+$$
+dV_t = (a - bV_t) dt + c \sqrt{V_t} d W_t
+$$
+
+
+
+
+\pagebreak
 \subsection*{Quizzes}
 
 
@@ -202,11 +305,8 @@ with $\mu$ probably equal to zero. Note that it is also true that nonzero $\mu$ 
 
 \textbf{(Answer)}. $exp \{ iubt + \lambda t (e^{icu} - 1) - \frac{t(\sigma u)^2}{2} \}$
 
-\textbf{(Quiz 2)}. What are the mean, variance, covariance function of this process?
 
-\textbf{(Answer)}. No answer. 
-
-\textbf{(Quiz 3)}. What is measure $\nu$ of a Borel set $B$? 
+\textbf{(Quiz 2)}. What is measure $\nu$ of a Borel set $B$? 
 
 \textbf{(Answer)}. $\nu(B) = \lambda$, if $1 \in B$ and $0$ otherwise.
 
@@ -220,19 +320,19 @@ Considering that the jump part of the Levy process discussed is
 Thus $\nu(B) = \lambda \mathbf{1}_{c \in B}$. Computing the integral in the characteristic exponent, returns a pointwise evaluation in the point $c$, $\lambda (e^{iuc} - 1)$.
 
 
-\textbf{(Quiz 4)}. Let $X_t$ be a Levy process. What is the correct expression for $\mathrm{Var} (X_t)$ in terms of characteristic exponent $\psi$? 
+\textbf{(Quiz 3)}. Let $X_t$ be a Levy process. What is the correct expression for $\mathrm{Var} (X_t)$ in terms of characteristic exponent $\psi$? 
 
 \textbf{(Answer)}. $\mathrm{Var} (X_t) = -t \psi''(0)$
 
 
-\textbf{(Quiz 5)}. Let $X_t$ be a Levy process, assuming $X_1 \sim N(0,1)$. Find the mean and the variance of $X_t$
+\textbf{(Quiz 4)}. Let $X_t$ be a Levy process, assuming $X_1 \sim N(0,1)$. Find the mean and the variance of $X_t$
 
-\textbf{(Answer)}. $\mathbb{E} [X_t] = 0, \mathrm{Var} (X_t) = t$.
+\textbf{(Answer)}. It is just the Brownian motion. Therefore, $\mathbb{E} [X_t] = 0, \mathrm{Var} (X_t) = t$.
 
 
-\textbf{(Quiz 6)}. Let $X_t = bt + N_t$, where $N_t$ is a Poisson process with $\lambda$ and $b \in \mathbb{R}$. Find the Levy triplet of this process. 
+\textbf{(Quiz 5)}. Let $X_t = bt + N_t$, where $N_t$ is a Poisson process with $\lambda$ and $b \in \mathbb{R}$. Find the Levy triplet of this process. 
 
-\textbf{(Answer)}. $(b + \lambda, 0, \nu$, where $\nu(B) =\lambda \mathbf{1}_{1 \in B}$ for any Borel set $B$.
+\textbf{(Answer)}. $(b + \lambda, 0, \nu)$, where $\nu(B) =\lambda \mathbf{1}_{1 \in B}$ for any Borel set $B$.
 
 The first term of a Levy triplet should correspond to the coefficient of the drift term, i.e. $b$, if $X$ is of the form
 
